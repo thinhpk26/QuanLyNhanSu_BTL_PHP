@@ -2,10 +2,10 @@
 <!-- Nếu kiểm tra thì truyền đối tượng đó vào trong tham số của function muốn check -->
 <!-- Chưa có model nên tạm thời chưa có dữ liệu -->
 <?php
+    // kiểm tra quyền truy cập
     interface CheckRole {
         public function checkRole();
     }
-
 
     class CheckNhanVien implements CheckRole {
         public function checkRole()
@@ -43,5 +43,10 @@
     $t = new CheckTruongPhong();
 
     echo $t->checkRole();
+
+    // xử lý lỗi
+    interface ExcuteError {
+        public function excuteError();
+    }
 
 ?>
