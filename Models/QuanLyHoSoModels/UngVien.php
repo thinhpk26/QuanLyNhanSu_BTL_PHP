@@ -9,6 +9,7 @@
     private $email;
     private $sdt;
     private $viTriUngTuyen;
+    private $linkAnh;
 
     // Hàm khởi tạo không tham số
     public function __construct() {
@@ -21,6 +22,7 @@
         $this->email = "";
         $this->sdt = "";
         $this->viTriUngTuyen = "";
+        $this->linkAnh = "";
     }
 
     // Hàm khởi tạo có tham số
@@ -107,6 +109,14 @@
 
     public function setViTriUngTuyen($viTriUngTuyen) {
         $this->viTriUngTuyen = $viTriUngTuyen;
+    }
+        
+    public function getLinkAnh() {
+        return $this->linkAnh;
+    }
+
+    public function setLinkAnh($linkAnh) {
+        $this->linkAnh = $linkAnh;
     }
 }
 
