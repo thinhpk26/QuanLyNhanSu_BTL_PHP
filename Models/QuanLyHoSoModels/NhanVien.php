@@ -26,6 +26,7 @@
         private $soTK;
         private $maSoThue;
         private $tinhTrang;
+        private $linkAnh;
     
         // Hàm khởi tạo không tham số
         public function __construct() {
@@ -169,6 +170,7 @@
         public function setChuyenMon($chuyenMon) {
             $this->chuyenMon = $chuyenMon;
         }
+        
     
         public function getDanToc() {
             return $this->danToc;
@@ -264,6 +266,14 @@
     
         public function setTinhTrang($tinhTrang) {
             $this->tinhTrang = $tinhTrang;
+        }
+        
+        public function getLinkAnh() {
+            return $this->linkAnh;
+        }
+
+        public function setLinkAnh($linkAnh) {
+            $this->linkAnh = $linkAnh;
         }
     }
     
