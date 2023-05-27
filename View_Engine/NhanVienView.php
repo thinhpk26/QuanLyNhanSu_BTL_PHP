@@ -5,8 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Giao dien</title>
+    <title>Công ty TNHH 3T</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
 </head>
 <style>
     @font-face {
@@ -70,20 +74,23 @@
     }
     
     .LContent .logo {
+        margin-left: 20px;
         width: 100%;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        
     }
     
     .logo img {
         width: 30%;
-        height: 70px;
+        height: 100px;
     }
     .logo p {
+        display: inline-block;
+        text-align: center;
+        font-size: 20px;
         color: orange;
-        font-weight: 1800;
-        margin-top: 10px;
+        font-weight: bold;
+        margin-top: 35px;
         font-family: Arial;
     }
     .contain  {
@@ -95,7 +102,7 @@
     
     .contain i {
         color: silver;
-        margin-left: 50px;
+        margin-left: 60px;
     }
     .contain i:hover {
         color: orange;
@@ -112,7 +119,8 @@
     }
     
     form .search {
-        padding: 20px;  
+        width: 300px;
+        padding: 10px;  
         font-size: 16px;
         border-color: white;
         background-color: rgb(235, 235, 235);
@@ -127,11 +135,13 @@
     
     .ChucNang ul li {
         display: inline-block;
-        margin-top:28px;
-        margin-left: 10px;
+        margin-top:50px;
+        margin-left: 0px;
         padding: 5px;
     }
     .ChucNang ul li a {
+        width: 70%;
+        margin-left: 20px;
         text-decoration: none;
         color: black;
         font-size: 25px;
@@ -181,56 +191,55 @@
         height: 20px;
         background-color: orange;
     }
-    
 </style>
 <body>
     <div class="LContent">
         <div class="logo">
-            <img src="./imgs/logo-removebg-preview.png">
+            <img src="./anh/bg.png">
             <p>Công ty TNHH 3T</p>
         </div>
         <div class="contain">
-            <i class="fa fa-light fa-user fa-2x"></i>
-            <i class="fa fa-light fa-gear fa-2x"></i>
-            <i class="fa fa-light fa-bell fa-2x"></i>
+            <i class="fa fa-light fa-user fa-3x"></i>
+            <i class="fa fa-light fa-gear fa-3x"></i>
+            <i class="fa fa-light fa-bell fa-3x"></i>
         </div>
         <form>
-            <input type="text" style="font-family: 'Font Awesome 5 Free'; font-weight:700; " name="search" class="search" placeholder=" &#xf002 Tìm kiếm...">
+            <input type="text" style="font-family: 'Font Awesome 5 Free'; font-weight:700; " name="search" class="search" placeholder=" &#xf002; Tìm kiếm...">
         </form>
         <div class="ChucNang">
             <ul>
                 <li>    
-                    <i class="fa fa-solid fa-home fa-2x"></i>   
-                    <a href="#">Thông Báo</a>
+                    <i class="fa fa-home fa-2x"></i>
+                    <a href="#">Tổng quan</a>
                 </li>
             </ul>
             <ul>
                 <li>    
-                    <i class="fa fa-solid fa-home fa-2x"></i>   
-                    <a href="#">Thông Báo</a>
+                    <i class="fa fa-calendar fa-2x"></i>
+                    <a href="#">Chấm công</a>
                 </li>
             </ul>
             <ul>
                 <li>    
-                    <i class="fa fa-solid fa-home fa-2x"></i>   
-                    <a href="#">Thông Báo</a>
+                <i class="fa fa-money fa-2x"></i>  
+                    <a href="#">Lương và doanh số</a>
                 </li>
             </ul>
             <ul>
                 <li>    
-                    <i class="fa fa-solid fa-home fa-2x"></i>   
-                    <a href="#">Thông Báo</a>
+                    <i class="fa fa-group fa-2x"></i> 
+                    <a href="#">Phòng làm việc</a>
                 </li>
             </ul>
             <ul>
                 <li>    
-                    <i class="fa fa-solid fa-home fa-2x"></i>   
-                    <a href="#">Thông Báo</a>
+                    <i class="fa fa-book fa-2x"></i> 
+                    <a href="#">Đào tạo</a>
                 </li>
             </ul>
             <ul>
                 <li>    
-                    <i class="fa fa-solid fa-home fa-2x"></i>   
+                    <i class="fa fa-solid fa-bullhorn fa-2x"></i>   
                     <a href="#">Thông Báo</a>
                 </li>
             </ul>
