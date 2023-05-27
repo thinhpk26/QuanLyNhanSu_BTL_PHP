@@ -247,7 +247,7 @@
         </div>
     </div>
     <div class="RContent">
-
+        <?php $this->renderSection('Content'); ?>
     </div>
 </body>
 <script>
