@@ -195,7 +195,7 @@
 <body>
     <div class="LContent">
         <div class="logo">
-            <img src="./anh/bg.png">
+            <img src="bg.png">
             <p>Công ty TNHH 3T</p>
         </div>
         <div class="contain">
