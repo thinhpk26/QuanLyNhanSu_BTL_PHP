@@ -65,7 +65,7 @@
         public function handle()
         {
             if(!$this->checkRole() || $this->checkMethod()) {
-                header('Location: /Views/ErrorPage.php');
+                header('Location: /QuanLyNhanSu_BTL_PHP/Views/ErrorPage.php');
                 exit();
             }
         }
@@ -80,12 +80,14 @@
         }
     }
 
+
     $taiKhoan = new TaiKhoan();
 
+    // Request gồm những gì
     $request = new Request($taiKhoan, "get");
 
+    // Đặt middleware trước controller nếu request không được chấp nhận sẽ tự động chuyển đến trang lỗi
     $quanLyNhanSuMiddleware = new QuanLyNhanSuAuthMiddleware($request, ["get"]);
-
     $quanLyNhanSuMiddleware->handle();
 
 ?>
