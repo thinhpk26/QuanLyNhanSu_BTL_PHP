@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../content/grid.css">
+    <link rel="stylesheet" href="/QuanLyNhanSu_BTL_PHP/content/grid.css">
     <script src="https://kit.fontawesome.com/181ea712f3.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../content/style.css">
+    <link rel="stylesheet" href="/QuanLyNhanSu_BTL_PHP/content/style.css">
 </head>
 <body>
     <div class="container">

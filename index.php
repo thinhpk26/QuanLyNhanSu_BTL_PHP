@@ -1,6 +1,4 @@
 <?php
-    include_once 'View_Engine/Template.php';
-
-    $template = new Template('Views/QuanLyNhanSuViews/TuyenDungViews', 'View_Engine');
-    echo $template->render('test', []);
+    $ero = include_once 'Views/ErrorPage.php';
+    echo $ero;
 ?>

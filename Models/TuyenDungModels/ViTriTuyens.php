@@ -5,12 +5,12 @@
         public $soLuong;
         public $kyNangCanThiet;
 
-        public function __construct()
+        public function __construct($iD = "", $iDViTri = "", $soLuong = 0, $kyNangCanThiet = "")
         {
-            $iD = "";
-            $iDViTri = "";
-            $soLuong = "";
-            $kyNangCanThiet = "";
+            $this->iD = $iD;
+            $this->iDViTri = $iDViTri;
+            $this->soLuong = $soLuong;
+            $this->kyNangCanThiet = $kyNangCanThiet;
         }
     }
 ?>

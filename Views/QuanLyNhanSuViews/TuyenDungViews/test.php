@@ -1,4 +1,4 @@
-<?php $this->layout('NhanVienView'); ?>
+<?php $this->layout('QuanLyNhanSuView'); ?>
 
 <?php $this->section('Content'); ?>
     <h1>User Profile</h1>

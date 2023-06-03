@@ -2,7 +2,7 @@
     class HoSoUngTuyens {
         public $iD;
         public $iDKeHoachTuyenDung;
-        public $iDKehoachPhongVan;
+        public $iDKeHoachPhongVan;
         public $hoTen;
         public $email;
         public $soDT;
@@ -10,17 +10,17 @@
         public $ngaySinh;
         public $ghiChu;
 
-        public function __construct()
+        public function __construct($iD = "", $iDKeHoachPhongVan = "", $iDKeHoachTuyenDung = "", $hoTen = "", $email = "", $soDT = "", $diaChi = "", $ngaySinh = "", $ghiChu = "")
         {
-            $iD = "";
-            $iDKehoachPhongVan = "";
-            $iDKeHoachTuyenDung = "";
-            $hoTen = "";
-            $email = "";
-            $soDT = "";
-            $diaChi = "";
-            $ngaySinh = "";
-            $ghiChu = "";
+            $this->iD = $iD;
+            $this->iDKeHoachPhongVan = $iDKeHoachPhongVan;
+            $this->iDKeHoachTuyenDung = $iDKeHoachTuyenDung;
+            $this->hoTen = $hoTen;
+            $this->email = $email;
+            $this->soDT = $soDT;
+            $this->diaChi = $diaChi;
+            $this->ngaySinh = $ngaySinh;
+            $this->ghiChu = $ghiChu;
         }
     }
 ?>

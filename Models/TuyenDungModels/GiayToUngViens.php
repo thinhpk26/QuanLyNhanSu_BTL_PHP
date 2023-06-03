@@ -1,26 +1,26 @@
 <?php
     class GiayToUngViens {
         public $iD;
-        public $iDKeHoachTuyenDung;
-        public $iDKeHoachPhongVan;
-        public $hoTen;
-        public $email;
-        public $soDT;
-        public $diaChi;
-        public $ngaySinh;
-        public $ghiChu;
+        public $CV;
+        public $soYeuLyLich;
+        public $donXinViec;
+        public $CCCD;
+        public $giayKhaiSinh;
+        public $soHoKhau;
+        public $giayKhamSucKhoe;
+        public $anh;
 
-        public function __construct()
+        public function __construct($iD = "", $CV = "", $soYeuLyLich = "", $donXinViec = "", $CCCD = "", $giayKhaiSinh = "", $soHoKhau = "", $giayKhamSucKhoe = "", $anh = "")
         {
-            $this->iD = "";
-            $this->iDKeHoachPhongVan = "";
-            $this->iDKeHoachTuyenDung = "";
-            $this->hoTen = "";
-            $this->email = "";
-            $this->soDT = "";
-            $this->diaChi = "";
-            $this->ngaySinh = "";
-            $this->ghiChu = "";
+            $this->iD = $iD;
+            $this->CV = $CV;
+            $this->soYeuLyLich = $soYeuLyLich;
+            $this->donXinViec = $donXinViec;
+            $this->CCCD = $CCCD;
+            $this->giayKhaiSinh = $giayKhaiSinh;
+            $this->soHoKhau = $soHoKhau;
+            $this->giayKhamSucKhoe = $giayKhamSucKhoe;
+            $this->anh = $anh;
         }
     }
 ?>

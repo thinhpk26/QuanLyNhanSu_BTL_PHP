@@ -5,12 +5,12 @@
         public $tenChungChi;
         public $anhChungChi;
 
-        public function __construct()
+        public function __construct($iD = "", $iDHoSoUngTuyen = "", $tenChungChi = "", $anhChungChi = "")
         {
-            $this->iD = "";
-            $this->iDHoSoUngTuyen = "";
-            $this->tenChungChi = "";
-            $this->anhChungChi = "";
+            $this->iD = $iD;
+            $this->iDHoSoUngTuyen = $iDHoSoUngTuyen;
+            $this->tenChungChi = $tenChungChi;
+            $this->anhChungChi = $anhChungChi;
         }
 
     }
