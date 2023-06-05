@@ -3,10 +3,10 @@
         public $iD;
         public $tieuChi;
 
-        public function __construct()
+        public function __construct($iD = "", $tieuChi = "")
         {
-            $this->iD = "";
-            $this->tieuChi = "";
+            $this->iD = $iD;
+            $this->tieuChi = $tieuChi;
         }
     }
 ?>

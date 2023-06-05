@@ -4,11 +4,11 @@
         public $iDKeHoachPhongVan;
         public $iDTaiKhoan;
 
-        public function __construct()
+        public function __construct($iD = "", $iDKeHoachPhongVan = "", $iDTaiKhoan = "")
         {
-            $this->iD = "";
-            $this->iDKeHoachPhongVan = "";
-            $this->iDTaiKhoan;
+            $this->iD = $iD;
+            $this->iDKeHoachPhongVan = $iDKeHoachPhongVan;
+            $this->iDTaiKhoan = $iDTaiKhoan;
         }
     }
 ?>
