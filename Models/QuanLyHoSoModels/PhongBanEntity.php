@@ -19,17 +19,6 @@
             $this->email = "";
         }
     
-        // Hàm khởi tạo có tham số
-        public function __construct($maPb, $tenPb, $moTa, $maTruongPhong, $soNv, $soDT, $email) {
-            $this->maPb = $maPb;
-            $this->tenPb = $tenPb;
-            $this->moTa = $moTa;
-            $this->maTruongPhong = $maTruongPhong;
-            $this->soNv = $soNv;
-            $this->soDT = $soDT;
-            $this->email = $email;
-        }
-    
     }
     
 ?>
