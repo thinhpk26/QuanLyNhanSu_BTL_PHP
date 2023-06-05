@@ -11,10 +11,10 @@
 </head>
 <style>
     .color-primary {
-        color: #FF914C;
+        color: #FF914C !important;
     }
     .background-primary {
-        background-color: #FF914C;
+    background-color: #FF914C !important;
     }
 </style>
 <body>

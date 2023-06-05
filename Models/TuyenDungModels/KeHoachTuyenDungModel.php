@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
-    include_once './KeHoachTuyenDung.php';
-    include_once './TuyenDungModel.php';
+    include_once 'KeHoachTuyenDung.php';
+    include_once 'TuyenDungModel.php';
     class KeHoachTuyenDungModel extends TuyenDungModel {
         public static function withDifferentHost($host) {
             $instance = new self();
@@ -48,9 +48,49 @@
                 $this->navigateWhenError($ex);
                 return [];
             }
-        } 
+        }
 
-        public function addKeHoachTuyenDung(KeHoachTuyenDung $keHoachTuyenDung) : bool {
+        public function getAllKeHoachWithChuaXacNhan() : array {
+            try {
+                $query = "SELECT * from KeHoachTuyenDung where trangThaiGiaiDoan = 'chuaXacNhan'";
+                $this->open_db();
+                $result = $this->condb->query($query);
+                $keHoachTuyenDungList = array();
+                if($result->num_rows > 0) {
+                    while($row = $result->fetch_object()) {
+                        $keHoachTuyenDungList[] = $row;
+                    }
+                    $keHoachTuyenDungList;
+                }
+                $this->close_db();
+                return $keHoachTuyenDungList;
+            } catch(Exception $ex) {
+                $this->navigateWhenError($ex);
+                return [];
+            }
+        }
+
+        public function getAllKeHoachWithDangThucThi() : array {
+            try {
+                $query = "SELECT * from KeHoachTuyenDung where trangThaiGiaiDoan = 'dangThucThi'";
+                $this->open_db();
+                $result = $this->condb->query($query);
+                $keHoachTuyenDungList = array();
+                if($result->num_rows > 0) {
+                    while($row = $result->fetch_object()) {
+                        $keHoachTuyenDungList[] = $row;
+                    }
+                    $keHoachTuyenDungList;
+                }
+                $this->close_db();
+                return $keHoachTuyenDungList;
+            } catch(Exception $ex) {
+                $this->navigateWhenError($ex);
+                return [];
+            }
+        }
+
+        public function addKeHoachTuyenDung(KeHoachTuyenDung $keHoachTuyenDung) {
             try {
                 $query = "INSERT INTO KeHoachTuyenDung VALUES (?,?,?,?)";
                 $this->open_db();
@@ -67,31 +107,39 @@
                 $this->close_db();
                 return true;
             } catch(Exception $ex) {
-                $this->navigateWhenError($ex);
-                return false;
+                return $ex;
             }
         }
 
-        public function updateKeHoachTuyenDung(KeHoachTuyenDung $keHoachTuyenDung) : bool {
+        public function updateKeHoachTuyenDungByiD(string $iD, string $thoiGianTrienKhai, string $ghiChu) {
             try {
-                $query = "UPDATE KeHoachTuyenDung set thoiGianTrienKhai = ?, trangThaiGiaiDoan = ?, ghiChu = ? where iD = ?";
+                $query = "UPDATE KeHoachTuyenDung set thoiGianTrienKhai = ?, ghiChu = ? where iD = ?";
                 $this->open_db();
                 $pttm = $this->condb->prepare($query);
-                $pttm->bind_param("ssss", $thoiGianTrienKhai, $trangThaiGiaiDoan, $ghiChu, $iD);
-                $iD = $keHoachTuyenDung->iD;
-                $thoiGianTrienKhai =  $this->fromStringToDatetime($keHoachTuyenDung->thoiGianTrienKhai);
-                $trangThaiGiaiDoan = $keHoachTuyenDung->trangThaiGiaiDoan;
-                $ghiChu = $keHoachTuyenDung->ghiChu;
+                $pttm->bind_param("sss", $thoiGianTrienKhai, $ghiChu, $iD);
                 $pttm->execute();
                 $this->close_db();
                 return true;
             } catch(Exception $ex) {
-                $this->navigateWhenError($ex);
-                return false;
+                return $ex;
             }
         }
 
-        public function deleteKeHoachTuyenDungbyID(string $iD) : bool {
+        public function updateTrangThaiGiaiDoan(string $iD, string $trangThaiGiaiDoan) {
+            try {
+                $query = "UPDATE KeHoachTuyenDung set trangThaiGiaiDoan = ?where iD = ?";
+                $this->open_db();
+                $pttm = $this->condb->prepare($query);
+                $pttm->bind_param("ss", $trangThaiGiaiDoan, $iD);
+                $pttm->execute();
+                $this->close_db();
+                return true;
+            } catch(Exception $ex) {
+                return $ex;
+            }
+        }
+
+        public function deleteKeHoachTuyenDungbyID(string $iD) {
             try {
                 $query = "DELETE FROM KeHoachTuyenDung where iD = ?";
                 $this->open_db();
@@ -101,8 +149,7 @@
                 $this->close_db();
                 return true;
             }catch(Exception $ex) {
-                $this->navigateWhenError($ex);
-                return false;
+                return $ex;
             }
         }
     }

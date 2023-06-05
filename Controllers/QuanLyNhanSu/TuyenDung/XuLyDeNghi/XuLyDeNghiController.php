@@ -1,5 +1,4 @@
 <?php declare(strict_types=1);
-    echo $_SERVER['DOCUMENT_ROOT'];
     include_once $_SERVER['DOCUMENT_ROOT'] .'/QuanLyNhanSu_BTL_PHP/Middleware.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/DeNghiTuyenDungsModel.php';
     include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/DeNghiTuyenDungs.php';
@@ -16,7 +15,7 @@
             $this->deNghiTuyenDungModel = new DeNghiTuyenDungsModel();
             $resultFromDB = $this->deNghiTuyenDungModel->updatePhanHoiTuyenDung($iD, $phanHoi);
             $response = [];
-            if($resultFromDB == true) {
+            if($resultFromDB === true) {
                 $response = ['issuccess' => true, 'message' => ''];
             } else {
                 $response = ['issuccess' => false, 'message' => $resultFromDB];

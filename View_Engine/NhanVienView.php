@@ -43,10 +43,10 @@
         display: block;
     }
     .color-primary {
-        color: #FF914C;
+        color: #FF914C !important;
     }
     .background-primary {
-        background-color: #FF914C;
+        background-color: #FF914C !important;
     }
     body {
         line-height: 1;
