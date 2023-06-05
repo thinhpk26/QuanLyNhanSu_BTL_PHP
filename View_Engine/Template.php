@@ -43,37 +43,34 @@
 
         private function __setDirectory(string $directory)
         {
-            if (!is_dir($directory)) {
-                throw new Exception("$directory is not exist");
+            if (!is_dir($_SERVER['DOCUMENT_ROOT'] . "/QuanLyNhanSu_BTL_PHP" . "/" . $directory)) {
+                throw new Exception();
             }
             $this->__directory = $directory;
         }
 
         private function __setDirectory_Layout(string $__directory_Layout)
         {
-            if (!is_dir($__directory_Layout)) {
-                throw new Exception("$__directory_Layout is not exist");
+            if (!is_dir($_SERVER['DOCUMENT_ROOT'] . "/QuanLyNhanSu_BTL_PHP" . "/" . $__directory_Layout)) {
+                throw new Exception();
             }
             $this->__directory_Layout = $__directory_Layout;
         }
 
-
-
-
         private function __resolvePath(string $path)
         {
-            $file = $this->__directory . '/' . $path . '.php';
+            $file = $_SERVER['DOCUMENT_ROOT'] . "/QuanLyNhanSu_BTL_PHP" . "/" . $this->__directory . '/' . $path . '.php';
             if (!file_exists($file)) {
-                throw new Exception("$file is not exist");
+                throw new Exception();
             }
             return $file;
         }
         
         private function __resolvePathLayout(string $path)
         {
-            $file = $this->__directory_Layout . '/' . $path . '.php';
+            $file = $_SERVER['DOCUMENT_ROOT'] . "/QuanLyNhanSu_BTL_PHP" . "/" . $this->__directory_Layout . '/' . $path . '.php';
             if (!file_exists($file)) {
-                throw new Exception("$file is not exist");
+                throw new Exception();
             }
             return $file;
         }
@@ -174,7 +171,7 @@
             }
         
             ob_start();
-        
+
             include_once $this->__resolvePath($view_name);
         
             $content = ob_get_clean();

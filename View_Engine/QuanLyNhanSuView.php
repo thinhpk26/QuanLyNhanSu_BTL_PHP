@@ -5,10 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/QuanLyNhanSu_BTL_PHP/content/grid.css">
+    <link rel="stylesheet" href="../content/grid.css">
     <script src="https://kit.fontawesome.com/181ea712f3.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/QuanLyNhanSu_BTL_PHP/content/style.css">
+    <link rel="stylesheet" href="../content/style.css">
 </head>
+<style>
+    .color-primary {
+        color: #FF914C;
+    }
+    .background-primary {
+        background-color: #FF914C;
+    }
+</style>
 <body>
     <div class="container">
         <div class="navbar">
@@ -79,12 +87,12 @@
         </div>
 
         <div class="content">
-
+            <?php $this->renderSection('Content'); ?>
         </div>
     </div>
 </body>
 </html>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
    function toggleNavCate2() {
     var navCate2List = document.querySelectorAll('.nav-cate2');

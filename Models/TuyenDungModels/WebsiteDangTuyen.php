@@ -1,5 +1,5 @@
 <?php
-    class WebsiteDangTuyens {
+    class WebsiteDangTuyen {
         public $iD;
         public $iDKeHoachTuyenDung;
         public $linkDangTuyen;

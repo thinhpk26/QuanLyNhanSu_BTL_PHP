@@ -1,5 +1,5 @@
 <?php
-    class KeHoachTuyenDungs {
+    class KeHoachTuyenDung {
         public $iD;
         public $thoiGianTrienKhai;
         public $trangThaiGiaiDoan;
@@ -7,10 +7,10 @@
 
         public function __construct($iD = "", $thoiGianTrienKhai = "", $trangThaiGiaiDoan = "", $ghiChu = "")
         {
-            $iD = $iD;
-            $thoiGianTrienKhai = $thoiGianTrienKhai;
-            $trangThaiGiaiDoan = $trangThaiGiaiDoan;
-            $ghiChu = $ghiChu;
+            $this->iD = $iD;
+            $this->thoiGianTrienKhai = $thoiGianTrienKhai;
+            $this->trangThaiGiaiDoan = $trangThaiGiaiDoan;
+            $this->ghiChu = $ghiChu;
         }
     }
 ?>

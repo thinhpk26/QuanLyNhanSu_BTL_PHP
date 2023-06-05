@@ -1,5 +1,5 @@
 <?php
-    class GiayToUngViens {
+    class GiayToUngVien {
         public $iD;
         public $CV;
         public $soYeuLyLich;

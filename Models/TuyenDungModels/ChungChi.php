@@ -1,5 +1,5 @@
 <?php
-    class ChungChis {
+    class ChungChi {
         public $iD;
         public $iDHoSoUngTuyen;
         public $tenChungChi;

@@ -1,5 +1,5 @@
 <?php
-    class LoaiHoSos {
+    class LoaiHoSo {
         public $iD;
         public $loaiHoSo;
 
