@@ -26,7 +26,7 @@
                 <td class="text-center">%s</td>
                 <td>%s</td>
                 <td class="text-center">
-                  <button class="btn btn-primary btn-thucThiKeHoach" data-iD="%s" data-passevent="xacNhanThucThiKeHoach" onclick="toggleNotify(event)">Thực thi</button>
+                  <button class="btn btn-primary btn-thucThiKeHoach" data-iD="%s" data-passevent="xacNhanThucThiKeHoach" onclick="showXacNhanThucThiTuyenDung(event)">Thực thi</button>
                 </td>
                 <td class="text-center">
                   <form method="post">
@@ -102,16 +102,17 @@
             <h4 class="fw-bold text-center color-primary mb-4">Xác nhận thực thi</h4>
             <hr>
             <p>Bạn muốn bắt đầu thực thi kế hoạch ngay bây giờ</p>
-            <form action="">
-            <div class="d-flex justify-content-center" style="margin-top: 120px;">
-              <button type="submit" class="btn btn-primary">Xác nhận</button>
-            </div>
+            <form action="" method="post">
+              <input class="visually-hidden" id="xacNhanThucThiKeHoach" name="xacNhanThucThiKeHoach">
+              <div class="d-flex justify-content-center" style="margin-top: 120px;">
+                <button type="submit" class="btn btn-primary" onclick="confirmToStartKeHoachTuyenDung(event)">Xác nhận</button>
+              </div>
             </form>
         </div>
       </div>
     </div>
 
-    <!-- Xác nhận thực thi -->
+    <!-- Xác nhận xóa kế hoạch -->
     <div class="xacNhanXoaKeHoachTuyenDungContainer position-absolute justify-content-center align-items-center" style="top: 0; bottom: 0; right: 0; left: 0; background-color: rgba(0, 0, 0, 0.1); display: none;" data-toggle="#xacNhanXoaKeHoachContainer">
       <div class="xacNhanXoaKeHoachTuyenDungForm shadow-lg position-relative rounded-3 shadow-lg" style="width: 500px; height: 300px; background-color: #fffcfc;">
         <div class="position-absolute" style="top: 18px; right: 18px; cursor: pointer;"  data-passevent="xacNhanXoaKeHoachContainer" onclick="toggleNotify(event)">

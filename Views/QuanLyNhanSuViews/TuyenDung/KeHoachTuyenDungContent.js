@@ -67,6 +67,7 @@ function updateKeHoachTuyenDung(event) {
     })
 }
 
+// chưa có đủ thông tin để làm
 function addKeHoachTuyenDung(event) {
     event.preventDefault();
     const form = new FormData(event.currentTarget.parentElement.parentElement);
@@ -77,6 +78,45 @@ function addKeHoachTuyenDung(event) {
 
 }
 
+function showXacNhanThucThiTuyenDung(event) {
+    const iD = event.currentTarget.getAttribute("data-iD");
+
+    const iDKeHoachBaoTriInput = document.getElementById('xacNhanThucThiKeHoach');
+    iDKeHoachBaoTriInput.value = iD;
+
+    toggleNotify(event);
+}
+
+function confirmToStartKeHoachTuyenDung(event) {
+    event.preventDefault();
+
+    const form = FormData(event.currentTarget.parentElement.parentElement);
+
+    const body = {};
+    for(const [value, key] of form) {
+        body[key] = value;
+    }
+
+    fetch('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/UpdateKeHoachTuyenDung.php', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+    .then(response => {
+        return JSON.parse(response);
+    })
+    .then(response => {
+        if(response.isSuccess) {
+            alert('Xác nhận thực thi thành công');
+            window.location.reload();
+        } else {
+            alert('Có lỗi ở phía server. Vui lòng reload lại page');
+        }
+    })
+}
 
 function toggleNotify(event) {
     const sendedEventElement = event.currentTarget;
