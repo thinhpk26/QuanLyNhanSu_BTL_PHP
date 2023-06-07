@@ -1,15 +1,15 @@
 <?php
     class TaiKhoanModel{
         function __construct($consetup){
-            $this->host = $consetup->host;
-            $this->user = $consetup->user;
-            $this->pass =  $consetup->pass;
-            $this->db = $consetup->db;
+            $this->hostname = $consetup->hostname;
+            $this->username = $consetup->username;
+            $this->password =  $consetup->password;
+            $this->database = $consetup->database;
         }
 
         public function open_db()
         {
-            $this->condb=new mysqli($this->host,$this->user,$this->pass,$this->db);
+            $this->condb=new mysqli($this->hostname,$this->username,$this->password,$this->database);
             if ($this->condb->connect_error)
             {
                 die("Erron in connection: " . $this->condb->connect_error);
