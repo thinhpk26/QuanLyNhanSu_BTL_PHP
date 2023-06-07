@@ -28,6 +28,7 @@ function showSuaKeHoachTuyenDung(event) {
     })
     .then(response => response.json())
     .then(response => {
+        console.log(response);
         const iDInput = document.getElementById('iD_suaKeHoach');
         const thoiGianTrienKhaiInput = document.getElementById('thoiGianTrienKhai_suaKeHoach');
         const ghiChuInput = document.getElementById('ghiChu_suaKeHoach');
@@ -90,14 +91,14 @@ function showXacNhanThucThiTuyenDung(event) {
 function confirmToStartKeHoachTuyenDung(event) {
     event.preventDefault();
 
-    const form = FormData(event.currentTarget.parentElement.parentElement);
+    const form = new FormData(event.currentTarget.parentElement.parentElement);
 
     const body = {};
-    for(const [value, key] of form) {
+    for(const [key, value] of form) {
         body[key] = value;
     }
 
-    fetch('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/UpdateKeHoachTuyenDung.php', {
+    fetch('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/XacNhanThucThi.php', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -105,15 +106,13 @@ function confirmToStartKeHoachTuyenDung(event) {
         },
         body: JSON.stringify(body)
     })
-    .then(response => {
-        return JSON.parse(response);
-    })
+    .then(response => response.json())
     .then(response => {
         if(response.isSuccess) {
             alert('Xác nhận thực thi thành công');
             window.location.reload();
         } else {
-            alert('Có lỗi ở phía server. Vui lòng reload lại page');
+            alert(response.message);
         }
     })
 }

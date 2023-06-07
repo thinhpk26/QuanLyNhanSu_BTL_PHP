@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
-    include_once 'ViTriTuyen.php';
-    include_once 'TuyenDungModel.php';
+    require_once 'ViTriTuyen.php';
+    require_once 'TuyenDungModel.php';
     class ViTriTuyenModel extends TuyenDungModel {
         public static function withDifferentHost($host) {
             $instance = new self();

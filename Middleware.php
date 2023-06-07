@@ -6,8 +6,8 @@
     // Nếu kiểm tra thì truyền đối tượng đó vào trong tham số của function muốn check
     // Chưa có model nên tạm thời chưa có dữ liệu
     // kiểm tra quyền truy cập
-    include_once __DIR__ . '/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
-    include_once __DIR__ . '/Request.php';
+    require_once __DIR__ . '/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
+    require_once __DIR__ . '/Request.php';
     abstract class AuthMiddleware {
         protected Request $request;
         protected array $methods;
@@ -16,7 +16,9 @@
         {
             if(!$this->checkRole() || !$this->checkMethod()) {
                 // header('Location: /QuanLyNhanSu_BTL_PHP/Views/ErrorPage.php');
-                echo "Khong duoc phep tiep can" . $this->checkRole() .$this->checkMethod();
+                $result = (object)['isSuccess' => false, 'message' => "Không được phép tiếp cận"];
+                header('Content-Type: application/json');
+                echo json_encode($result);
                 exit();
             }
         }

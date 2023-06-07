@@ -11,7 +11,13 @@
     
     $keHoachTuyenDungController->handle();
     
-    $iD = $_POST['iD'];
+    $dataJson = file_get_contents("php://input");
+
+    $data = json_decode($dataJson);
+    $iD = "";
+    if(isset($data->iD)) {
+        $iD = $data->iD;
+    }
 
     $keHoachTuyenDungController->deleteKeHoachTuyenDung($iD);
 ?>

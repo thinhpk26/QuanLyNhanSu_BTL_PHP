@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
-    include_once 'TuyenDungModel.php';
-    include_once 'WebsiteDangTuyen.php';
+    require_once 'TuyenDungModel.php';
+    require_once 'WebsiteDangTuyen.php';
     class WebsiteDangTuyenModel extends TuyenDungModel {
         public static function withDifferentHost($host) {
             $instance = new self();

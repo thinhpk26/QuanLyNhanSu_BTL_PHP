@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
-    include_once $_SERVER['DOCUMENT_ROOT'] .'/QuanLyNhanSu_BTL_PHP/Middleware.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/KeHoachTuyenDungModel.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/KeHoachTuyenDung.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/ViTriTuyen.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/ViTriTuyenModel.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Request.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] .'/QuanLyNhanSu_BTL_PHP/Middleware.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/KeHoachTuyenDungModel.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/KeHoachTuyenDung.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/ViTriTuyen.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/ViTriTuyenModel.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Request.php';
 
     class KeHoachTuyenDungController extends QuanLyNhanSuAuthMiddleware {
         public function hienThiKeHoachTuyenDungPage() {
@@ -52,11 +52,11 @@
         private function returnJson($resultFromDB) {
             $result = [];
             if($resultFromDB === true) {
-                $result = ['isSuccess' => true, 'message' => ''];
+                $result = (object)['isSuccess' => true, 'message' => ''];
             } else if($resultFromDB instanceof Exception) {
-                $result = ['isSuccess' => false, 'message' => $resultFromDB];
+                $result = (object)['isSuccess' => false, 'message' => $resultFromDB];
             } else {
-                $result = ['isSuccess' => true, 'message' => '', 'data' => $resultFromDB];
+                $result = (object)['isSuccess' => true, 'message' => '', 'data' => $resultFromDB];
             }
             header('Content-Type: application/json');
             echo json_encode($result);

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
-    include_once 'KeHoachTuyenDung.php';
-    include_once 'TuyenDungModel.php';
+    require_once 'KeHoachTuyenDung.php';
+    require_once 'TuyenDungModel.php';
     class KeHoachTuyenDungModel extends TuyenDungModel {
         public static function withDifferentHost($host) {
             $instance = new self();
@@ -122,7 +122,7 @@
 
         public function updateTrangThaiGiaiDoan(string $iD, string $trangThaiGiaiDoan) {
             try {
-                $query = "UPDATE KeHoachTuyenDung set trangThaiGiaiDoan = ?where iD = ?";
+                $query = "UPDATE KeHoachTuyenDung set trangThaiGiaiDoan = ? where iD = ?";
                 $this->open_db();
                 $pttm = $this->condb->prepare($query);
                 $pttm->bind_param("ss", $trangThaiGiaiDoan, $iD);

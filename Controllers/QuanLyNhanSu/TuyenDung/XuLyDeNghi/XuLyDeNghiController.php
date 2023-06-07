@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
-    include_once $_SERVER['DOCUMENT_ROOT'] .'/QuanLyNhanSu_BTL_PHP/Middleware.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/DeNghiTuyenDungsModel.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/DeNghiTuyenDungs.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Request.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] .'/QuanLyNhanSu_BTL_PHP/Middleware.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/DeNghiTuyenDungsModel.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/DeNghiTuyenDungs.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Request.php';
     class XuLyDeNghiController extends QuanLyNhanSuAuthMiddleware {
         private $deNghiTuyenDungModel;
         public function hienThiPhanHoiTuyenDungPage() {
             $this->deNghiTuyenDungModel = new DeNghiTuyenDungsModel();
             $deNghiTuyenDungList = $this->deNghiTuyenDungModel->getAllDeNghiTuyenDungWithoutPhanHoi();
             $variables = ['deNghiTuyenDungList' => $deNghiTuyenDungList];
-            include_once $_SERVER['DOCUMENT_ROOT']. '/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/PhanHoiTuyenDungView.php';
+            require_once $_SERVER['DOCUMENT_ROOT']. '/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/PhanHoiTuyenDungView.php';
         }
         public function phanHoiTuyenDung(string $iD, string $phanHoi) {
             $this->deNghiTuyenDungModel = new DeNghiTuyenDungsModel();

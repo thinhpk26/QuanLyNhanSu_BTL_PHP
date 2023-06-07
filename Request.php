@@ -1,5 +1,5 @@
 <?php
-    include_once __DIR__ . '/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
+    require_once __DIR__ . '/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
     class Request {
         public TaiKhoanEntity $taiKhoan;
         public string $method;

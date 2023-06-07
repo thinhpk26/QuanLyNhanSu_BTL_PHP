@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
-    include_once 'TuyenDungModel.php';
-    include_once 'ChungChi.php';
+    require_once 'TuyenDungModel.php';
+    require_once 'ChungChi.php';
     class ChungChiModel extends TuyenDungModel {
         public static function withDifferentHost($host) {
             $instance = new self();

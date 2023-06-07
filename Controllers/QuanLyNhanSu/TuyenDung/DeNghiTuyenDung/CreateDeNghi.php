@@ -1,7 +1,7 @@
 <?php declare(strict_types = 1);
     session_start();
-    include_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
-    include_once './DeNghiTuyenDungController.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
+    require_once './DeNghiTuyenDungController.php';
 
     $inforUser;
     if(isset($_SESSION['user'])) {
