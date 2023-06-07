@@ -7,11 +7,12 @@
 
     $request = new Request($inforUser, $_SERVER['REQUEST_METHOD']);
 
-    $keHoachTuyenDungController = new KeHoachTuyenDungController($request, ['get']);
+    $keHoachTuyenDungController = new KeHoachTuyenDungController($request, ['post']);
     
     $keHoachTuyenDungController->handle();
-    
-    $iD = $_POST['iD'];
 
-    $keHoachTuyenDungController->xacNhanThucThi($iD);
+    $json = file_get_contents('php://input');
+    $iD = json_decode($json)->iD;
+
+    $keHoachTuyenDungController->getKeHoachTuyenDung($iD);
 ?>

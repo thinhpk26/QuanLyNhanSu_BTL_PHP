@@ -1,23 +1,82 @@
 function showChiTietKeHoach(event) {
-    console.log(event.currentTarget);
-
-    const btnThucThiKeHoach = document.getElementsByClassName('btn-thucThiKeHoach');
-    const btnSuaKeHoach = document.getElementsByClassName('btn-suaKeHoach');
-    const btnXoaKeHoach = document.getElementsByClassName('btn-xoaKeHoach');
+    const btnThucThiKeHoach = event.currentTarget.getElementsByClassName('btn-thucThiKeHoach');
+    const btnSuaKeHoach = event.currentTarget.getElementsByClassName('btn-suaKeHoach');
+    const btnXoaKeHoach = event.currentTarget.getElementsByClassName('btn-xoaKeHoach');
 
     for(let i=0; i<btnThucThiKeHoach.length; i++) {
-        if(event.target != btnThucThiKeHoach[i]) {
-            toggleNotify(event);
-        }
-        if(event.target != btnXoaKeHoach[i]) {
-            toggleNotify(event);
-        }
-        if(event.target != btnSuaKeHoach[i]) {
+        if(event.target != btnThucThiKeHoach[i] && event.target != btnXoaKeHoach[i] && event.target != btnSuaKeHoach[i]) {
             toggleNotify(event);
         }
     }
 
 }
+
+function showSuaKeHoachTuyenDung(event) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget.parentElement);
+    const body = {};
+    for(const [name, value] of form) {
+        body[name] = value;
+    }
+    fetch('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/GetKeHoachTuyenDung.php', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+    .then(response => response.json())
+    .then(response => {
+        const iDInput = document.getElementById('iD_suaKeHoach');
+        const thoiGianTrienKhaiInput = document.getElementById('thoiGianTrienKhai_suaKeHoach');
+        const ghiChuInput = document.getElementById('ghiChu_suaKeHoach');
+        const thoiGianTrienKhai = new Date(response.data.thoiGianTrienKhai);
+
+        iDInput.value = response.data.iD;
+        thoiGianTrienKhaiInput.value = thoiGianTrienKhai.toISOString().split('T')[0];
+        ghiChuInput.value = response.data.ghiChu;
+    })
+    toggleNotify(event);
+}
+
+function updateKeHoachTuyenDung(event) {
+    event.preventDefault();
+
+    const form = new FormData(event.currentTarget.parentElement.parentElement);
+    const body = {};
+    for(const [name, value] of form) {
+        body[name] = value;
+    }
+    fetch('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/UpdateKeHoachTuyenDung.php', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+   .then(response => response.json())
+    .then(response => {
+        if(response.isSuccess) {
+            alert("Update thành công");
+            window.location.reload();
+        } else {
+            alert(response.message);
+        }
+    })
+}
+
+function addKeHoachTuyenDung(event) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget.parentElement.parentElement);
+    const body = {};
+    for(const [key, value] of form) {
+        body[key] = value;
+    }
+
+}
+
 
 function toggleNotify(event) {
     const sendedEventElement = event.currentTarget;
@@ -31,16 +90,5 @@ function toggleNotify(event) {
             nofifyElement[i].classList.add('toggle-show_hindden');
             nofifyElement[i].style.display = 'flex';
         }
-    }
-}
-
-function toggleChiTietKeHoach(event) {
-    const chiTietKeHoachElement = document.getElementsByClassName('chiTietKeHoachElement');
-    if(chiTietKeHoachElement[0].classList.contains('toggle-ChiTietKeHoachContainer')) {
-        chiTietKeHoachElement[0].classList.remove('toggle-ChiTietKeHoachContainer');
-        chiTietKeHoachElement[0].style.display = 'none';
-    } else {
-        chiTietKeHoachElement[0].classList.add('toggle-ChiTietKeHoachContainer');
-        chiTietKeHoachElement[0].style.display = 'flex';
     }
 }

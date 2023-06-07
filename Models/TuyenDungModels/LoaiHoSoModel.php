@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
-    include_once './LoaiHoSo.php';
-    include_once './TuyenDungModel.php';
+    include_once 'LoaiHoSo.php';
+    include_once 'TuyenDungModel.php';
     class LoaiHoSoModel extends TuyenDungModel {
         public static function withDifferentHost($host) {
             $instance = new self();

@@ -13,6 +13,11 @@
             $variables = ['keHoachTuyenDungList' => $keHoachTuyenDungList];
             include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/KeHoachTuyenDungView.php';
         }
+        public function getKeHoachTuyenDung(string $iD) {
+            $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
+            $resultFromDB = $keHoachTuyenDungModel->getKeHoachTuyenDungByiD($iD);
+            $this->returnJson($resultFromDB);
+        }
         public function createKeHoachTuyenDung(string $thoiGianTrienKhai, string $ghiChu) {
             $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
             $keHoachTuyenDung = new KeHoachTuyenDung("", $thoiGianTrienKhai, "", $ghiChu);
@@ -21,7 +26,6 @@
         } 
         public function updateKeHoachTuyenDung(string $iD, string $thoiGianTrienKhai, string $ghiChu) {
             $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
-            $keHoachTuyenDung = new KeHoachTuyenDung("", $thoiGianTrienKhai, "", $ghiChu);
             $resultFromDB = $keHoachTuyenDungModel->updateKeHoachTuyenDungByiD($iD, $thoiGianTrienKhai, $ghiChu);
             $this->returnJson($resultFromDB);
         }
@@ -49,8 +53,10 @@
             $result = [];
             if($resultFromDB === true) {
                 $result = ['isSuccess' => true, 'message' => ''];
-            } else {
+            } else if($resultFromDB instanceof Exception) {
                 $result = ['isSuccess' => false, 'message' => $resultFromDB];
+            } else {
+                $result = ['isSuccess' => true, 'message' => '', 'data' => $resultFromDB];
             }
             header('Content-Type: application/json');
             echo json_encode($result);

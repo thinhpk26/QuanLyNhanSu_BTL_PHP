@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
     session_start();
-    include_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/TaiKhoan.php';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
     include_once './KeHoachTuyenDungController.php';
 
-    $inforUser = isset($_SESSION['inforUser']) ? $_SESSION['inforUser'] : new TaiKhoan();
+    $inforUser = isset($_SESSION['inforUser']) ? $_SESSION['inforUser'] : new TaiKhoanEntity();
 
     $request = new Request($inforUser, $_SERVER['REQUEST_METHOD']);
 
@@ -11,9 +11,12 @@
     
     $keHoachTuyenDungController->handle();
     
-    $iD = $_POST['iD'];
-    $thoiGianThucThi = $_POST['thoiGianThucThi'];
-    $ghiChu = $_POST['ghiChu'];
+    $json = file_get_contents('php://input');
+    $data = json_decode($json);
 
-    $keHoachTuyenDungController->updateKeHoachTuyenDung($iD, $thoiGianThucThi, $ghiChu);
+    $iD = $data->iD;
+    $thoiGianTrienKhai = $data->thoiGianTrienKhai;
+    $ghiChu = $data->ghiChu;
+
+    $keHoachTuyenDungController->updateKeHoachTuyenDung($iD, $thoiGianTrienKhai, $ghiChu);
 ?>

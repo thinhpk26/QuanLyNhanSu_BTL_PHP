@@ -104,19 +104,19 @@
     }
 
     // test correct
-    $inforDb = new stdClass();
-    $inforDb->host = 'localhost';
-    $inforDb->pass = '';
-    $inforDb->user = 'root';
-    $inforDb->db = 'quanlynhansu';
-    $deNghiTuyenDungModel = DeNghiTuyenDungsModel::withDifferentHost($inforDb);
+    // $inforDb = new stdClass();
+    // $inforDb->host = 'localhost';
+    // $inforDb->pass = '';
+    // $inforDb->user = 'root';
+    // $inforDb->db = 'quanlynhansu';
+    // $deNghiTuyenDungModel = DeNghiTuyenDungsModel::withDifferentHost($inforDb);
 
-    $deNghiTuyenDung = new DeNghiTuyenDungs("sdfdd", "mapb01", "sfdsd", "");
+    // $deNghiTuyenDung = new DeNghiTuyenDungs("sdfdd", "mapb01", "sfdsd", "");
 
 
-    $deNghiTuyenDungList = $deNghiTuyenDungModel->getAllDeNghiTuyenDungByIDPhongBan($deNghiTuyenDung->iDPhongBan);
+    // $deNghiTuyenDungList = $deNghiTuyenDungModel->getAllDeNghiTuyenDungByIDPhongBan($deNghiTuyenDung->iDPhongBan);
 
-    foreach($deNghiTuyenDungList as $deNghiTuyenDungIndex) {
-        echo $deNghiTuyenDungIndex->iD.$deNghiTuyenDungIndex->iDPhongBan.$deNghiTuyenDungIndex->noiDung.$deNghiTuyenDungIndex->phanHoi;
-    }
+    // foreach($deNghiTuyenDungList as $deNghiTuyenDungIndex) {
+    //     echo $deNghiTuyenDungIndex->iD.$deNghiTuyenDungIndex->iDPhongBan.$deNghiTuyenDungIndex->noiDung.$deNghiTuyenDungIndex->phanHoi;
+    // }
 ?>

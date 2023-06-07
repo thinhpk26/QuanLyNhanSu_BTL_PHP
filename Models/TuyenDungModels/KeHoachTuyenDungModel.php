@@ -10,27 +10,25 @@
             $instance->db = $host->db;
             return $instance;
         }
-        public function getKeHoachTuyenDungByiD(string $iD) : array {
+        public function getKeHoachTuyenDungByiD(string $iD) {
+            $keHoachTuyenDung = new KeHoachTuyenDung();
             try {
                 $query = "SELECT * from KeHoachTuyenDung where iD = '$iD'";
                 $this->open_db();
                 $result = $this->condb->query($query);
-                $keHoachTuyenDungList = array();
                 if($result->num_rows > 0) {
                     while($row = $result->fetch_object()) {
-                        $keHoachTuyenDungList[] = $row;
+                        $keHoachTuyenDung = $row;
                     }
-                    $keHoachTuyenDungList;
                 }
                 $this->close_db();
-                return $keHoachTuyenDungList;
+                return $keHoachTuyenDung;
             } catch(Exception $ex) {
-                $this->navigateWhenError($ex);
-                return [];
+                return $ex;
             }
         }
 
-        public function getAllKeHoachTuyenDung() : array {
+        public function getAllKeHoachTuyenDung(){
             try {
                 $query = "SELECT * from KeHoachTuyenDung";
                 $this->open_db();
@@ -45,12 +43,11 @@
                 $this->close_db();
                 return $keHoachTuyenDungList;
             } catch(Exception $ex) {
-                $this->navigateWhenError($ex);
-                return [];
+                return $ex;
             }
         }
 
-        public function getAllKeHoachWithChuaXacNhan() : array {
+        public function getAllKeHoachWithChuaXacNhan() {
             try {
                 $query = "SELECT * from KeHoachTuyenDung where trangThaiGiaiDoan = 'chuaXacNhan'";
                 $this->open_db();
@@ -65,12 +62,11 @@
                 $this->close_db();
                 return $keHoachTuyenDungList;
             } catch(Exception $ex) {
-                $this->navigateWhenError($ex);
-                return [];
+                return $ex;
             }
         }
 
-        public function getAllKeHoachWithDangThucThi() : array {
+        public function getAllKeHoachWithDangThucThi() {
             try {
                 $query = "SELECT * from KeHoachTuyenDung where trangThaiGiaiDoan = 'dangThucThi'";
                 $this->open_db();
@@ -85,8 +81,7 @@
                 $this->close_db();
                 return $keHoachTuyenDungList;
             } catch(Exception $ex) {
-                $this->navigateWhenError($ex);
-                return [];
+                return $ex;
             }
         }
 
@@ -153,13 +148,5 @@
             }
         }
     }
-
-    $heHoachTuyenDung = new KeHoachTuyenDung("", "2012-09-04", "chuaXacNhan", "khong");
-
-    $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
-
-    $keHoachTuyenDungModel->addKeHoachTuyenDung($heHoachTuyenDung);
-
-
 
 ?>
