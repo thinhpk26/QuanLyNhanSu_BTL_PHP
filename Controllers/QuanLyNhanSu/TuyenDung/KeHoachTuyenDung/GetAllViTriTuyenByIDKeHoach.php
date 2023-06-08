@@ -10,11 +10,9 @@
     $keHoachTuyenDungController = new KeHoachTuyenDungController($request, ['post']);
     
     $keHoachTuyenDungController->handle();
-    
-    $dataJson = file_get_contents("php://input");
 
-    $data = json_decode($dataJson);
-    $iD = isset($data->iD) ? $data->iD : "";
+    $json = file_get_contents('php://input');
+    $iDKeHoachTuyenDung = json_decode($json)->iDKeHoachTuyenDung;
 
-    $keHoachTuyenDungController->deleteKeHoachTuyenDung($iD);
+    $keHoachTuyenDungController->getAllViTriTuyenByIDKeHoach($iD);
 ?>

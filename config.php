@@ -1,10 +1,10 @@
 <?php
     class config {
-        private $hostname;
-        private $username;
-        private $password;
-        private $database;
-        private $conn;
+        public $hostname;
+        public $username;
+        public $password;
+        public $database;
+        public $conn;
 
         function __construct()
         {

@@ -39,15 +39,24 @@
             $resultFromDB = $keHoachTuyenDungModel->updateTrangThaiGiaiDoan($iD, "dangThucThi");
             $this->returnJson($resultFromDB);
         }
-        public function createViTriTuyenDung() {
+        public function addViTriTuyenDung(string $iDViTri, string $iDKeHoachTuyenDung, int $soLuong, string $kyNangCanThiet) {
             $viTriTuyenDungModel = new ViTriTuyenModel();
-            // chưa đủ điều kiện
-            // $resultFromDB = $viTriTuyenDungModel->addViTriTuyen();
+            $newViTriTuyenDung = new ViTriTuyen($viTriTuyenDungModel->createID(), $iDViTri, $iDKeHoachTuyenDung, $soLuong, $kyNangCanThiet);
+            $resultFromDB = $viTriTuyenDungModel->addViTriTuyen($newViTriTuyenDung);
+            $this->returnJson($resultFromDB);
         }
         public function deleteViTriTuyenDung($iD) {
             $viTriTuyenDungModel = new ViTriTuyenModel();
             $resultFromDB = $viTriTuyenDungModel->deleteViTriTuyenbyID($iD);
             $this->returnJson($resultFromDB);
+        }
+        public function getAllViTriTuyenByIDKeHoach(string $iDKeHoachTuyenDung) {
+            $viTriTuyenDungModel = new ViTriTuyenModel();
+            $resultFromDB = $viTriTuyenDungModel->getAllViTriTuyenByiDKeHoachTuyenDung($iDKeHoachTuyenDung);
+            $this->returnJson($resultFromDB);
+        }
+        public function getAllViTriNhanSu() {
+            //
         }
         private function returnJson($resultFromDB) {
             $result = [];

@@ -1,4 +1,28 @@
+function setViTriNhanSuForChiTietKeHoach() {
+    const viTriNhanSuSelect = document.getElementById('viTriNhanSu');
+    
+    fetchGet("/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/GetAllViTriNhanSu.php")
+    .then(response => {
+        if(response.isSuccess) {
+            let htmls = "";
+            for(let i=0; i<response.data.length; i++) {
+                htmls += `<option value="${response.data[i].maChucVu}" selected>${response.data[i].tenChucVu}</option>`
+            }
+            viTriNhanSuSelect.innerHTML = htmls;
+        } else {
+            alert(response.message);
+        }
+    })
+}
+
+//setViTriNhanSuForChiTietKeHoach();
+
 function showChiTietKeHoach(event) {
+    const iDKeHoachTuyenDung = event.currentTarget.getAttribute("data-iD");
+    //setAllViTriTuyenDung(iDKeHoachTuyenDung);
+    const iDKehoachTuyenDungInputOfForm = document.getElementById("addViTriTuyen");
+    iDKehoachTuyenDungInputOfForm.value = iDKeHoachTuyenDung;
+
     const btnThucThiKeHoach = event.currentTarget.getElementsByClassName('btn-thucThiKeHoach');
     const btnSuaKeHoach = event.currentTarget.getElementsByClassName('btn-suaKeHoach');
     const btnXoaKeHoach = event.currentTarget.getElementsByClassName('btn-xoaKeHoach');
@@ -13,22 +37,12 @@ function showChiTietKeHoach(event) {
 
 function showSuaKeHoachTuyenDung(event) {
     event.preventDefault();
-    const form = new FormData(event.currentTarget.parentElement);
-    const body = {};
-    for(const [name, value] of form) {
-        body[name] = value;
-    }
-    fetch('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/GetKeHoachTuyenDung.php', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    })
-    .then(response => response.json())
+
+    const formElemnt = event.currentTarget.parentElement;
+    const formData = getFormDataFromFormElement(formElemnt);
+
+    fetchPost('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/GetKeHoachTuyenDung.php', formData)
     .then(response => {
-        console.log(response);
         const iDInput = document.getElementById('iD_suaKeHoach');
         const thoiGianTrienKhaiInput = document.getElementById('thoiGianTrienKhai_suaKeHoach');
         const ghiChuInput = document.getElementById('ghiChu_suaKeHoach');
@@ -38,26 +52,16 @@ function showSuaKeHoachTuyenDung(event) {
         thoiGianTrienKhaiInput.value = thoiGianTrienKhai.toISOString().split('T')[0];
         ghiChuInput.value = response.data.ghiChu;
     })
+
     toggleNotify(event);
 }
 
 function updateKeHoachTuyenDung(event) {
     event.preventDefault();
 
-    const form = new FormData(event.currentTarget.parentElement.parentElement);
-    const body = {};
-    for(const [name, value] of form) {
-        body[name] = value;
-    }
-    fetch('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/UpdateKeHoachTuyenDung.php', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    })
-   .then(response => response.json())
+    const formElement = event.currentTarget.parentElement.parentElement;
+    const formData = getFormDataFromFormElement(formElement);
+    fetchPost('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/UpdateKeHoachTuyenDung.php', formData)
     .then(response => {
         if(response.isSuccess) {
             alert("Update thành công");
@@ -65,7 +69,7 @@ function updateKeHoachTuyenDung(event) {
         } else {
             alert(response.message);
         }
-    })
+    });
 }
 
 // chưa có đủ thông tin để làm
@@ -91,22 +95,10 @@ function showXacNhanThucThiTuyenDung(event) {
 function confirmToStartKeHoachTuyenDung(event) {
     event.preventDefault();
 
-    const form = new FormData(event.currentTarget.parentElement.parentElement);
+    const confirmStartKeHoachform = event.currentTarget.parentElement.parentElement;
+    const confirmStartData = getFormDataFromFormElement(confirmStartKeHoachform);
 
-    const body = {};
-    for(const [key, value] of form) {
-        body[key] = value;
-    }
-
-    fetch('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/XacNhanThucThi.php', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    })
-    .then(response => response.json())
+    fetchPost('/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/XacNhanThucThi.php', confirmStartData)
     .then(response => {
         if(response.isSuccess) {
             alert('Xác nhận thực thi thành công');
@@ -115,6 +107,109 @@ function confirmToStartKeHoachTuyenDung(event) {
             alert(response.message);
         }
     })
+}
+
+function showDeleteKeHoachTuyenDung(event) {
+    const iD = event.currentTarget.getAttribute('data-iD');
+    const xoaKeHoachInput = document.getElementById('xoaKeHoachInput');
+    xoaKeHoachInput.value = iD;
+
+    toggleNotify(event);
+}
+
+function deleteKeHoachTuyenDung(event) {
+    event.preventDefault();
+    const confirmDeleteForm = event.currentTarget.parentElement.parentElement;
+    const confirmDeleteData = getFormDataFromFormElement(confirmDeleteForm);
+
+    fetchPost("/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/DeleteKeHoachTuyenDung.php", confirmDeleteData)
+    .then(response => {
+        if(response.isSuccess) {
+            alert('Xóa thành công thành công');
+            window.location.reload();
+        } else {
+            alert(response.message);
+        }
+    })
+}
+
+function setAllViTriTuyenDung(iDKeHoachTuyenDung) {
+    fetchPost("/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/getAllViTriTuyenByIDKeHoach.php", {iDKeHoachTuyenDung})
+    .then(response => {
+        if(response.isSuccess) {
+            let allViTriTuyenDungHTML = '';
+            for(let i=0; i<response.data.length; i++) {
+                allViTriTuyenDungHTML += viTriTuyenDungHTML(response.data[i]);
+            }
+            const chiTietBaoTriBodyTable = document.getElementById('ChiTietBaoTriContainer');
+            chiTietBaoTriBodyTable.innerHTML = allViTriTuyenDungHTML;
+        } else {
+            alert(response.message);
+        }
+    })
+}
+
+function viTriTuyenDungHTML(viTriTuyenDung, ordinalNumber) {
+    return `
+    <tr data-iD="iD-sdfsd" style="cursor: pointer;">
+      <td scope="row" class="text-center">${ordinalNumber}</td>
+      <td class="text-center">${viTriTuyenDung.tenViTri}</td>
+      <td class="text-center">${viTriTuyenDung.soLuong}</td>
+      <td class="text-center">
+        ${viTriTuyenDung.kyNangCanThiet}
+      </td>
+      <td class="text-center">
+        <form action="#" method="post">
+          <input type="text" class="visually-hidden" name="iD" value="${viTriTuyenDung.iD}">
+          <button class="btn text-decoration-underline" type="submit">Xóa</button>
+        </form>
+      </td>
+    </tr>`;
+}
+
+function addVitriTuyenDung(event) {
+    event.preventDefault();
+    
+    console.log(event.currentTarget);
+
+
+}
+
+
+
+
+
+
+async function fetchPost(url, data) {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
+
+async function fetchGet(url) {
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    });
+    return response.json();
+}
+
+function getFormDataFromFormElement(formElement) {
+    const formData = new FormData(formElement);
+    const body = {};
+    for(const [key, value] of formData) {
+        body[key] = value;
+    }
+    return body;
 }
 
 function toggleNotify(event) {

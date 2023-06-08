@@ -35,7 +35,7 @@
                   </form>
                 </td>
                 <td class="text-center">
-                  <button class="btn btn-primary btn-xoaKeHoach" type="submit" data-iD="%s" data-passevent="xacNhanXoaKeHoachContainer" onclick="toggleNotify(event)">Xóa</button>
+                  <button class="btn btn-primary btn-xoaKeHoach" type="submit" data-iD="%s" data-passevent="xacNhanXoaKeHoachContainer" onclick="showDeleteKeHoachTuyenDung(event)">Xóa</button>
                 </td>
               </tr>', $i, $keHoachTuyenDungList[$i]->thoiGianTrienKhai, $keHoachTuyenDungList[$i]->ghiChu, $keHoachTuyenDungList[$i]->iD, $keHoachTuyenDungList[$i]->iD, $keHoachTuyenDungList[$i]->iD);
             }
@@ -123,9 +123,10 @@
             <hr>
             <p>Bạn muốn xóa kế hoạch</p>
             <form action="">
-            <div class="d-flex justify-content-center" style="margin-top: 120px;">
-              <button type="submit" class="btn btn-primary">Xác nhận</button>
-            </div>
+              <input id="xoaKeHoachInput" name="iD" class="visually-hidden">
+              <div class="d-flex justify-content-center" style="margin-top: 120px;">
+                <button type="submit" class="btn btn-primary" onclick="deleteKeHoachTuyenDung(event)">Xác nhận</button>
+              </div>
             </form>
         </div>
       </div>
@@ -152,7 +153,7 @@
                     <th scope="col" class="text-center" style="width: 50px;"></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="ChiTietBaoTriContainer">
                   <tr data-iD="iD-sdfsd" style="cursor: pointer;">
                     <td scope="row" class="text-center">1</td>
                     <td class="text-center">IT engineer</td>
@@ -171,30 +172,31 @@
               </table>
             </div>
             <div class="p-3">
-              <form action="#" method="post">
+              <form action="#" method="post" onsubmit="addVitriTuyenDung(event)">
                 <h5 class="mb-4">Thêm thông tin</h5>
                 <div class="mb-3">
+                  <input class="visually-hidden" iD="addViTriTuyen" name="iDKeHoachTuyenDung">
                   <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">
+                    <span class="input-group-text" id="viTriNhanSu_addViTriTuyen">
                       Vị trí
                     </span>
-                    <select class="form-select" id="viTri" name="viTri">
+                    <select class="form-select" id="viTriNhanSu_addViTriTuyen" name="iDViTri">
                       <option value="1" selected>One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
                   </div>
                   <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">
+                    <span class="input-group-text" id="soLuong_addViTriTuyen">
                       Số lượng
                     </span>
-                    <input class="form-control" type="text" name="soLuong" id="soLuong">
+                    <input class="form-control" type="text" name="soLuong" id="soLuong_addViTriTuyen">
                   </div>
                   <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">
+                    <span class="input-group-text" id="kyNangCanThiet_addViTriTuyen">
                       Kỹ năng cần thiết
                     </span>
-                    <input class="form-control" type="text" name="kyNangCanThiet" id="kyNangCanThiet">
+                    <input class="form-control" type="text" name="kyNangCanThiet" id="kyNangCanThiet_addViTriTuyen">
                   </div>
                 </div>
                 <div class="d-flex w-100 justify-content-end">

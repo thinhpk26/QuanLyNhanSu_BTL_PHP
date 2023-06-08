@@ -12,7 +12,8 @@
     $keHoachTuyenDungController->handle();
 
     $json = file_get_contents('php://input');
-    $iD = json_decode($json)->iD;
+    $keHoachTuyenDungData = json_decode($json);
+    $iD = isset($keHoachTuyenDungData->iD) ? $keHoachTuyenDungData->iD : "";
 
     $keHoachTuyenDungController->getKeHoachTuyenDung($iD);
 ?>

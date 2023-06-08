@@ -7,14 +7,9 @@
 
     $request = new Request($inforUser, $_SERVER['REQUEST_METHOD']);
 
-    $keHoachTuyenDungController = new KeHoachTuyenDungController($request, ['post']);
+    $keHoachTuyenDungController = new KeHoachTuyenDungController($request, ['get']);
     
     $keHoachTuyenDungController->handle();
-    
-    $dataJson = file_get_contents("php://input");
 
-    $data = json_decode($dataJson);
-    $iD = isset($data->iD) ? $data->iD : "";
-
-    $keHoachTuyenDungController->deleteKeHoachTuyenDung($iD);
+    $keHoachTuyenDungController->getAllViTriNhanSu();
 ?>
