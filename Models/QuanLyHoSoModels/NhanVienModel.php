@@ -1,15 +1,15 @@
 <?php
     class NhanVienModel{
         function __construct($consetup){
-            $this->host = $consetup->host;
-            $this->user = $consetup->user;
-            $this->pass =  $consetup->pass;
-            $this->db = $consetup->db;
+            $this->hostname = $consetup->hostname;
+            $this->username = $consetup->username;
+            $this->password =  $consetup->password;
+            $this->database = $consetup->database;
         }
 
         public function open_db()
         {
-            $this->condb=new mysqli($this->host,$this->user,$this->pass,$this->db);
+            $this->condb=new mysqli($this->hostname,$this->username,$this->password,$this->database);
             if ($this->condb->connect_error)
             {
                 die("Erron in connection: " . $this->condb->connect_error);
@@ -49,7 +49,7 @@
 
         }
 
-        public function searchEmployees($maNV1, $tenNV1, $tenPB1, $gioiTinh1, $queQuan1, $chucVu1, $chuyenMon1) {
+        public function searchEmployees($maNV1, $tenNV1, $tenPB1, $queQuan1, $chucVu1, $chuyenMon1) {
             $this->open_db();
             $sql = "SELECT * FROM nhanvien WHERE";
 
@@ -71,10 +71,6 @@
             
             if (!empty($tenPB1)) {
                 $sql .= " maPb='$tenPB1' AND";
-            }
-            
-            if (!empty($gioiTinh1)) {
-                $sql .= " gioiTinh='$gioiTinh1' AND";
             }
             
             if (!empty($chuyenMon1)) {
@@ -124,8 +120,8 @@
             try
             {
                 $this->open_db();
-                $query = $this->condb->prepare("UPDATE nhanvien SET tenNV = ?, tuoi = ?, gioiTinh = ?, ngaySinh = ?, sdt = ?, email = ?, queQuan = ?, diaChi = ?, honNhan = ?, maPb = ?, maChucVu = ?, trinhDo = ?, chuyenMon = ?, danToc = ?, quocTich = ?, soCMND = ?, linkCMND = ?, hoKhau = ?, linkHoKhau = ?, linkBangCap = ?, linkGiayKhaiSinh = ?, nganHang = ?, soTK = ?, maSoThue = ?, tinhTrang = ?, linkAnh = ? WHERE maNV = ?");
-                $query->bind_param("sssssssssssssssssssssssssi", $obj->tenNV, $obj->tuoi, $obj->gioiTinh, $obj->ngaySinh, $obj->sdt, $obj->email, $obj->queQuan, $obj->diaChi, $obj->honNhan, $obj->maPb, $obj->maChucVu, $obj->trinhDo, $obj->chuyenMon, $obj->danToc, $obj->quocTich, $obj->soCMND, $obj->linkCMND, $obj->hoKhau, $obj->linkHoKhau, $obj->linkBangCap, $obj->linkGiayKhaiSinh, $obj->nganHang, $obj->soTK, $obj->maSoThue, $obj->tinhTrang, $obj->linkAnh, $obj->maNV);
+                $query = $this->condb->prepare("UPDATE nhanvien SET tenNV = ?, tuoi = ?, gioiTinh = ?, ngaySinh = ?, sdt = ?, email = ?, queQuan = ?, diaChi = ?, honNhan = ?, maPb = ?, maChucVu = ?, trinhDo = ?, chuyenMon = ?, danToc = ?, quocTich = ?, soCMND = ?, linkCMND = ?, hoKhau = ?, linkHoKhau = ?, linkBangCap = ?, linkGiayKhaiSinh = ?, nganHang = ?, soTK = ?, maSoThue = ?, tinhTrang = ? WHERE maNV = ?");
+                $query->bind_param("sssssssssssssssssssssssssi", $obj->tenNV, $obj->tuoi, $obj->gioiTinh, $obj->ngaySinh, $obj->sdt, $obj->email, $obj->queQuan, $obj->diaChi, $obj->honNhan, $obj->maPb, $obj->maChucVu, $obj->trinhDo, $obj->chuyenMon, $obj->danToc, $obj->quocTich, $obj->soCMND, $obj->linkCMND, $obj->hoKhau, $obj->linkHoKhau, $obj->linkBangCap, $obj->linkGiayKhaiSinh, $obj->nganHang, $obj->soTK, $obj->maSoThue, $obj->tinhTrang, $obj->maNV);
                 $query->execute();
                 $res=$query->get_result();
                 $query->close();

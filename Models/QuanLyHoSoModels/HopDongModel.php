@@ -1,15 +1,15 @@
 <?php
     class HopDongModel{
         function __construct($consetup){
-            $this->host = $consetup->host;
-            $this->user = $consetup->user;
-            $this->pass =  $consetup->pass;
-            $this->db = $consetup->db;
+            $this->hostname = $consetup->hostname;
+            $this->username = $consetup->username;
+            $this->password =  $consetup->password;
+            $this->database = $consetup->database;
         }
 
         public function open_db()
         {
-            $this->condb=new mysqli($this->host,$this->user,$this->pass,$this->db);
+            $this->condb=new mysqli($this->hostname,$this->username,$this->password,$this->database);
             if ($this->condb->connect_error)
             {
                 die("Erron in connection: " . $this->condb->connect_error);
@@ -91,7 +91,7 @@
             {
                 $this->open_db();
                 $query = $this->condb->prepare("INSERT INTO hopdong (maHD, linkHopDong, loaiHD, maNV, daiDien, ngayKy, ngayHieuLuc, ngayHet, luong, ngayTra, phuCap, baoHiem, tinhTrangHD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-                $query->bind_param("ssssssssdsdss", $obj->maHD, $obj->linkHopDong, $obj->loaiHD, $obj->maNV, $obj->daiDien, $obj->ngayKy, $obj->ngayHieuLuc, $obj->ngayHet, $obj->luong, $obj->ngayTra, $obj->phuCap, $obj->baoHiem, $obj->tinhTrangHD);
+                $query->bind_param("ssssssssisiss", $obj->maHD, $obj->linkHopDong, $obj->loaiHD, $obj->maNV, $obj->daiDien, $obj->ngayKy, $obj->ngayHieuLuc, $obj->ngayHet, $obj->luong, $obj->ngayTra, $obj->phuCap, $obj->baoHiem, $obj->tinhTrangHD);
                 $query->execute();
                 $res= $query->get_result();
                 $last_id=$this->condb->insert_id;
