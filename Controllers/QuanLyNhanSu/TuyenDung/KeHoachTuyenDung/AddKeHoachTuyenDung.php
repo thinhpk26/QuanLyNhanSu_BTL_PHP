@@ -10,9 +10,14 @@
     $keHoachTuyenDungController = new KeHoachTuyenDungController($request, ['post']);
     
     $keHoachTuyenDungController->handle();
-    
-    $thoiGianTrienKhai = $_POST['thoiGianTrienKhai'];
-    $ghiChu = $_POST['ghiChu'];
 
-    $keHoachTuyenDungController->createKeHoachTuyenDung($thoiGianTrienKhai, $ghiChu);
+    $dataJson = file_get_contents("php://input");
+    $data = json_decode($dataJson);
+    
+    $dateNow = new DateTime();
+
+    $thoiGianTrienKhai = isset($data->thoiGianTrienKhai) ? $data->thoiGianTrienKhai : $dateNow->format('Y-m-d');
+    $ghiChu = isset($data->ghiChu) ? $data->ghiChu : "";
+
+    $keHoachTuyenDungController->addKeHoachTuyenDung($thoiGianTrienKhai, $ghiChu);
 ?>

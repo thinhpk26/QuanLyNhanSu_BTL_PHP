@@ -49,6 +49,25 @@
             }
         }
 
+        public function getAllViTriTuyenAndChucVuByiDKeHoachTuyenDung(string $iDKeHoachTuyenDung) : array {
+            try {
+                $query = "SELECT * from vitrituyen join chucvu on vitrituyen.iDViTri = chucvu.maChucVu where iDKeHoachTuyenDung = '$iDKeHoachTuyenDung'";
+                $this->open_db();
+                $result = $this->condb->query($query);
+                $viTriTuyenList = array();
+                if($result->num_rows > 0) {
+                    while($row = $result->fetch_object()) {
+                        $viTriTuyenList[] = $row;
+                    }
+                }
+                $this->close_db();
+                return $viTriTuyenList;
+            } catch(Exception $ex) {
+                $this->navigateWhenError($ex);
+                return [];
+            }
+        }
+
         public function addViTriTuyen(ViTriTuyen $viTriTuyen) : bool {
             try {
                 $query = "INSERT INTO ViTriTuyen VALUES (?,?,?,?,?)";

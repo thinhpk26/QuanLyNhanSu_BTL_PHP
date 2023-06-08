@@ -16,7 +16,7 @@
 
     $iDViTri = isset($viTriTuyenData->iDViTri) ? $viTriTuyenData->iDViTri : "";
     $iDKeHoachTuyenDung = isset($viTriTuyenData->iDKeHoachTuyenDung) ? $viTriTuyenData->iDKeHoachTuyenDung : "";
-    $soLuong = isset($viTriTuyenData->soLuong) ? $viTriTuyenData->soLuong : 0;
+    $soLuong = isset($viTriTuyenData->soLuong) ? (int) $viTriTuyenData->soLuong : 0;
     $kyNangCanThiet = isset($viTriTuyenData->kyNangCanThiet) ? $viTriTuyenData->kyNangCanThiet : "";
 
     $keHoachTuyenDungController->addViTriTuyenDung($iDViTri, $iDKeHoachTuyenDung, $soLuong, $kyNangCanThiet);

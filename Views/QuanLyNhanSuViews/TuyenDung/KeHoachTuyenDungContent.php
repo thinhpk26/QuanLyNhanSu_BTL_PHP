@@ -1,12 +1,11 @@
 <?php $this->layout('QuanLyNhanSuView') ?>
 
 <?php $this->section('Content'); ?>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <div id="content-page" class="d-flex flex-column justify-content-center">
-    <h3 class="mb-3 mt-3 fw-bold">Các kế hoạch chờ thực thi</h3>
+  <div id="content-page">
+    <h3 class="mb-3 mt-3 fw-bold text-center">Các kế hoạch chờ thực thi</h3>
     <button class="btn btn-primary mb-2" style="width: 100px;" type="button" data-passevent="themKeHoachTuyenDungContainer" onclick="toggleNotify(event)">Thêm</button>
-    <div class="overflow-auto" style="height: 500px">
-      <table class="table table-hover table-striped mb-0 border border-3 table-bordered" style="width: 900px;">
+    <div class="overflow-auto" style="height: 618px">
+      <table class="table table-hover table-striped mb-0 border border-3 table-bordered">
         <thead>
           <tr>
             <th scope="col" class="background-primary color-white text-center" style="width: 30px;">STT</th>
@@ -21,11 +20,11 @@
           <?php 
             $html = '';
             for($i=0; $i<count($keHoachTuyenDungList); $i++) {
-              $html .= sprintf('<tr data-iD="iD-sdfsd" style="cursor: pointer;" data-passevent="chiTietKeHoachContainer" onclick="showChiTietKeHoach(event)">
+              $html .= sprintf('<tr data-iD="%s" style="cursor: pointer;" data-passevent="chiTietKeHoachContainer" onclick="showChiTietKeHoach(event)">
                 <td scope="row" class="text-center">%d</td>
                 <td class="text-center">%s</td>
                 <td>%s</td>
-                <td class="text-center">
+                <td class="text-center" style="width: 102px;">
                   <button class="btn btn-primary btn-thucThiKeHoach" data-iD="%s" data-passevent="xacNhanThucThiKeHoach" onclick="showXacNhanThucThiTuyenDung(event)">Thực thi</button>
                 </td>
                 <td class="text-center">
@@ -37,7 +36,7 @@
                 <td class="text-center">
                   <button class="btn btn-primary btn-xoaKeHoach" type="submit" data-iD="%s" data-passevent="xacNhanXoaKeHoachContainer" onclick="showDeleteKeHoachTuyenDung(event)">Xóa</button>
                 </td>
-              </tr>', $i, $keHoachTuyenDungList[$i]->thoiGianTrienKhai, $keHoachTuyenDungList[$i]->ghiChu, $keHoachTuyenDungList[$i]->iD, $keHoachTuyenDungList[$i]->iD, $keHoachTuyenDungList[$i]->iD);
+              </tr>', $keHoachTuyenDungList[$i]->iD, $i, $keHoachTuyenDungList[$i]->thoiGianTrienKhai, $keHoachTuyenDungList[$i]->ghiChu, $keHoachTuyenDungList[$i]->iD, $keHoachTuyenDungList[$i]->iD, $keHoachTuyenDungList[$i]->iD);
             }
             echo $html;
           ?>
@@ -177,7 +176,7 @@
                 <div class="mb-3">
                   <input class="visually-hidden" iD="addViTriTuyen" name="iDKeHoachTuyenDung">
                   <div class="input-group mb-3">
-                    <span class="input-group-text" id="viTriNhanSu_addViTriTuyen">
+                    <span class="input-group-text">
                       Vị trí
                     </span>
                     <select class="form-select" id="viTriNhanSu_addViTriTuyen" name="iDViTri">
@@ -187,13 +186,13 @@
                     </select>
                   </div>
                   <div class="input-group mb-3">
-                    <span class="input-group-text" id="soLuong_addViTriTuyen">
+                    <span class="input-group-text">
                       Số lượng
                     </span>
                     <input class="form-control" type="text" name="soLuong" id="soLuong_addViTriTuyen">
                   </div>
                   <div class="input-group mb-3">
-                    <span class="input-group-text" id="kyNangCanThiet_addViTriTuyen">
+                    <span class="input-group-text">
                       Kỹ năng cần thiết
                     </span>
                     <input class="form-control" type="text" name="kyNangCanThiet" id="kyNangCanThiet_addViTriTuyen">

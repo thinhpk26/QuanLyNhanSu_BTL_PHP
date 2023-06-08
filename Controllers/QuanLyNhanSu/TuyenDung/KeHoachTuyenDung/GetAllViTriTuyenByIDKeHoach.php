@@ -12,7 +12,7 @@
     $keHoachTuyenDungController->handle();
 
     $json = file_get_contents('php://input');
-    $iDKeHoachTuyenDung = json_decode($json)->iDKeHoachTuyenDung;
+    $iDKeHoachTuyenDung = json_decode($json)->iDKeHoachTuyenDung ? json_decode($json)->iDKeHoachTuyenDung : "";
 
-    $keHoachTuyenDungController->getAllViTriTuyenByIDKeHoach($iD);
+    $keHoachTuyenDungController->getAllViTriTuyenByIDKeHoach($iDKeHoachTuyenDung);
 ?>

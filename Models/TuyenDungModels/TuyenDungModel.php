@@ -31,7 +31,6 @@
         }
 
         public function fromStringToDatetime(string $datetimeString) : string {
-            echo $datetimeString;
             $date = new DateTime($datetimeString);
             return $date->format('Y-m-d H:i:s');
         }

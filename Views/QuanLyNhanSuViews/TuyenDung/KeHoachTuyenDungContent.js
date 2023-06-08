@@ -1,5 +1,5 @@
 function setViTriNhanSuForChiTietKeHoach() {
-    const viTriNhanSuSelect = document.getElementById('viTriNhanSu');
+    const viTriNhanSuSelect = document.getElementById('viTriNhanSu_addViTriTuyen');
     
     fetchGet("/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/GetAllViTriNhanSu.php")
     .then(response => {
@@ -15,11 +15,11 @@ function setViTriNhanSuForChiTietKeHoach() {
     })
 }
 
-//setViTriNhanSuForChiTietKeHoach();
+setViTriNhanSuForChiTietKeHoach();
 
 function showChiTietKeHoach(event) {
     const iDKeHoachTuyenDung = event.currentTarget.getAttribute("data-iD");
-    //setAllViTriTuyenDung(iDKeHoachTuyenDung);
+    setAllViTriTuyenDung(iDKeHoachTuyenDung);
     const iDKehoachTuyenDungInputOfForm = document.getElementById("addViTriTuyen");
     iDKehoachTuyenDungInputOfForm.value = iDKeHoachTuyenDung;
 
@@ -72,15 +72,20 @@ function updateKeHoachTuyenDung(event) {
     });
 }
 
-// chưa có đủ thông tin để làm
 function addKeHoachTuyenDung(event) {
     event.preventDefault();
-    const form = new FormData(event.currentTarget.parentElement.parentElement);
-    const body = {};
-    for(const [key, value] of form) {
-        body[key] = value;
-    }
+    const addKeHoachForm = event.currentTarget.parentElement.parentElement;
+    const addKeHoachData = getFormDataFromFormElement(addKeHoachForm);
 
+    fetchPost("/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/AddKeHoachTuyenDung.php", addKeHoachData)
+    .then(response => {
+        if(response.isSuccess) {
+            alert("Thêm thành công");
+            window.location.reload();
+        } else {
+            alert(response.message);
+        }
+    })
 }
 
 function showXacNhanThucThiTuyenDung(event) {
@@ -137,9 +142,10 @@ function setAllViTriTuyenDung(iDKeHoachTuyenDung) {
     fetchPost("/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/getAllViTriTuyenByIDKeHoach.php", {iDKeHoachTuyenDung})
     .then(response => {
         if(response.isSuccess) {
+            console.log(response.data);
             let allViTriTuyenDungHTML = '';
             for(let i=0; i<response.data.length; i++) {
-                allViTriTuyenDungHTML += viTriTuyenDungHTML(response.data[i]);
+                allViTriTuyenDungHTML += viTriTuyenDungHTML(response.data[i], i + 1);
             }
             const chiTietBaoTriBodyTable = document.getElementById('ChiTietBaoTriContainer');
             chiTietBaoTriBodyTable.innerHTML = allViTriTuyenDungHTML;
@@ -153,13 +159,13 @@ function viTriTuyenDungHTML(viTriTuyenDung, ordinalNumber) {
     return `
     <tr data-iD="iD-sdfsd" style="cursor: pointer;">
       <td scope="row" class="text-center">${ordinalNumber}</td>
-      <td class="text-center">${viTriTuyenDung.tenViTri}</td>
+      <td class="text-center">${viTriTuyenDung.tenChucVu}</td>
       <td class="text-center">${viTriTuyenDung.soLuong}</td>
       <td class="text-center">
         ${viTriTuyenDung.kyNangCanThiet}
       </td>
       <td class="text-center">
-        <form action="#" method="post">
+        <form action="#" method="post" onsubmit="deleteViTriTuyenDung(event)">
           <input type="text" class="visually-hidden" name="iD" value="${viTriTuyenDung.iD}">
           <button class="btn text-decoration-underline" type="submit">Xóa</button>
         </form>
@@ -169,16 +175,45 @@ function viTriTuyenDungHTML(viTriTuyenDung, ordinalNumber) {
 
 function addVitriTuyenDung(event) {
     event.preventDefault();
-    
-    console.log(event.currentTarget);
+    const iDKeHoachTuyenDung = document.getElementById('addViTriTuyen').value;
+    const addViTriTuyenDungForm = event.currentTarget;
+    const soLuongString = document.getElementById('soLuong_addViTriTuyen').value;
+    let soLuong = 0;
+    try {
+        soLuong = Number.parseInt(soLuongString);
+    } catch(ex) {
+        alert("Bạn nhập không đúng số lượng");
+        return;
+    }
+    const addViTriTuyenDungData = getFormDataFromFormElement(addViTriTuyenDungForm);
 
-
+    fetchPost("/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/AddViTriTuyen.php", addViTriTuyenDungData)
+    .then(response => {
+        if(response.isSuccess) {
+            alert("Thêm thành công");
+            setAllViTriTuyenDung(iDKeHoachTuyenDung);
+        } else {
+            alert(response.message);
+        }
+    })
 }
 
+function deleteViTriTuyenDung(event) {
+    event.preventDefault();
+    const iDKeHoachTuyenDung = document.getElementById('addViTriTuyen').value;
+    const deleteViTriTuyenDungForm = event.currentTarget;
+    const deleteViTriTuyenDungData = getFormDataFromFormElement(deleteViTriTuyenDungForm);
 
-
-
-
+    fetchPost("/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/DeleteViTriTuyen.php", deleteViTriTuyenDungData)
+    .then(response => {
+        if(response.isSuccess) {
+            alert("Đã xóa thành công");
+            setAllViTriTuyenDung(iDKeHoachTuyenDung);
+        } else {
+            alert(response.message);
+        }
+    })
+}
 
 async function fetchPost(url, data) {
     const response = await fetch(url, {

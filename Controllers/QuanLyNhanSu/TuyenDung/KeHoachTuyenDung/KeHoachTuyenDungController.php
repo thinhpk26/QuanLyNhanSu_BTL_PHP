@@ -5,7 +5,8 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/ViTriTuyen.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/ViTriTuyenModel.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Request.php';
-
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/ChucVuModel.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/config.php';
     class KeHoachTuyenDungController extends QuanLyNhanSuAuthMiddleware {
         public function hienThiKeHoachTuyenDungPage() {
             $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
@@ -18,9 +19,9 @@
             $resultFromDB = $keHoachTuyenDungModel->getKeHoachTuyenDungByiD($iD);
             $this->returnJson($resultFromDB);
         }
-        public function createKeHoachTuyenDung(string $thoiGianTrienKhai, string $ghiChu) {
+        public function addKeHoachTuyenDung(string $thoiGianTrienKhai, string $ghiChu) {
             $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
-            $keHoachTuyenDung = new KeHoachTuyenDung("", $thoiGianTrienKhai, "", $ghiChu);
+            $keHoachTuyenDung = new KeHoachTuyenDung("", $thoiGianTrienKhai, "chuaXacNhan", $ghiChu);
             $resultFromDB = $keHoachTuyenDungModel->addKeHoachTuyenDung($keHoachTuyenDung);
             $this->returnJson($resultFromDB);
         } 
@@ -52,11 +53,13 @@
         }
         public function getAllViTriTuyenByIDKeHoach(string $iDKeHoachTuyenDung) {
             $viTriTuyenDungModel = new ViTriTuyenModel();
-            $resultFromDB = $viTriTuyenDungModel->getAllViTriTuyenByiDKeHoachTuyenDung($iDKeHoachTuyenDung);
+            $resultFromDB = $viTriTuyenDungModel->getAllViTriTuyenAndChucVuByiDKeHoachTuyenDung($iDKeHoachTuyenDung);
             $this->returnJson($resultFromDB);
         }
         public function getAllViTriNhanSu() {
-            //
+            $ChucVuModel = new ChucVuModel(new config());
+            $resultFromDB = $ChucVuModel->getAllChucVu();
+            $this->returnJson($resultFromDB);
         }
         private function returnJson($resultFromDB) {
             $result = [];
