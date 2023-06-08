@@ -5,12 +5,12 @@
         public $diaDiemPhongVan;
         public $xacNhanKeHoach;
 
-        public function __construct()
+        public function __construct($iD = "", $thoiGianPhongVan = "", $diaDiemPhongVan = "", $xacNhanKeHoach = false)
         {
-            $this->iD = "";
-            $this->thoiGianPhongVan = "";
-            $this->diaDiemPhongVan = "";
-            $this->xacNhanKeHoach = "";
+            $this->iD = $iD;
+            $this->thoiGianPhongVan = $thoiGianPhongVan;
+            $this->diaDiemPhongVan = $diaDiemPhongVan;
+            $this->xacNhanKeHoach = $xacNhanKeHoach;
         }
     }
 ?>
