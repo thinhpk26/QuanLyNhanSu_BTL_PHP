@@ -1,15 +1,15 @@
 <?php
     class UngVienModel{
         function __construct($consetup){
-            $this->host = $consetup->host;
-            $this->user = $consetup->user;
-            $this->pass =  $consetup->pass;
-            $this->db = $consetup->db;
+            $this->hostname = $consetup->hostname;
+            $this->username = $consetup->username;
+            $this->password =  $consetup->password;
+            $this->database = $consetup->database;
         }
 
         public function open_db()
         {
-            $this->condb=new mysqli($this->host,$this->user,$this->pass,$this->db);
+            $this->condb=new mysqli($this->hostname,$this->username,$this->password,$this->database);
             if ($this->condb->connect_error)
             {
                 die("Erron in connection: " . $this->condb->connect_error);
@@ -49,16 +49,16 @@
 
         }
 
-        public function searchCandidate($maUV1, $tenUV1, $vtUT1, $gioiTinh1, $queQuan1, $email1, $sdt1, $ngayNop1) {
+        public function searchCandidate($maUV1, $tenUV1, $vtUT1, $queQuan1, $email1, $sdt1, $ngayNop1) {
             $this->open_db();
             $sql = "SELECT * FROM ungvien WHERE";
 
-            if (!empty($maNV1)) {
-                $sql .= " maUV='$maNV1' AND ";
+            if (!empty($maUV1)) {
+                $sql .= " maUV='$maUV1' AND ";
             }
             
-            if (!empty($tenNV1)) {
-                $sql .= " tenUV='$tenNV1' AND";
+            if (!empty($tenUV1)) {
+                $sql .= " tenUV='$tenUV1' AND";
             }
             
             if (!empty($sdt1)) {
@@ -71,10 +71,6 @@
             
             if (!empty($email1)) {
                 $sql .= " email='$email1' AND";
-            }
-            
-            if (!empty($gioiTinh1)) {
-                $sql .= " sex='$gioiTinh1' AND";
             }
             
             if (!empty($ngayNop1)) {
@@ -94,7 +90,7 @@
 
             $query->execute();
 
-            $cadidates = $query->get_result();
+            $candidates = $query->get_result();
             $query->close();
             $this->close_db();
             return $candidates;

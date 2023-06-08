@@ -1,13 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../content/grid.css">
+    <title>Bảng nhân viên</title>
+    
     <script src="https://kit.fontawesome.com/181ea712f3.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../content/style.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a{
+            text-decoration: none;
+            color: white;
+            height: 100%;
+            width: 100%;
+            display: block;
+        }
+
+        .container{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .navbar{
+            position: fixed;
+            width: 16%; 
+            background-color: white;
+            padding: 10px;
+        }
+
+        .vung-dem{
+            width: calc(16% + 20px);
+        }
+
+        .nav-ele{
+            padding: 5px 0px;
+            height: 6%;
+
+        }
+
+        .nav-ele i{
+            min-width: 20px;
+        }
+
+        .nav-header{
+            display: flex;
+            line-height: 44.64px;
+        }
+
+        .nav-img{
+            height: 100%;
+            width: 20%; 
+        }
+
+        .nav-tit{
+            color: #f57d00;
+            font-weight: 600;
+            text-align: left;
+            flex: 1;
+            word-spacing: 2px;
+            line-height: 30.88px;
+        }
+
+        .nav-choice{
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .ti{
+            margin: 0 16px;
+        }
+
+        .nav-search-form{
+            width: 100%;
+        }
+
+        .nav-search{
+            width: 100%;
+        }
+
+        .nav-search-form{
+            display: flex;
+
+        }
+
+        .nav-search-ip{
+            width: 70%;
+            padding: 5px;
+            
+        }
+
+        .nav-search-sub{
+            flex: 1;
+            margin: 0 3px;
+            background-color: #f57d00;
+        }
+
+        .nav-cate,
+        .nav-cate2{
+            font-size: 14px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-weight: 600;
+            line-height: 38px;
+        }
+
+        .nav-cate:hover,
+        .nav-cate2:hover{
+            background-color: #f57d00;
+        } 
+        .nav-cate{
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+
+        .nav-cate2{
+            margin-left: -10px;
+            margin-right: -10px;
+            padding-right: 10px;
+            padding-left: 30px;
+            display: none;
+            background-color: #DDDDDD;
+        }
+
+    </style>
 </head>
 <style>
     .color-primary {
@@ -18,6 +137,7 @@
     }
 </style>
 <body>
+
     <div class="container">
         <div class="navbar">
             <div class="nav-header nav-ele">
@@ -52,17 +172,18 @@
             <!--Con của ông trên-->
             <div class="nav-cate2 nav-ele">
                 <i class="fa-solid fa-star"></i>
-                Quản lý ứng viên
+                <a href="" style="display: inline; color: black;">Quản lý ứng viên</a>
+                
             </div>
 
             <div class="nav-cate2 nav-ele">
                 <i class="fa-solid fa-person"></i>
-                Quản lý nhân viên
+                <a href="" style="display: inline; color: black;">Quản lý nhân viên </a>
             </div>
 
             <div class="nav-cate2 nav-ele">
                 <i class="fa-solid fa-ban"></i>
-                Quản lý nghỉ việc
+                <a href="" style="display: inline; color: black;">Quản lý nghỉ việc </a>
             </div>
 
             <div class="nav-cate nav-ele">
@@ -85,13 +206,28 @@
                 Đào tạo
             </div>
         </div>
-
         <div class="content">
             <?php $this->renderSection('Content'); ?>
+
         </div>
-    </div>
+
+    </div>       
+
+    <script>
+       function toggleNavCate2() {
+        var navCate2List = document.querySelectorAll('.nav-cate2');
+        navCate2List.forEach(function(navCate2) {
+            if (navCate2.style.display === 'none') {
+            navCate2.style.display = 'block';
+            } else {
+            navCate2.style.display = 'none';
+            }
+        });
+        }
+    </script>
 </body>
 </html>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
    function toggleNavCate2() {
