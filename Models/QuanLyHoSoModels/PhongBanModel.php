@@ -48,5 +48,24 @@
 
         }
 
+        public function getPhongBanByMaNV(string $maNV) {
+            try {
+                $query = "select taikhoan.*, phongban.* from taikhoan join nhanvien on taikhoan.maNV = nhanvien.maNV
+                join phongban on phongban.maPb = nhanvien.maPb where taikhoan.maNV = '$maNV'";
+                $this->open_db();
+                $resultFromDB = $this->condb->query($query);
+                $result = null;
+                if($resultFromDB->num_rows > 0) {
+                    While($row = $resultFromDB->fetch_object()) {
+                        $result = $row;
+                    }
+                }
+                $this->close_db();
+                return $result;
+            } catch(Exception $ex) {
+                return $ex;
+            }
+        }
+
     }
 ?>

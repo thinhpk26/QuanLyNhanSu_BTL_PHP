@@ -207,5 +207,6 @@
       </div>
     </div>
   </div>
-  <script src="/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/KeHoachTuyenDungContent.js"></script>
+  <script src="/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/UtilitiesFunction.js"></script>
+  <script src="/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/KeHoachTuyenDung/KeHoachTuyenDungContent.js"></script>
 <?php $this->end(); ?>

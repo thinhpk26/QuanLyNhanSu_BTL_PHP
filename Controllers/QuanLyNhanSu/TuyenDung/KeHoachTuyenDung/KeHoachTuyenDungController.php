@@ -12,7 +12,7 @@
             $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
             $keHoachTuyenDungList = $keHoachTuyenDungModel->getAllKeHoachWithChuaXacNhan();
             $variables = ['keHoachTuyenDungList' => $keHoachTuyenDungList];
-            include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/KeHoachTuyenDungView.php';
+            include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/KeHoachTuyenDung/KeHoachTuyenDungView.php';
         }
         public function getKeHoachTuyenDung(string $iD) {
             $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
@@ -61,18 +61,5 @@
             $resultFromDB = $ChucVuModel->getAllChucVu();
             $this->returnJson($resultFromDB);
         }
-        private function returnJson($resultFromDB) {
-            $result = [];
-            if($resultFromDB === true) {
-                $result = (object)['isSuccess' => true, 'message' => ''];
-            } else if($resultFromDB instanceof Exception) {
-                $result = (object)['isSuccess' => false, 'message' => $resultFromDB];
-            } else {
-                $result = (object)['isSuccess' => true, 'message' => '', 'data' => $resultFromDB];
-            }
-            header('Content-Type: application/json');
-            echo json_encode($result);
-        }
-
     }
 ?>

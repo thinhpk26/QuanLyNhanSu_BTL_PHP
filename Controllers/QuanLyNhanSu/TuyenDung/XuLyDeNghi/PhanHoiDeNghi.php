@@ -11,10 +11,11 @@
 
     $request = new Request($inforUser, $_SERVER['REQUEST_METHOD']);
 
-    $xuLyDeNghiController = new XuLyDeNghiController($request, ["get"]);
-    
-    $xuLyDeNghiController->handle();
-    
-    $xuLyDeNghiController->hienThiPhanHoiTuyenDungPage();
+    $deNghiTuyenDungController = new XuLyDeNghiController($request, ['post']);
 
+    $deNghiTuyenDungController->handle();
+
+    $dataFromClientJson = file_get_contents("php://input");
+    $dataFromClient = json_decode($dataFromClientJson);
+    $deNghiTuyenDungController->phanHoiTuyenDung($dataFromClient);
 ?>

@@ -147,8 +147,8 @@
         }
     </style>
 </head>
-<body>
-    <div class="cover_all">
+<body style="width: 100%; height: 100vh;">
+    <div class="cover_all" style="width: 100%; height: 100%">
         <div class="navbar d-block">
             <div class="nav-header nav-ele">
                 <img src="/QuanLyNhanSu_BTL_PHP/View_Engine/bg.png" alt="Anh logo" class="nav-img">
@@ -216,7 +216,7 @@
                 Đào tạo
             </div>
         </div>
-        <div class="content">
+        <div class="content" style="height: 100%">
             <?php $this->renderSection('Content'); ?>
         </div>
 
