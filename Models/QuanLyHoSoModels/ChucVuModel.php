@@ -47,5 +47,27 @@
             }
 
         }
+
+        public function getAllChucVu() {
+            try
+            {
+                $this->open_db();
+                $query = "SELECT * FROM ChucVu";
+                $result = $this->condb->query($query);
+                $chucVuList = array();
+                if($result->num_rows > 0) {
+                    while($row = $result->fetch_object()) {
+                        $chucVuList[] = $row;
+                    }
+                }
+                $this->close_db();
+                return $chucVuList;
+            }
+            catch(Exception $e)
+            {
+                return $e;
+            }
+        }
+
     }
 ?>

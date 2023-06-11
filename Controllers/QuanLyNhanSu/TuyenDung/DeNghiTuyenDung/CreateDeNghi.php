@@ -1,14 +1,13 @@
 <?php declare(strict_types = 1);
     session_start();
-    include_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/TaiKhoan.php';
-    include_once './DeNghiTuyenDungController.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
+    require_once './DeNghiTuyenDungController.php';
 
-    $inforUser;
-    if(isset($_SESSION['user'])) {
-        $inforUser = $_SESSION['user'];
-    } else {
-        $inforUser = new TaiKhoan();
+    // Điều hướng đến login
+    if(!isset($_SESSION['inforUser'])) {
+        
     }
+    $inforUser = isset($_SESSION['inforUser']) ? $_SESSION['inforUser'] : new TaiKhoanEntity();
 
     $request = new Request($inforUser, $_SERVER['REQUEST_METHOD']);
 
@@ -16,9 +15,8 @@
 
     $deNghiTuyenDungController->handle();
 
-    $deNghi = $_POST['deNghi'];
-
-    $deNghiTuyenDungController->createYeuCauDeNghiTuyenDung($request, $deNghi);
-
-    echo "Đã gửi đến quản lý nhân sự thành công";
+    $dataFromClientJson = file_get_contents("php://input");
+    $dataFromClient = json_decode($dataFromClientJson);
+    $UUID = new UUIDVersion1();
+    $deNghiTuyenDungController->createYeuCauDeNghiTuyenDung($dataFromClient, $UUID);
 ?>

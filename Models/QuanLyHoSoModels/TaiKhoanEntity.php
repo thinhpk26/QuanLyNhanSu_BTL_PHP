@@ -2,7 +2,7 @@
     class TaiKhoanEntity {
         public $maNV;
         public $username;
-        public $passwords;
+        public $password;
         public $loaiTk;
     
         // Hàm khởi tạo không tham số

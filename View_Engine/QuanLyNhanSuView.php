@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Bảng nhân viên</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <title>Công ty TNHH 3T</title>
     <script src="https://kit.fontawesome.com/181ea712f3.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         *{
             margin: 0;
@@ -19,17 +23,19 @@
             display: block;
         }
 
-        .container{
+        .cover_all{
             width: 100%;
-            display: flex;
+            position: relative;
             flex-wrap: wrap;
         }
 
         .navbar{
             position: fixed;
-            width: 16%; 
+            width: 350px; 
+            height: 100%;
             background-color: white;
             padding: 10px;
+            border-right: 1px solid #ccc;
         }
 
         .vung-dem{
@@ -101,16 +107,20 @@
 
         .nav-cate,
         .nav-cate2{
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
             padding-left: 10px;
             padding-right: 10px;
             font-weight: 600;
             line-height: 38px;
+            height: 60px;
         }
 
         .nav-cate:hover,
         .nav-cate2:hover{
             background-color: #f57d00;
+            cursor: pointer;
         } 
         .nav-cate{
             margin-left: -10px;
@@ -125,33 +135,33 @@
             display: none;
             background-color: #DDDDDD;
         }
-
+        .content {
+            margin-left: 350px;
+            padding: 24px;
+        }
+        .color-primary {
+            color: #FF914C !important;
+        }
+        .background-primary {
+            background-color: #FF914C !important;
+        }
     </style>
 </head>
-<style>
-    .color-primary {
-        color: #FF914C;
-    }
-    .background-primary {
-        background-color: #FF914C;
-    }
-</style>
-<body>
-
-    <div class="container">
-        <div class="navbar">
+<body style="width: 100%; height: 100vh;">
+    <div class="cover_all" style="width: 100%; height: 100%">
+        <div class="navbar d-block">
             <div class="nav-header nav-ele">
-                <img src="./bg.png" alt="Anh logo" class="nav-img">
+                <img src="/QuanLyNhanSu_BTL_PHP/View_Engine/bg.png" alt="Anh logo" class="nav-img">
                 <h3 class="nav-tit">Công ty TNHH 3T</h3>
             </div>
 
-            <div class="nav-choice nav-ele">
+            <div class="nav-choice nav-ele mt-3">
                 <i class="fa fa-light fa-user ti"></i>
                 <i class="fa fa-light fa-gear ti"></i>
                 <i class="fa fa-light fa-bell ti"></i>
             </div>
 
-            <div class="nav-search nav-ele">
+            <div class="nav-search nav-ele mt-3">
                 <form action="" method="get" class="nav-search-form">
                     <input type="text" name="nav-search-ip" class="nav-search-ip" placeholder="Tìm kiếm">
                     <button type="submit" class="nav-search-sub">
@@ -160,59 +170,59 @@
                 </form>
             </div>
 
-            <div class="nav-cate nav-ele">
-                <i class="fa-solid fa-house"></i>
+            <div class="nav-cate nav-ele mt-5">
+                <i class="fa-solid fa-house me-3"></i>
                 Tổng quan
             </div>
 
             <div class="nav-cate nav-ele nav-qlhs" onclick="toggleNavCate2()"">
-                <i class="fa-solid fa-file"></i>
+                <i class="fa-solid fa-file me-3"></i>
                 Quản lý hồ sơ
             </div>
             <!--Con của ông trên-->
             <div class="nav-cate2 nav-ele">
-                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star me-3"></i>
                 <a href="" style="display: inline; color: black;">Quản lý ứng viên</a>
                 
             </div>
 
             <div class="nav-cate2 nav-ele">
-                <i class="fa-solid fa-person"></i>
+                <i class="fa-solid fa-person me-3"></i>
                 <a href="" style="display: inline; color: black;">Quản lý nhân viên </a>
             </div>
 
             <div class="nav-cate2 nav-ele">
-                <i class="fa-solid fa-ban"></i>
+                <i class="fa-solid fa-ban me-3"></i>
                 <a href="" style="display: inline; color: black;">Quản lý nghỉ việc </a>
             </div>
 
             <div class="nav-cate nav-ele">
-                <i class="fa-solid fa-person"></i>
+                <i class="fa-solid fa-person me-3"></i>
                 Tuyển dụng
             </div>
 
             <div class="nav-cate nav-ele">
-                <i class="fa-solid fa-money-bill"></i>
+                <i class="fa-solid fa-money-bill me-3"></i>
                 Lương và doanh số
             </div>
 
             <div class="nav-cate nav-ele">
-                <i class="fa-solid fa-door-closed"></i>
+                <i class="fa-solid fa-door-closed me-3"></i>
                 Phòng làm việc
             </div>
 
             <div class="nav-cate nav-ele">
-                <i class="fa-solid fa-book"></i>
+                <i class="fa-solid fa-book me-3"></i>
                 Đào tạo
             </div>
         </div>
-        <div class="content">
+        <div class="content" style="height: 100%">
             <?php $this->renderSection('Content'); ?>
-
         </div>
 
     </div>       
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
        function toggleNavCate2() {
         var navCate2List = document.querySelectorAll('.nav-cate2');
@@ -227,17 +237,3 @@
     </script>
 </body>
 </html>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script>
-   function toggleNavCate2() {
-    var navCate2List = document.querySelectorAll('.nav-cate2');
-    navCate2List.forEach(function(navCate2) {
-        if (navCate2.style.display === 'none') {
-        navCate2.style.display = 'block';
-        } else {
-        navCate2.style.display = 'none';
-        }
-    });
-    }
-</script>
