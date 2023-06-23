@@ -1,17 +1,17 @@
 <?php
     class config {
-        private $hostname;
-        private $username;
-        private $password;
-        private $database;
-        private $conn;
+        public $hostname;
+        public $username;
+        public $password;
+        public $database;
+        public $conn;
 
         function __construct()
         {
             $this->hostname = "localhost";
             $this->username = "root";
             $this->password = "";
-            $this->database = "QuanLyNhanSu";
+            $this->database = "qlns";
         }
 
         public function opendb() {
