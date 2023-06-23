@@ -100,6 +100,17 @@
         }
     }
 
+    class KhongXacDinhAuthMiddleWare extends AuthMiddleware {
+        public function __construct(Request $request, array $methods) {
+            $this->request = $request;
+            $this->methods = $methods;
+        }
+        protected function checkRole() : bool {
+            return true;
+        }
+    }
+
+
     interface UUID {
         public function setID(string $UUID);
         public function getID();

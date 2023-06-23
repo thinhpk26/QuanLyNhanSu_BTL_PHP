@@ -10,27 +10,25 @@
             $instance->db = $host->db;
             return $instance;
         }
-        public function addLoaiHoSo(LoaiHoSo $loaiHoSo) : bool {
+        public function addLoaiHoSo(LoaiHoSo $loaiHoSo) {
             try {
+                $this->checkHaveParams($loaiHoSo, ['iD', 'loaiHoSo']);
                 $query = "INSERT INTO LoaiHoSo VALUES(?,?)";
                 $this->open_db();
                 $pttm = $this->condb->prepare($query);
                 $pttm->bind_param("ss", $iD, $loai);
                 $iD = $loaiHoSo->iD;
-                if($iD == "") {
-                    $iD = $this->createID();
-                }
                 $loai = $loaiHoSo->loaiHoSo;
                 $pttm->execute();
                 $this->close_db();
                 return true;
             } catch (Exception $e) {
-                $this->navigateWhenError($e);
-                return false;
+                return $e;
             }
         }
-        public function udpateLoaiHoSobyID(LoaiHoSo $loaiHoSo) : bool {
+        public function udpateLoaiHoSobyID(LoaiHoSo $loaiHoSo) {
             try {
+                $this->checkHaveParams($loaiHoSo, ['iD', 'loaiHoSo']);
                 $query = "UPDATE LoaiHoSo set loaiHoSo = ? where iD = ?";
                 $this->open_db();
                 $pttm = $this->condb->prepare($query);
@@ -41,11 +39,10 @@
                 $this->close_db();
                 return true;
             } catch (Exception $e) {
-                $this->navigateWhenError($e);
-                return false;
+                return $e;
             }
         }
-        public function deleteLoaiHoSobyID(string $iD) : bool {
+        public function deleteLoaiHoSobyID(string $iD) {
             try {
                 $query = "DELETE LoaiHoSo where iD = ?";
                 $this->open_db();
@@ -55,8 +52,7 @@
                 $this->close_db();
                 return true;
             } catch (Exception $e) {
-                $this->navigateWhenError($e);
-                return false;
+                return $e;
             }
         }
     }

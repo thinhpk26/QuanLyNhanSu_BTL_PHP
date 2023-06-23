@@ -21,6 +21,17 @@ async function fetchGet(url) {
     return response.json();
 }
 
+async function fetchWithMutiplePart(url, formData) {
+    const response = await fetch(url, {
+        method: 'POST',
+        header: {
+            'Content-Type': 'multipart/form-data',
+        },
+        data: formData,
+    });
+    return response.json();
+}
+
 function getFormDataFromFormElement(formElement, addAttributes = {}) {
     const formData = new FormData(formElement);
     const body = {};

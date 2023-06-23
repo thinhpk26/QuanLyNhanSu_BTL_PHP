@@ -66,13 +66,11 @@
         public function addWebsiteDangTuyen(WebsiteDangTuyen $websiteDangTuyen){
             try {
                 $query = "INSERT INTO WebsiteDangTuyen values (?,?,?,?,?,?)";
+                $this->checkHaveParams($websiteDangTuyen, ['iD', 'iDKeHoachTuyenDung', 'linkDangTuyen', 'thoiGianDangTuyen', 'ketThucDangTuyen', 'ghiChu']);
                 $this->open_db();
                 $pttm = $this->condb->prepare($query);
                 $pttm->bind_param("ssssss", $iD, $iDKeHoachTuyenDung, $linkDangTuyen, $thoiGianDangTuyen, $ketThucDangTuyen, $ghiChu);
                 $iD = $websiteDangTuyen->iD;
-                if($iD == "") {
-                    $iD = $this->createID();
-                }
                 $iDKeHoachTuyenDung = $websiteDangTuyen->iDKeHoachTuyenDung;
                 $linkDangTuyen = $websiteDangTuyen->linkDangTuyen;
                 $thoiGianDangTuyen = $this->fromStringToDatetime($websiteDangTuyen->thoiGianDangTuyen);
@@ -89,6 +87,7 @@
         public function udpateWebsiteDangTuyen(WebsiteDangTuyen $websiteDangTuyen) {
             try {
                 $query = "UPDATE WebsiteDangTuyen SET linkDangTuyen = ?, thoiGianDangTuyen = ?, ketThucDangTuyen = ?, ghiChu = ? WHERE iD = ?";
+                $this->checkHaveParams($websiteDangTuyen, ['iD', 'linkDangTuyen', 'thoiGianDangTuyen', 'ketThucDangTuyen', 'ghiChu']);
                 $this->open_db();
                 $pttm = $this->condb->prepare($query);
                 $pttm->bind_param("sssss", $linkDangTuyen, $thoiGianDangTuyen, $ketThucDangTuyen, $ghiChu, $iD);
