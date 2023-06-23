@@ -18,8 +18,9 @@ class GuiHoSoController extends KhongXacDinhAuthMiddleWare
     private $session;
     private string $nameSession;
     private int $timeOutForSession;
-    public function __construct(object $inforSession)
+    public function __construct(&$Session, object $inforSession)
     {
+        $this->Session = $Session;
         $this->session = $inforSession->session;
         $this->nameSession = $inforSession->nameSession;
         $this->timeOutForSession = $inforSession->timeOutForSession;
@@ -187,20 +188,11 @@ class GuiHoSoController extends KhongXacDinhAuthMiddleWare
 
 }
 
-require_once $_SERVER["DOCUMENT_ROOT"]. "/QuanLyNhanSu_BTL_PHP/Request.php";
-require_once $_SERVER["DOCUMENT_ROOT"]. "/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/TaiKhoanEntity.php";
-
-// Điều hướng đến login
-if(!isset($_SESSION['inforUser'])) {
-    
-}
-$inforUser = isset($_SESSION['inforUser']) ? $_SESSION['inforUser'] : new TaiKhoanEntity();
-
 $timeOutForSession = 86400;
 $inforSession = (object)["session" => &$_SESSION, "nameSession" => "isSendedThongTinHoSo", "timeOutForSession" => $timeOutForSession];
 
-$guiHoSoController = new GuiHoSoController($inforSession);
-$guiHoSoController->handleVersion2();
+$guiHoSoController = new GuiHoSoController($_SESSION, $inforSession);
+$guiHoSoController->handleAccessController();
 
 if($_SERVER["REQUEST_METHOD"] === "GET") {
     $guiHoSoController->guiHoSoPage(isset($_GET["iDKeHoachTuyenDung"]) ? $_GET["iDKeHoachTuyenDung"] : null);

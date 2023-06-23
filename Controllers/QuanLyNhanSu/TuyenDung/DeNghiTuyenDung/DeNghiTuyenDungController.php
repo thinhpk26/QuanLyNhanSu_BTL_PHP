@@ -6,8 +6,8 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/PhongBanEntity.php';
     class DeNghiTuyenDungController extends TruongPhongAuthMiddleware {
         private DeNghiTuyenDungsModel $deNghiTuyenDungModel;
-        public function __construct(Request $request, array $methods) {
-            parent::__construct($request, $methods);
+        public function __construct(&$Session) {
+            parent::__construct($Session);
             $this->initDAO();
         }
         private function initDAO() {
@@ -31,7 +31,6 @@
             try {
                 if(!isset($dataFromClient->phongBan) || !isset($dataFromClient->deNghi)) 
                     throw new Exception ("Không có thuộc tính trên. Vui lòng reload lại page!");
-                
                 $iD = $uuid->getID();
                 $phongBan = $dataFromClient->phongBan;
                 $deNghi = $dataFromClient->deNghi;

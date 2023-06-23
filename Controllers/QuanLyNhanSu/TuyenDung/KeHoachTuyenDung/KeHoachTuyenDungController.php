@@ -8,57 +8,60 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/ChucVuModel.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/config.php';
     class KeHoachTuyenDungController extends QuanLyNhanSuAuthMiddleware {
+        private KeHoachTuyenDungModel $keHoachTuyenDungModel;
+        private ViTriTuyenModel $viTriTuyenDungModel;
+        private ChucVuModel $chucVuModel;
+        public function __construct(&$Session) {
+            parent::__construct($Session);
+            $this->initDAO();
+        }
+        private function initDAO() {
+            $this->keHoachTuyenDungModel = new KeHoachTuyenDungModel();
+            $this->viTriTuyenDungModel = new ViTriTuyenModel();
+            $this->chucVuModel = new ChucVuModel(new config());
+        }
+
         public function hienThiKeHoachTuyenDungPage() {
-            $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
-            $keHoachTuyenDungList = $keHoachTuyenDungModel->getAllKeHoachWithChuaXacNhan();
+            $keHoachTuyenDungList = $this->keHoachTuyenDungModel->getAllKeHoachWithChuaXacNhan();
             $variables = ['keHoachTuyenDungList' => $keHoachTuyenDungList];
             include_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/KeHoachTuyenDung/KeHoachTuyenDungView.php';
         }
         public function getKeHoachTuyenDung(string $iD) {
-            $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
-            $resultFromDB = $keHoachTuyenDungModel->getKeHoachTuyenDungByiD($iD);
+            $resultFromDB = $this->keHoachTuyenDungModel->getKeHoachTuyenDungByiD($iD);
             $this->returnJson($resultFromDB);
         }
         public function addKeHoachTuyenDung(string $thoiGianTrienKhai, string $ghiChu) {
-            $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
             $keHoachTuyenDung = new KeHoachTuyenDung("", $thoiGianTrienKhai, "chuaXacNhan", $ghiChu);
-            $resultFromDB = $keHoachTuyenDungModel->addKeHoachTuyenDung($keHoachTuyenDung);
+            $resultFromDB = $this->keHoachTuyenDungModel->addKeHoachTuyenDung($keHoachTuyenDung);
             $this->returnJson($resultFromDB);
         } 
         public function updateKeHoachTuyenDung(string $iD, string $thoiGianTrienKhai, string $ghiChu) {
-            $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
-            $resultFromDB = $keHoachTuyenDungModel->updateKeHoachTuyenDungByiD($iD, $thoiGianTrienKhai, $ghiChu);
+            $resultFromDB = $this->keHoachTuyenDungModel->updateKeHoachTuyenDungByiD($iD, $thoiGianTrienKhai, $ghiChu);
             $this->returnJson($resultFromDB);
         }
         public function deleteKeHoachTuyenDung(string $iD) {
-            $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
-            $resultFromDB = $keHoachTuyenDungModel->deleteKeHoachTuyenDungbyID($iD);
+            $resultFromDB = $this->keHoachTuyenDungModel->deleteKeHoachTuyenDungbyID($iD);
             $this->returnJson($resultFromDB);
         }
         public function xacNhanThucThi(string $iD) {
-            $keHoachTuyenDungModel = new KeHoachTuyenDungModel();
-            $resultFromDB = $keHoachTuyenDungModel->updateTrangThaiGiaiDoan($iD, "dangThucThi");
+            $resultFromDB = $this->keHoachTuyenDungModel->updateTrangThaiGiaiDoan($iD, "dangThucThi");
             $this->returnJson($resultFromDB);
         }
         public function addViTriTuyenDung(string $iDViTri, string $iDKeHoachTuyenDung, int $soLuong, string $kyNangCanThiet) {
-            $viTriTuyenDungModel = new ViTriTuyenModel();
-            $newViTriTuyenDung = new ViTriTuyen($viTriTuyenDungModel->createID(), $iDViTri, $iDKeHoachTuyenDung, $soLuong, $kyNangCanThiet);
-            $resultFromDB = $viTriTuyenDungModel->addViTriTuyen($newViTriTuyenDung);
+            $newViTriTuyenDung = new ViTriTuyen($this->viTriTuyenDungModel->createID(), $iDViTri, $iDKeHoachTuyenDung, $soLuong, $kyNangCanThiet);
+            $resultFromDB = $this->viTriTuyenDungModel->addViTriTuyen($newViTriTuyenDung);
             $this->returnJson($resultFromDB);
         }
         public function deleteViTriTuyenDung($iD) {
-            $viTriTuyenDungModel = new ViTriTuyenModel();
-            $resultFromDB = $viTriTuyenDungModel->deleteViTriTuyenbyID($iD);
+            $resultFromDB = $this->viTriTuyenDungModel->deleteViTriTuyenbyID($iD);
             $this->returnJson($resultFromDB);
         }
         public function getAllViTriTuyenByIDKeHoach(string $iDKeHoachTuyenDung) {
-            $viTriTuyenDungModel = new ViTriTuyenModel();
-            $resultFromDB = $viTriTuyenDungModel->getAllViTriTuyenAndChucVuByiDKeHoachTuyenDung($iDKeHoachTuyenDung);
+            $resultFromDB = $this->viTriTuyenDungModel->getAllViTriTuyenAndChucVuByiDKeHoachTuyenDung($iDKeHoachTuyenDung);
             $this->returnJson($resultFromDB);
         }
         public function getAllViTriNhanSu() {
-            $ChucVuModel = new ChucVuModel(new config());
-            $resultFromDB = $ChucVuModel->getAllChucVu();
+            $resultFromDB = $this->chucVuModel->getAllChucVu();
             $this->returnJson($resultFromDB);
         }
     }

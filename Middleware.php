@@ -9,44 +9,23 @@
     require_once __DIR__ . '/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
     require_once __DIR__ . '/Request.php';
     abstract class AuthMiddleware {
-        protected Request $request;
-        protected array $methods;
-        protected abstract function checkRole() : bool;
-        //kỹ thuật tạo file như là 1 action của controller
-        public function handle()
-        {
-            if(!$this->checkRole() || !$this->checkMethod()) {
-                // header('Location: /QuanLyNhanSu_BTL_PHP/Views/ErrorPage.php');
-                $result = (object)['isSuccess' => false, 'message' => "Không được phép tiếp cận"];
-                header('Content-Type: application/json');
-                echo json_encode($result);
-                exit();
-            }
+        protected $Session;
+        public function __construct(&$Session) {
+            $this->Session = $Session;
         }
-        // Kỹ thuật tạo 1 controller và action trong 1 file duy nhất và điều hướng
-        public function handleVersion2() { 
+        
+        protected abstract function checkRole() : bool;
+
+        public function handleAccessController() {
+            // if(!isset($this->Session['inforUser'])) {
+            //     // Điều hướng sang login
+            // }
             if(!$this->checkRole()) {
                 $result = (object)['isSuccess' => false, 'message' => "Bạn không có quyền truy cập!"];
                 header('Content-Type: application/json');
                 echo json_encode($result);
                 exit();
             }
-        }
-        public function checkMeThodVersion2(array $methodList) {
-            foreach($methodList as $method) {
-                if(strcasecmp($this->request->method, $method) == 0) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        protected function checkMethod() : bool {
-            foreach($this->methods as $method) {
-                if(strcasecmp($this->request->method, $method) == 0) {
-                    return true;
-                }
-            }
-            return false;
         }
         protected function returnJson($resultForClient) {
             $result = [];
@@ -64,12 +43,6 @@
     }
 
     class NhanVienAuthMiddleware extends AuthMiddleware{
-        public function __construct(Request $request, array $methods)
-        {
-            $this->request = $request;
-            $this->methods = $methods;
-        }
-        
         protected function checkRole() : bool {
             return true;
         }
@@ -77,11 +50,6 @@
     }
 
     class TruongPhongAuthMiddleware extends AuthMiddleware {
-        public function __construct(Request $request, array $methods)
-        {
-            $this->request = $request;
-            $this->methods = $methods;
-        }
         
         protected function checkRole() : bool {
             return true;
@@ -89,11 +57,6 @@
     }
 
     class QuanLyNhanSuAuthMiddleware extends AuthMiddleware {
-        public function __construct(Request $request, array $methods)
-        {
-            $this->request = $request;
-            $this->methods = $methods;
-        }
         
         protected function checkRole() : bool {
             return true;
@@ -101,10 +64,6 @@
     }
 
     class KhongXacDinhAuthMiddleWare extends AuthMiddleware {
-        public function __construct(Request $request, array $methods) {
-            $this->request = $request;
-            $this->methods = $methods;
-        }
         protected function checkRole() : bool {
             return true;
         }
