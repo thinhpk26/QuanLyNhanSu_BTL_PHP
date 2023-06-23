@@ -11,7 +11,7 @@
             $this->hostname = "localhost";
             $this->username = "root";
             $this->password = "";
-            $this->database = "qlns";
+            $this->database = "QuanLyNhanSu";
         }
 
         public function opendb() {
