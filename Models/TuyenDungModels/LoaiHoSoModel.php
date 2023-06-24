@@ -10,7 +10,23 @@
             $instance->db = $host->db;
             return $instance;
         }
-        public function addLoaiHoSo(LoaiHoSo $loaiHoSo) {
+        public function getLoaiHoSoByID($iD) {
+            try {
+                if(!isset($iD)) throw new Exception("No have iD");
+                $query = "select * from LoaiHoSo where iD = '$iD'";
+                $this->open_db();
+                $result = $this->condb->query($query);
+                $loaiHoSo = null;
+                if($result->num_rows > 0) {
+                    $loaiHoSo = $result->fetch_object();
+                }
+                $this->close_db();
+                return $loaiHoSo;
+            } catch (Exception $e) {
+                return $e;
+            }
+        }
+        public function addLoaiHoSo($loaiHoSo) {
             try {
                 $this->checkHaveParams($loaiHoSo, ['iD', 'loaiHoSo']);
                 $query = "INSERT INTO LoaiHoSo VALUES(?,?)";
@@ -26,7 +42,7 @@
                 return $e;
             }
         }
-        public function udpateLoaiHoSobyID(LoaiHoSo $loaiHoSo) {
+        public function udpateLoaiHoSobyID($loaiHoSo) {
             try {
                 $this->checkHaveParams($loaiHoSo, ['iD', 'loaiHoSo']);
                 $query = "UPDATE LoaiHoSo set loaiHoSo = ? where iD = ?";
@@ -44,6 +60,7 @@
         }
         public function deleteLoaiHoSobyID(string $iD) {
             try {
+                if(!isset($iD)) throw new Exception("No have iD");
                 $query = "DELETE LoaiHoSo where iD = ?";
                 $this->open_db();
                 $pttm = $this->condb->prepare($query);

@@ -21,13 +21,24 @@ async function fetchGet(url) {
     return response.json();
 }
 
+async function fetchFormData(url, formData) {
+    const response = await fetch(url, {
+        method: 'POST',
+        header: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData,
+    });
+    return response.json();
+}
+
 async function fetchWithMutiplePart(url, formData) {
     const response = await fetch(url, {
         method: 'POST',
         header: {
             'Content-Type': 'multipart/form-data',
         },
-        data: formData,
+        body: formData,
     });
     return response.json();
 }

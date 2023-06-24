@@ -32,7 +32,7 @@
             if($resultForClient === true) {
                 $result = (object)['isSuccess' => true, 'message' => ''];
             } else if($resultForClient instanceof Exception) {
-                $result = (object)['isSuccess' => false, 'message' => $resultForClient->getMessage()];
+                $result = (object)['isSuccess' => false, 'message' => $resultForClient->getMessage() . $resultForClient->getTraceAsString()];
             } else {
                 $result = (object)['isSuccess' => true, 'message' => '', 'data' => $resultForClient];
             }

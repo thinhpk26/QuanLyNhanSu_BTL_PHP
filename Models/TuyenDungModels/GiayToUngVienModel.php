@@ -13,17 +13,15 @@
 
         public function getGiayToUngVienbyID(string $iD) {
             try {
-                $query = "SELECT * FROM GiayToUngVienby WHERE iD = '$iD'";
+                $query = "SELECT * FROM GiayToUngVien WHERE iD = '$iD'";
                 $this->open_db();
-                $giayToUngVienList = array();
+                $giayToUngVien = null;
                 $result = $this->condb->query($query);
                 if($result->num_rows > 0) {
-                    while($row = $result->fetch_object()) {
-                        $giayToUngVienList[] = $row;
-                    }
+                    $giayToUngVien = $result->fetch_object();
                 }
                 $this->close_db();
-                return $giayToUngVienList;
+                return $giayToUngVien;
             } catch(Exception $e) {
                 return $e;
             }

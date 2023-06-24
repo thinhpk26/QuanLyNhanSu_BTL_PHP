@@ -60,6 +60,9 @@
                     $anhChungChi = $chungChiList[$i]->anhChungChi;
                     $query .= "INSERT INTO chungChi values ('$iD', '$iDHoSoUngTuyen', '$tenChungChi', '$anhChungChi')";
                 }
+                if($query === "") {
+                    return true;
+                }
                 $resultFromDB = $this->condb->multi_query($query);
                 if($resultFromDB !== true) {
                     throw new Exception("Lỗi: " . $this->condb->error);

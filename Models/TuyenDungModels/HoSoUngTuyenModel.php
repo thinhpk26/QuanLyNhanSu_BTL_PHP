@@ -11,10 +11,10 @@
             return $instance;
         }
 
-        public function getAllHoSoUngTuyenWithChuaQuyetDinh() {
+        public function getAllHoSoUngTuyenWithChuaQuyetDinh($iDKeHoachTuyenDung) {
             try {
                 $query = "select hosoungtuyen.* from loaihoso join hosoungtuyen on loaihoso.iD = hosoungtuyen.iD
-                where loaihoso.loaiHoSo = 'Chưa quyết định'";
+                where loaihoso.loaiHoSo = 'Chưa quyết định' && hosoungtuyen.iDKeHoachTuyenDung = '$iDKeHoachTuyenDung'";
                 $this->open_db();
                 $hoSoUngTuyenList = array();
                 $result = $this->condb->query($query);
@@ -30,10 +30,10 @@
             }
         }
 
-        public function getAllHoSoUngTuyenWithChoPhongVan() {
+        public function getAllHoSoUngTuyenWithChoPhongVanByiDKeHoachtuyenDung($iDKeHoachTuyenDung) {
             try {
                 $query = "select hosoungtuyen.* from loaihoso join hosoungtuyen on loaihoso.iD = hosoungtuyen.iD
-                where loaihoso.loaiHoSo = 'Chờ phỏng vấn'";
+                where loaihoso.loaiHoSo = 'Chờ phỏng vấn' && hosoungtuyen.iDKeHoachTuyenDung = '$iDKeHoachTuyenDung'";
                 $this->open_db();
                 $hoSoUngTuyenList = array();
                 $result = $this->condb->query($query);
@@ -49,10 +49,10 @@
             }
         }
 
-        public function getAllHoSoUngTuyenWithLoaiBo() {
+        public function getAllHoSoUngTuyenWithLoaiBo($iDKeHoachTuyenDung) {
             try {
                 $query = "select hosoungtuyen.* from loaihoso join hosoungtuyen on loaihoso.iD = hosoungtuyen.iD
-                where loaihoso.loaiHoSo = 'Loại bỏ'";
+                where loaihoso.loaiHoSo = 'Loại bỏ' && hosoungtuyen.iDKeHoachTuyenDung = '$iDKeHoachTuyenDung'";
                 $this->open_db();
                 $hoSoUngTuyenList = array();
                 $result = $this->condb->query($query);
@@ -86,7 +86,21 @@
                 return $ex;
             }
         }
-
+        public function getHoSoUngTuyenByID($iD) {
+            try {
+                $query = "select * from hosoungtuyen where iD = '$iD'";
+                $this->open_db();
+                $hoSoUngTuyen = null;
+                $result = $this->condb->query($query);
+                if($result->num_rows > 0) {
+                    $hoSoUngTuyen = $result->fetch_object();
+                }
+                $this->close_db();
+                return $hoSoUngTuyen;
+            } catch (Exception $ex) {
+                return $ex;
+            }
+        }
         public function getAllHoSoUngTuyen() {
             try {
                 $query = "select * from hosoungtuyen";
