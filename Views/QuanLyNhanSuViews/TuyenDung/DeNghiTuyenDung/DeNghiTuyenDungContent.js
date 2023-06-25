@@ -11,9 +11,9 @@ function guiDeNghi(event) {
     })
     .then(response => response.json())
     .then(response => {
-        console.log(response);
         if(response.isSuccess) {
             alert("Gửi đề nghị thành công");
+            window.location.reload();
         } else {
             alert(response.message);
         }

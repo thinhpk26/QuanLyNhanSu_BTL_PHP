@@ -194,12 +194,12 @@
                 <i class="fa-solid fa-house me-3"></i>
                 Tổng quan
             </div>
-            <div class="nav-cate nav-ele" id="navItem--deNghi" onclick="toggleActiveItemNavbar(event)">
+            <div class="nav-cate nav-ele active" id="navItem--deNghi" onclick="toggleActiveItemNavbar(event)">
                 <i class="fa-solid fa-circle-info me-3"></i>
                 <a href="/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/DeNghiTuyenDung/deNghiTuyenDung.php" style="color: #000">Đề nghị tuyển dụng</a>
             </div>
             <div class="nav-cate nav-ele" id="navItem--chamCong" onclick="toggleActiveItemNavbar(event)">
-                <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-pen me-3"></i>
                 Chấm công
             </div>
             <div class="nav-cate nav-ele" id="navItem--luongDoanhSo" onclick="toggleActiveItemNavbar(event)">
@@ -214,6 +214,15 @@
             <div class="nav-cate nav-ele" id="navItem--daoTao" onclick="toggleActiveItemNavbar(event)">
                 <i class="fa-solid fa-book me-3"></i>
                 Đào tạo
+            </div>
+            <div style="margin-top: 130px;">
+                <form action="/QuanLyNhanSu_BTL_PHP/Controllers/DangNhapController/DangNhapController.php" method="POST" onsubmit="logout(event)">
+                    <input class="visually-hidden" name="action" value="logout">
+                    <button type="submit" style="outline: none;border: none;background: transparent;">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span style="font-size: 18px; font-weight: bold">logout</span>
+                    </button>
+                </form>
             </div>
         </div>
         <div class="content" style="height: 100%">
@@ -237,6 +246,10 @@
 
         const iDActiveElement = localStorage.getItem('elementActive');
         if(iDActiveElement !== undefined && iDActiveElement !== null) {
+            const activeElements = document.getElementsByClassName('active');
+            for(let i=0; i<activeElements.length; i++) {
+                activeElements[i].classList.remove('active');
+            }
             document.getElementById(iDActiveElement).classList.add('active');
         }
 
@@ -248,6 +261,10 @@
             }
             currElement.classList.add('active');
             localStorage.setItem('elementActive', currElement.id);
+        }
+
+        function logout(event) {
+            localStorage.removeItem('elementActive');
         }
 
     </script>

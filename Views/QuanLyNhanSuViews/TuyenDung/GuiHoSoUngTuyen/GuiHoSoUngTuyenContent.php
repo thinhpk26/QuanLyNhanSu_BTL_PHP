@@ -24,9 +24,9 @@
     <h1>Chào mừng bạn đến công ty may mặc 3T!</h1>
     <h3>Hãy gửi CV ngay để trở thành thành viên của đại gia đình</h3>
     <i class="fa-solid fa-hand-pointer color-primary mt-2 mb-5" style="font-size: 32px; transform: rotateZ(180deg);"></i>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3" style="width: 800px">
         <div class="input-group-text"><p class="m-0">Chia sẻ ngay <strong style="color: red;"></strong></p></div>
-        <div style="font-size: 12px;" class="form-control">http://localhost/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/GuiHoSoController.php?iDKeHoachTuyenDung=<?=$iDKeHoachTuyenDung?></div>
+        <div style="font-size: 12px; word-wrap: break-word;" class="form-control">http://localhost/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/GuiHoSoController.php?iDKeHoachTuyenDung=<?=$iDKeHoachTuyenDung?></div>
     </div>
     <div style="width: 800px;">
     <form action="" method="post" enctype="multipart/form-data" id="generalInformation">

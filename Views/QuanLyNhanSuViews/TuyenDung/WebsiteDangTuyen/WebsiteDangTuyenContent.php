@@ -4,6 +4,10 @@
     <h3 class="text-center mb-3">WEBSITE ĐĂNG TUYỂN</h3>
     <button class="btn btn-primary mb-2" data-passevent="addWebsiteDangTuyen" onclick="toggleNotify(event)">Thêm</button>
     <span class="visually-hidden" iD="iDKeHoachTuyenDung" data-iDKehoachTuyenDung="<?=$iDKeHoachTuyenDung?>"></span>
+    <div class="input-group mb-3" style="width: 800px;">
+        <div class="input-group-text"><p class="m-0">Trang gửi hồ sơ của người ứng tuyển <strong style="color: red;"></strong></p></div>
+        <div style="font-size: 12px; word-wrap: break-word;" class="form-control">http://localhost/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/GuiHoSoController.php?iDKeHoachTuyenDung=<?=$iDKeHoachTuyenDung?></div>
+    </div>
     <div class="border border-3 rounded-3">
         <table class="table table-light table-bordered table-hover mb-0">
             <thead>

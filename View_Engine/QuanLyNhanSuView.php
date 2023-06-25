@@ -205,15 +205,15 @@
                     <div>
                         <div class="navbar-subItem" id="navItem--quanLyUngVien" onclick="toggleActiveItemNavbar(event)">
                             <i class="fa-solid fa-star me-3"></i>
-                            <a href="" style="display: inline; color: black;">Quản lý ứng viên</a>
+                            <a href="/QuanLyNhanSu_BTL_PHP/direct.php?route=quanlyuv" style="display: inline; color: black;">Quản lý ứng viên</a>
                         </div>
                         <div class="navbar-subItem" id="navItem--quanLyNhanVien" onclick="toggleActiveItemNavbar(event)">
                             <i class="fa-solid fa-person me-3"></i>
-                            <a href="" style="display: inline; color: black;">Quản lý nhân viên </a>
+                            <a href="/QuanLyNhanSu_BTL_PHP/direct.php?route=quanlynv" style="display: inline; color: black;">Quản lý nhân viên </a>
                         </div>
                         <div class="navbar-subItem" id="navItem--quanLyNghiViec" onclick="toggleActiveItemNavbar(event)">
                             <i class="fa-solid fa-ban me-3"></i>
-                            <a href="" style="display: inline; color: black;">Quản lý nghỉ việc </a>
+                            <a href="/QuanLyNhanSu_BTL_PHP/direct.php?route=quanlynvn" style="display: inline; color: black;">Quản lý nghỉ việc </a>
                         </div>
                     </div>
                 </div>
@@ -231,7 +231,7 @@
                             <i class="fa-solid fa-comment-medical"></i>
                             <a href="/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/XuLyDeNghi/XuLyDeNghiPage.php" style="display: inline; color: black; margin-left: 6px">Xử lý đề nghị tuyển dụng</a>
                         </div>
-                        <div class="navbar-subItem" id="navItem--keHoachTuyenDung" onclick="toggleActiveItemNavbar(event)">
+                        <div class="navbar-subItem active" id="navItem--keHoachTuyenDung" onclick="toggleActiveItemNavbar(event)">
                             <i class="fa-solid fa-calendar-days"></i>
                             <a href="/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/KeHoachTuyenDungPage.php" style="display: inline; color: black; margin-left: 6px">Kế hoạch tuyển dụng</a>
                         </div>
@@ -245,7 +245,7 @@
 
             <div class="nav-cate nav-ele" id="navItem--luongDoanhSo" onclick="toggleActiveItemNavbar(event)">
                 <i class="fa-solid fa-money-bill me-3"></i>
-                Lương và doanh số
+                <a href="/QuanLyNhanSu_BTL_PHP/Models/QuanLyLuongModels/AUDDoanhSoCaNhanModel.php" style="display: inline; color: black; margin-left: 6px">Lương và doanh số</a>
             </div>
 
             <div class="nav-cate nav-ele" id="navItem--phongLamViec" onclick="toggleActiveItemNavbar(event)">
@@ -258,7 +258,7 @@
                 Đào tạo
             </div>
             <div style="margin-top: 130px;">
-                <form action="/QuanLyNhanSu_BTL_PHP/Controllers/DangNhapController/DangNhapController.php" method="POST">
+                <form action="/QuanLyNhanSu_BTL_PHP/Controllers/DangNhapController/DangNhapController.php" method="POST" onsubmit="logout(event)">
                     <input class="visually-hidden" name="action" value="logout">
                     <button type="submit" style="outline: none;border: none;background: transparent;">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -288,6 +288,10 @@
 
         const iDActiveElement = localStorage.getItem('elementActive');
         if(iDActiveElement !== undefined && iDActiveElement !== null) {
+            const activeElements = document.getElementsByClassName('active');
+            for(let i=0; i<activeElements.length; i++) {
+                activeElements[i].classList.remove('active');
+            }
             document.getElementById(iDActiveElement).classList.add('active');
         }
 
@@ -299,6 +303,10 @@
             }
             currElement.classList.add('active');
             localStorage.setItem('elementActive', currElement.id);
+        }
+        
+        function logout(event) {
+            localStorage.removeItem('elementActive');
         }
 
     </script>
