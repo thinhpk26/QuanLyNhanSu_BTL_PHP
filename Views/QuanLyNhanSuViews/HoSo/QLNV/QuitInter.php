@@ -94,7 +94,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="../../../../index.php?route=quanlynv&act=delete" method="post">
+        <form action="../../../../direct.php?route=quanlynv&act=delete" method="post">
             <div class="content">
                 <h2>Nhập cho nhân viên nghỉ việc</h2>
                 <div class="row">
@@ -117,7 +117,7 @@
             <!-- Thêm các div khác tương ứng với dữ liệu từ bảng UngVien của bạn -->
                 <div class="row btn">
                     <input type="submit" name="but" value="Xác nhận">
-                    <button><a href="../index.php?route=quanlynv">Hủy</a></button>
+                    <button><a href="../direct.php?route=quanlynv">Hủy</a></button>
                 </div>
             </div>
         </form>

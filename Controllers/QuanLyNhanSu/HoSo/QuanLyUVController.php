@@ -235,7 +235,7 @@
 
 						if($pid != '' && $pid2 != ''){			
 							$this->delete($_POST['ma-ung-vien']);
-							$this->pageRedirect("index.php?route=quanlynv"); 
+							$this->pageRedirect("direct.php?route=quanlynv"); 
 						}else{
 							echo "Somthing is wrong..., try again.";
 						}

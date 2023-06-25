@@ -232,17 +232,17 @@
             </div>
             <div class="nav-cate nav-ele js-nav-qlttcn">
                 <i class="fa-sharp fa-solid fa-person"></i>
-                Sửa thông tin cá nhân
+                Nhập thông tin cá nhân
             </div>
 
             <div class="nav-cate nav-ele js-nav-qlhd" onclick="toggleNavCate2()"">
                 <i class="fa-sharp fa-solid fa-file-contract"></i>
-                Sửa hợp đồng
+                Nhập hợp đồng
             </div>
             <!--Con của ông trên-->
             <div class="nav-cate nav-ele js-nav-qlgt">
                 <i class="fa-sharp fa-solid fa-image"></i>
-                Sửa thông tin giấy tờ
+                Nhập thông tin giấy tờ
             </div>
         </div>
 
@@ -251,7 +251,7 @@
         </div>
 
         <div class="content">
-            <form method="post" action="index.php?route=quanlyuv&act=add" class="formm" enctype="multipart/form-data">
+            <form method="post" action="direct.php?route=quanlyuv&act=add" class="formm" enctype="multipart/form-data">
                 <div class="ttcn js-ttcn">
                     <div class="formm-tit">
                         <h1>Form Nhập Thông Tin Nhân Viên</h1>

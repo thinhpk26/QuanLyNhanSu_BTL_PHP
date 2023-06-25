@@ -384,16 +384,16 @@
         <div class="content">
             <h1 class="ct-ele1">Quản lý hồ sơ nhân viên</h1>
             <div class="ct-ele2">
-                    <form action="index.php?route=quanlynv&act=search" method="post" id="cele2-search">
+                    <form action="direct.php?route=quanlynv&act=search" method="post" id="cele2-search">
                         <input type="text" id="cele2-search-ip"  name="cele2-search" placeholder="Tìm kiếm theo tên nhân viên">
                         <button type="submit" id="cele2-search-bt" name="search-name">Tìm</button>
                     </form>
                     <button class="cele2-filter-button js-filter-button">Lọc</button>
-                    <button class="cele2-add-button js-add-employee"><a href="index.php?route=quanlynv&act=addView">Thêm</a></button>
+                    <button class="cele2-add-button js-add-employee"><a href="direct.php?route=quanlynv&act=addView">Thêm</a></button>
             </div>
             
             <div class="model js-model">
-                <form action="index.php?route=quanlynv&act=search" method="post" id="ft-form">
+                <form action="direct.php?route=quanlynv&act=search" method="post" id="ft-form">
                     <div class="ft-form-row">
                         <div class="form-row-tit">Mã Nhân Viên:</div>
                         <input type="text" id="ma-nhan-vien" name="ma-nhan-vien" >

@@ -401,7 +401,7 @@
         <div class="content">
             <h1 class="ct-ele1">Quản lý hồ sơ nhân viên nghỉ việc</h1>
             <div class="ct-ele2">
-                    <form action="index.php?route=quanlynvn&act=search" method="get" id="cele2-search">
+                    <form action="" method="get" id="cele2-search">
                         <input type="text" name="" id="cele2-search-ip" placeholder="Tìm kiếm theo tên nhân viên">
                         <button type="submit" id="cele2-search-bt">Tìm</button>
                     </form>
@@ -409,7 +409,7 @@
             </div>
             
             <div class="model js-model">
-                <form action="index.php?route=quanlynvn&act=search" method="post" id="ft-form">
+                <form action="" method="post" id="ft-form">
                     <div class="ft-form-row">
                         <div class="form-row-tit">Mã Nhân Viên:</div>
                         <input type="text" id="ma-nhan-vien" name="ma-nhan-vien" >

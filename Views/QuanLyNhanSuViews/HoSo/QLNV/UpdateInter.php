@@ -309,7 +309,7 @@
         </div>
 
         <div class="content">
-            <form method="post" action="../../../../index.php?route=quanlynv&act=update" class="formm" enctype="multipart/form-data">
+            <form method="post" action="../../../../direct.php?route=quanlynv&act=update" class="formm" enctype="multipart/form-data">
                 <div class="ttcn js-ttcn">
                     <div class="formm-tit">
                         <h1>Sửa Thông Tin Cơ Bản Của Nhân Viên</h1>
