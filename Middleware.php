@@ -22,7 +22,7 @@
 
         public function handleAccessController() {
             if(!isset($this->Session['inforUser']) || !$this->checkRole()) {
-                header('location: /QuanLyNhanSu_BTL_PHP/Views/DangNhapViews/index.html');
+                header('location: /QuanLyNhanSu_BTL_PHP');
                 exit;
             }
         }
@@ -31,7 +31,7 @@
             if($resultForClient === true) {
                 $result = (object)['isSuccess' => true, 'message' => ''];
             }else if($resultForClient instanceof Exception) {
-                $result = (object)['isSuccess' => false, 'message' => $resultForClient->getMessage() . $resultForClient->getTraceAsString()];
+                $result = (object)['isSuccess' => false, 'message' => $resultForClient->getMessage()];
             } else {
                 $result = (object)['isSuccess' => true, 'message' => '', 'data' => $resultForClient];
             }

@@ -3,7 +3,7 @@
 <?php $this->section('Content'); ?>
     <h3 class="text-center mb-3">WEBSITE ĐĂNG TUYỂN</h3>
     <button class="btn btn-primary mb-2" data-passevent="addWebsiteDangTuyen" onclick="toggleNotify(event)">Thêm</button>
-    <span class="visually-hidden" iD="iDKeHoachTuyenDung" data-iDKehoachTuyenDung="<?=$websiteDangTuyenList[0]->iDKeHoachTuyenDung?>"></span>
+    <span class="visually-hidden" iD="iDKeHoachTuyenDung" data-iDKehoachTuyenDung="<?=$iDKeHoachTuyenDung?>"></span>
     <div class="border border-3 rounded-3">
         <table class="table table-light table-bordered table-hover mb-0">
             <thead>

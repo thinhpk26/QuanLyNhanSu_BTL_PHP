@@ -30,13 +30,16 @@ async function addThongTinHoSo(event) {
     console.log(dataForServer);
     fetchPost("/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/GuiHoSoController.php", dataForServer)
     .then(response => {
+        console.log(response);
         if(response.isSuccess) {
             alert("Đã thêm thành công");
         } else {
             alert(response.message);
         }
     })
-
+    .catch(err => {
+        console.log(err.message);
+    })
 }
 
 async function formatThongTinHoSo() {

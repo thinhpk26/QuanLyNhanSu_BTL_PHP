@@ -182,7 +182,6 @@
                 <i class="fa fa-light fa-gear ti"></i>
                 <i class="fa fa-light fa-bell ti"></i>
             </div>
-
             <div class="nav-search nav-ele mt-3">
                 <form action="" method="get" class="nav-search-form">
                     <input type="text" name="nav-search-ip" class="nav-search-ip" placeholder="Tìm kiếm">
@@ -257,6 +256,15 @@
             <div class="nav-cate nav-ele" id="navItem--daoTao" onclick="toggleActiveItemNavbar(event)">
                 <i class="fa-solid fa-book me-3"></i>
                 Đào tạo
+            </div>
+            <div style="margin-top: 130px;">
+                <form action="/QuanLyNhanSu_BTL_PHP/Controllers/DangNhapController/DangNhapController.php" method="POST">
+                    <input class="visually-hidden" name="action" value="logout">
+                    <button type="submit" style="outline: none;border: none;background: transparent;">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span style="font-size: 18px; font-weight: bold">logout</span>
+                    </button>
+                </form>
             </div>
         </div>
         <div class="content" style="height: 100%">

@@ -41,6 +41,12 @@
             }
             $this->returnJson($resultForClient);
         }
+
+        public function logout() {
+            unset($this->Session['inforUser']);
+            unset($this->Session['account']);
+            header("location: /QuanLyNhanSu_BTL_PHP");
+        }
     }
     session_start();
     $dangNhapController = new DangNhapController($_SESSION);
@@ -56,6 +62,8 @@
         case 'login':
             $dangNhapController->login($_POST);
             break;
+        case 'logout':
+            $dangNhapController->logout();
         default:
             header("Content-Type: application/json");
             echo json_encode((object)['isSuccess' => false, "message" => "No understand action"]);
