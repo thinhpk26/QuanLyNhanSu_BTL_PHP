@@ -142,7 +142,6 @@ function setAllViTriTuyenDung(iDKeHoachTuyenDung) {
     fetchPost("/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/getAllViTriTuyenByIDKeHoach.php", {iDKeHoachTuyenDung})
     .then(response => {
         if(response.isSuccess) {
-            console.log(response.data);
             let allViTriTuyenDungHTML = '';
             for(let i=0; i<response.data.length; i++) {
                 allViTriTuyenDungHTML += viTriTuyenDungHTML(response.data[i], i + 1);
@@ -192,6 +191,8 @@ function addVitriTuyenDung(event) {
         if(response.isSuccess) {
             alert("Thêm thành công");
             setAllViTriTuyenDung(iDKeHoachTuyenDung);
+            document.getElementById('soLuong_addViTriTuyen').value = "";
+            document.getElementById('kyNangCanThiet_addViTriTuyen').value = "";
         } else {
             alert(response.message);
         }

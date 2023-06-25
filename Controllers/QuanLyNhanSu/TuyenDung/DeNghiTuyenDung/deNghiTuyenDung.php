@@ -11,7 +11,8 @@
 
     $phongBanModel = new PhongBanModel(new config());
 
-    $phongBan = $phongBanModel->getPhongBanByMaNV($_SESSION['inforuser']->maNV);
+    //$phongBan = $phongBanModel->getPhongBanByMaNV($_SESSION['inforuser']->maNV);
 
+    $phongBan = $phongBanModel->getPhongBanByMaNV("mnv01");
     $deNghiTuyenDungController->hienThiDeNghiTuyenDungPage($phongBan);
 ?>

@@ -23,17 +23,18 @@
                 echo 'Xảy ra lỗi trong quá trình lấy dữ liệu';
                 exit;
             }
-            $variables = ['deNghiTuyenDungList' => $deNghiTuyenDungList];
+            $variables = ['deNghiTuyenDungList' => $deNghiTuyenDungList, 'phongBan' => $phongBan->maPb];
             require_once $_SERVER['DOCUMENT_ROOT']. '/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/DeNghiTuyenDung/DeNghiTuyenDungView.php';
         }
-        public function createYeuCauDeNghiTuyenDung(object $dataFromClient, UUID $uuid) {
+        public function createYeuCauDeNghiTuyenDung($dataFormClient) {
             $resultForClient = null;
             try {
-                if(!isset($dataFromClient->phongBan) || !isset($dataFromClient->deNghi)) 
+                if(!isset($dataFormClient['phongBan']) || !isset($dataFormClient['deNghi'])) 
                     throw new Exception ("Không có thuộc tính trên. Vui lòng reload lại page!");
+                $uuid = new UUIDVersion1();
                 $iD = $uuid->getID();
-                $phongBan = $dataFromClient->phongBan;
-                $deNghi = $dataFromClient->deNghi;
+                $phongBan = $dataFormClient['phongBan'];
+                $deNghi = $dataFormClient['deNghi'];
                 $deNghiTuyenDung = new DeNghiTuyenDungs($iD, $phongBan, $deNghi, null);
                 $dataFromDB = $this->deNghiTuyenDungModel->addDeNghiTuyenDung($deNghiTuyenDung);
                 $resultForClient = $dataFromDB;

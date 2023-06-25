@@ -145,11 +145,33 @@
         .background-primary {
             background-color: #FF914C !important;
         }
+        .accordion-button {
+            padding: 1rem 0;
+        }
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: transparent;
+        }
+        .navbar-subItem {
+            padding: 6px 12px;
+        }
+        .navbar-subItem:hover {
+            background-color: #FF914C !important;
+            cursor: pointer;
+        }
+        .dropdown-menu  {
+            width: max-content;
+        }
+        .active {
+            background-color: #FF914C !important;
+        }
     </style>
 </head>
 <body style="width: 100%; height: 100vh;">
     <div class="cover_all" style="width: 100%; height: 100%">
-        <div class="navbar d-block">
+        <div class="navbar d-block accordion accordion-flush" id="Navbar">
             <div class="nav-header nav-ele">
                 <img src="/QuanLyNhanSu_BTL_PHP/View_Engine/bg.png" alt="Anh logo" class="nav-img">
                 <h3 class="nav-tit">Công ty TNHH 3T</h3>
@@ -169,49 +191,70 @@
                     </button>
                 </form>
             </div>
-
-            <div class="nav-cate nav-ele mt-5">
+            <div class="nav-cate nav-ele mt-5" id="navItem--tongQuan" onclick="toggleActiveItemNavbar(event)">
                 <i class="fa-solid fa-house me-3"></i>
                 Tổng quan
             </div>
-
-            <div class="nav-cate nav-ele nav-qlhs" onclick="toggleNavCate2()"">
-                <i class="fa-solid fa-file me-3"></i>
-                Quản lý hồ sơ
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="nav-quanLyHoSo--label">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-quanLyHoSo" aria-expanded="false" aria-controls="navbar-quanLyHoSo">
+                    <i class="fa-solid fa-file me-3"></i>
+                    <strong>Quản lý hồ sơ</strong>
+                    </button>
+                </h2>
+                <div id="navbar-quanLyHoSo" class="accordion-collapse collapse" aria-labelledby="nav-quanLyHoSo--label" data-bs-parent="#Navbar">
+                    <div>
+                        <div class="navbar-subItem" id="navItem--quanLyUngVien" onclick="toggleActiveItemNavbar(event)">
+                            <i class="fa-solid fa-star me-3"></i>
+                            <a href="" style="display: inline; color: black;">Quản lý ứng viên</a>
+                        </div>
+                        <div class="navbar-subItem" id="navItem--quanLyNhanVien" onclick="toggleActiveItemNavbar(event)">
+                            <i class="fa-solid fa-person me-3"></i>
+                            <a href="" style="display: inline; color: black;">Quản lý nhân viên </a>
+                        </div>
+                        <div class="navbar-subItem" id="navItem--quanLyNghiViec" onclick="toggleActiveItemNavbar(event)">
+                            <i class="fa-solid fa-ban me-3"></i>
+                            <a href="" style="display: inline; color: black;">Quản lý nghỉ việc </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--Con của ông trên-->
-            <div class="nav-cate2 nav-ele">
-                <i class="fa-solid fa-star me-3"></i>
-                <a href="" style="display: inline; color: black;">Quản lý ứng viên</a>
-                
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="nav-tuyenDung--label">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-tuyendung" aria-expanded="false" aria-controls="navbar-tuyendung">
+                    <i class="fa-regular fa-id-card"></i>
+                    <strong style="margin-left: 12px;">Tuyển dụng</strong>
+                    </button>
+                </h2>
+                <div id="navbar-tuyendung" class="accordion-collapse collapse" aria-labelledby="nav-tuyenDung--label" data-bs-parent="#Navbar">
+                    <div>
+                        <div class="navbar-subItem" id="navItem--xuLyDeNghi" onclick="toggleActiveItemNavbar(event)">
+                            <i class="fa-solid fa-comment-medical"></i>
+                            <a href="/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/XuLyDeNghi/XuLyDeNghiPage.php" style="display: inline; color: black; margin-left: 6px">Xử lý đề nghị tuyển dụng</a>
+                        </div>
+                        <div class="navbar-subItem" id="navItem--keHoachTuyenDung" onclick="toggleActiveItemNavbar(event)">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <a href="/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/KeHoachTuyenDung/KeHoachTuyenDungPage.php" style="display: inline; color: black; margin-left: 6px">Kế hoạch tuyển dụng</a>
+                        </div>
+                        <div class="navbar-subItem btn-group dropend" style="width: 100%" id="navItem--thucThiTuyenDung" onclick="toggleActiveItemNavbar(event)">
+                            <i class="fa-solid fa-person-digging"></i>
+                            <a href="/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/ThucThiTuyenDungController.php" style="display: inline; color: black; margin-left: 6px">Thực thi tuyển dụng</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="nav-cate2 nav-ele">
-                <i class="fa-solid fa-person me-3"></i>
-                <a href="" style="display: inline; color: black;">Quản lý nhân viên </a>
-            </div>
-
-            <div class="nav-cate2 nav-ele">
-                <i class="fa-solid fa-ban me-3"></i>
-                <a href="" style="display: inline; color: black;">Quản lý nghỉ việc </a>
-            </div>
-
-            <div class="nav-cate nav-ele">
-                <i class="fa-solid fa-person me-3"></i>
-                Tuyển dụng
-            </div>
-
-            <div class="nav-cate nav-ele">
+            <div class="nav-cate nav-ele" id="navItem--luongDoanhSo" onclick="toggleActiveItemNavbar(event)">
                 <i class="fa-solid fa-money-bill me-3"></i>
                 Lương và doanh số
             </div>
 
-            <div class="nav-cate nav-ele">
+            <div class="nav-cate nav-ele" id="navItem--phongLamViec" onclick="toggleActiveItemNavbar(event)">
                 <i class="fa-solid fa-door-closed me-3"></i>
                 Phòng làm việc
             </div>
 
-            <div class="nav-cate nav-ele">
+            <div class="nav-cate nav-ele" id="navItem--daoTao" onclick="toggleActiveItemNavbar(event)">
                 <i class="fa-solid fa-book me-3"></i>
                 Đào tạo
             </div>
@@ -226,14 +269,30 @@
     <script>
        function toggleNavCate2() {
         var navCate2List = document.querySelectorAll('.nav-cate2');
-        navCate2List.forEach(function(navCate2) {
-            if (navCate2.style.display === 'none') {
-            navCate2.style.display = 'block';
-            } else {
-            navCate2.style.display = 'none';
-            }
-        });
+            navCate2List.forEach(function(navCate2) {
+                if (navCate2.style.display === 'none') {
+                navCate2.style.display = 'block';
+                } else {
+                navCate2.style.display = 'none';
+                }
+            });
         }
+
+        const iDActiveElement = localStorage.getItem('elementActive');
+        if(iDActiveElement !== undefined && iDActiveElement !== null) {
+            document.getElementById(iDActiveElement).classList.add('active');
+        }
+
+        function toggleActiveItemNavbar(event) {
+            const currElement = event.currentTarget;
+            const activeElements = document.getElementsByClassName('active');
+            for(let i=0; i<activeElements.length; i++) {
+                activeElements[i].classList.remove('active');
+            }
+            currElement.classList.add('active');
+            localStorage.setItem('elementActive', currElement.id);
+        }
+
     </script>
 </body>
 </html>

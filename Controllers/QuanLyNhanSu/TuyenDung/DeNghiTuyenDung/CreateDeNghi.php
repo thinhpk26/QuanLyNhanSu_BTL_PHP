@@ -6,8 +6,5 @@
 
     $deNghiTuyenDungController->handleAccessController();
 
-    $dataFromClientJson = file_get_contents("php://input");
-    $dataFromClient = json_decode($dataFromClientJson);
-    $UUID = new UUIDVersion1();
-    $deNghiTuyenDungController->createYeuCauDeNghiTuyenDung($dataFromClient, $UUID);
+    $deNghiTuyenDungController->createYeuCauDeNghiTuyenDung($_POST);
 ?>
