@@ -33,7 +33,10 @@
                     $query->bind_param("s",$id);
                 }
                 else
-                {$query=$this->condb->prepare("SELECT * FROM nhanvien");    }
+                {   $query=$this->condb->prepare("SELECT * FROM nhanvien WHERE tinhTrang = ?");
+                    $tinhTrangNV = 'Đang làm việc';
+                    $query->bind_param("s",$tinhTrangNV);    
+                }
 
                 $query->execute();
                 $res=$query->get_result();
@@ -51,7 +54,8 @@
 
         public function searchEmployees($maNV1, $tenNV1, $tenPB1, $queQuan1, $chucVu1, $chuyenMon1) {
             $this->open_db();
-            $sql = "SELECT * FROM nhanvien WHERE";
+            $tinhtrang = "Đang làm việc";
+            $sql = "SELECT * FROM nhanvien WHERE tinhTrang='$tinhtrang' AND";
 
             if (!empty($maNV1)) {
                 $sql .= " maNV='$maNV1' AND ";
@@ -121,7 +125,28 @@
             {
                 $this->open_db();
                 $query = $this->condb->prepare("UPDATE nhanvien SET tenNV = ?, tuoi = ?, gioiTinh = ?, ngaySinh = ?, sdt = ?, email = ?, queQuan = ?, diaChi = ?, honNhan = ?, maPb = ?, maChucVu = ?, trinhDo = ?, chuyenMon = ?, danToc = ?, quocTich = ?, soCMND = ?, linkCMND = ?, hoKhau = ?, linkHoKhau = ?, linkBangCap = ?, linkGiayKhaiSinh = ?, nganHang = ?, soTK = ?, maSoThue = ?, tinhTrang = ? WHERE maNV = ?");
-                $query->bind_param("sssssssssssssssssssssssssi", $obj->tenNV, $obj->tuoi, $obj->gioiTinh, $obj->ngaySinh, $obj->sdt, $obj->email, $obj->queQuan, $obj->diaChi, $obj->honNhan, $obj->maPb, $obj->maChucVu, $obj->trinhDo, $obj->chuyenMon, $obj->danToc, $obj->quocTich, $obj->soCMND, $obj->linkCMND, $obj->hoKhau, $obj->linkHoKhau, $obj->linkBangCap, $obj->linkGiayKhaiSinh, $obj->nganHang, $obj->soTK, $obj->maSoThue, $obj->tinhTrang, $obj->maNV);
+                $query->bind_param("sissssssssssssssssssssssss", $obj->tenNV, $obj->tuoi, $obj->gioiTinh, $obj->ngaySinh, $obj->sdt, $obj->email, $obj->queQuan, $obj->diaChi, $obj->honNhan, $obj->maPb, $obj->maChucVu, $obj->trinhDo, $obj->chuyenMon, $obj->danToc, $obj->quocTich, $obj->soCMND, $obj->linkCMND, $obj->hoKhau, $obj->linkHoKhau, $obj->linkBangCap, $obj->linkGiayKhaiSinh, $obj->nganHang, $obj->soTK, $obj->maSoThue, $obj->tinhTrang, $obj->maNV);
+                $query->execute();
+                $res=$query->get_result();
+                $query->close();
+                $this->close_db();
+                return true;
+            }
+            catch (Exception $e)
+            {
+                $this->close_db();
+                throw $e;
+            }
+        }
+
+        public function updateStatus($id)
+        {
+            try
+            {
+                $this->open_db();
+                $query = $this->condb->prepare("UPDATE nhanvien SET tinhTrang = ? WHERE maNV = ?");
+                $tinhTrangNV = "Đã nghỉ việc";
+                $query->bind_param("ss",$tinhTrangNV, $id );
                 $query->execute();
                 $res=$query->get_result();
                 $query->close();

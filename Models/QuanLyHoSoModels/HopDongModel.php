@@ -47,6 +47,29 @@
             }
 
         }
+        
+        public function selectRecordNV($id)
+        {
+            try
+            {
+                $this->open_db();
+            
+                $query=$this->condb->prepare("SELECT * FROM hopdong WHERE maNV=?");
+                $query->bind_param("s",$id);
+
+                $query->execute();
+                $res=$query->get_result();
+                $query->close();
+                $this->close_db();
+                return $res;
+            }
+            catch(Exception $e)
+            {
+                $this->close_db();
+                throw $e;
+            }
+
+        }
 
         public function searchContract($maHD1, $maNV1, $tinhTrangHopDong1, $daiDien1) {
             $this->open_db();
@@ -112,7 +135,28 @@
             {
                 $this->open_db();
                 $query = $this->condb->prepare("UPDATE hopdong SET linkHopDong = ?, loaiHD = ?, maNV = ?, daiDien = ?, ngayKy = ?, ngayHieuLuc = ?, ngayHet = ?, luong = ?, ngayTra = ?, phuCap = ?, baoHiem = ?, tinhTrangHD = ? WHERE maHD = ?");
-                $query->bind_param("sssssssdsdsss", $obj->maHD, $obj->linkHopDong, $obj->loaiHD, $obj->maNV, $obj->daiDien, $obj->ngayKy, $obj->ngayHieuLuc, $obj->ngayHet, $obj->luong, $obj->ngayTra, $obj->phuCap, $obj->baoHiem, $obj->tinhTrangHD);
+                $query->bind_param("sssssssdddsss", $obj->maHD, $obj->linkHopDong, $obj->loaiHD, $obj->maNV, $obj->daiDien, $obj->ngayKy, $obj->ngayHieuLuc, $obj->ngayHet, $obj->luong, $obj->ngayTra, $obj->phuCap, $obj->baoHiem, $obj->tinhTrangHD);
+                $query->execute();
+                $res=$query->get_result();
+                $query->close();
+                $this->close_db();
+                return true;
+            }
+            catch (Exception $e)
+            {
+                $this->close_db();
+                throw $e;
+            }
+        }
+
+        public function resetRecord($id)
+        {
+            try
+            {
+                $this->open_db();
+                $query = $this->condb->prepare("UPDATE hopdong SET tinhTrangHD = ? WHERE maNV = ?");
+                $tt = 'Đã Hủy';
+                $query->bind_param("ss", $tt, $id);
                 $query->execute();
                 $res=$query->get_result();
                 $query->close();
