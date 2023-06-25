@@ -183,7 +183,7 @@
 						$pid2 = $this -> objsm2 ->insertRecord($HopDong);
 
 						if($pid != '' && $pid2 != ''){			
-							$this->pageRedirect("index.php?route=quanlynv"); 
+							$this->pageRedirect("direct.php?route=quanlynv"); 
 						}else{
 							echo "Somthing is wrong..., try again.";
 						}
@@ -214,7 +214,7 @@
 					$resultHd2 = $this -> objsm2 ->insertRecord($HopDong);
 					if($resultHd2 != ''){	
 	
-						$this->pageRedirect("index.php?route=quanlynv"); 
+						$this->pageRedirect("direct.php?route=quanlynv"); 
 					}else{
 						echo "Somthing is wrong..., try again.";
 					}
@@ -268,10 +268,10 @@
 
 				$Nghi = $this -> objsm5 ->insertRecord($NghiViec);
 				$Nghi2 = $this -> objsm ->updateStatus($NghiViec->maNV );
-				$this -> objsm2 ->resetRecord($HopDong->maNV);
+				$this -> objsm2 ->resetRecord($NghiViec->maNV);
 
 				if($Nghi != ''){			
-					$this->pageRedirect("index.php?route=quanlynv"); 
+					$this->pageRedirect("direct.php?route=quanlynv"); 
 				}else{
 					echo "Somthing is wrong..., try again.";
 				}
@@ -393,7 +393,7 @@
 						$pid = $this -> objsm ->updateRecord($NhanVien);
 
 						if($pid != ''){			
-							$this->pageRedirect("index.php?route=quanlynv"); 
+							$this->pageRedirect("directf.php?route=quanlynv"); 
 						}else{
 							echo "Somthing is wrong..., try again.";
 						}

@@ -154,8 +154,8 @@
             try
             {
                 $this->open_db();
-                $query = $this->condb->prepare("UPDATE hopdong SET tinhTrangHD = ? WHERE maNV = ?");
                 $tt = 'Đã Hủy';
+                $query = $this->condb->prepare("UPDATE hopdong SET tinhTrangHD = ? WHERE maNV = ?");
                 $query->bind_param("ss", $tt, $id);
                 $query->execute();
                 $res=$query->get_result();

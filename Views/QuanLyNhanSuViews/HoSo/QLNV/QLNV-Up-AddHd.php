@@ -95,7 +95,7 @@
   </style>
 </head>
 <body>
-  <form method="post" action="../../../../index.php?route=quanlynv&act=add" class="form-container">
+  <form method="post" action="../../../../direct.php?route=quanlynv&act=add" class="form-container">
     <div class="container-tit">
       <h1>Form Sửa Thông Tin Hợp Đồng Nhân Viên</h1>
     </div>

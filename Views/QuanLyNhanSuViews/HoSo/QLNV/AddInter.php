@@ -236,7 +236,7 @@
         </div>
 
         <div class="content">
-            <form method="post" action="index.php?route=quanlynv&act=add" class="formm" enctype="multipart/form-data">
+            <form method="post" action="direct.php?route=quanlynv&act=add" class="formm" enctype="multipart/form-data">
                 <div class="ttcn js-ttcn">
                     <div class="formm-tit">
                         <h1>Form Nhập Thông Tin Nhân Viên</h1>

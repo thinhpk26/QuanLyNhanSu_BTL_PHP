@@ -405,7 +405,7 @@
         <div class="content">
             <h1 class="ct-ele1">Quản lý hồ sơ ứng viên</h1>
             <div class="ct-ele2">
-                    <form action="index.php?route=quanlyuv&act=search" method="post" id="cele2-search">
+                    <form action="direct.php?route=quanlyuv&act=search" method="post" id="cele2-search">
                         <input type="text" name="cele2-search" id="cele2-search-ip" placeholder="Tìm kiếm theo tên nhân viên">
                         <button type="submit" id="cele2-search-bt" name="search-name">Tìm</button>
                     </form>
@@ -413,7 +413,7 @@
             </div>
             
             <div class="model js-model">
-                <form action="index.php?route=quanlyuv&act=search" method="post" id="ft-form">
+                <form action="direct.php?route=quanlyuv&act=search" method="post" id="ft-form">
                     <div class="ft-form-row">
                         <div class="form-row-tit">Mã ứng viên:</div>
                         <input type="text" id="ma-nhan-vien" name="ma-ung-vien" >
@@ -483,8 +483,8 @@
                     echo "<td>".$row['sdt']."</td>";
                     echo "
                     <td>
-                        <button class=\"tb-view-button\"><a href=\"./index.php?route=quanlyuv&act=single&maUV=".$row['maUV']."\">Xem</a></button>
-                        <button class=\"tb-edit-button\"><a href=\"./index.php?route=quanlyuv&act=addView&maUV=".$row['maUV']."\">Duyệt</a></button>
+                        <button class=\"tb-view-button\"><a href=\"./direct.php?route=quanlyuv&act=single&maUV=".$row['maUV']."\">Xem</a></button>
+                        <button class=\"tb-edit-button\"><a href=\"./direct.php?route=quanlyuv&act=addView&maUV=".$row['maUV']."\">Duyệt</a></button>
                     </td>";
                     echo "</tr>";
                 }
