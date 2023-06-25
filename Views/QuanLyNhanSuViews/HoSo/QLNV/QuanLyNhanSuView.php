@@ -342,7 +342,7 @@
             <!--Con của ông trên-->
             <div class="nav-cate2 nav-ele">
                 <i class="fa-solid fa-star"></i>
-                <a href="index.php?route=quanlyuv" style="display: inline; color: black;">Quản lý ứng viên</a>
+                <a href="direct.php?route=quanlyuv" style="display: inline; color: black;">Quản lý ứng viên</a>
                 
             </div>
 
@@ -353,7 +353,7 @@
 
             <div class="nav-cate2 nav-ele">
                 <i class="fa-solid fa-ban"></i>
-                <a href="index.php?route=quanlynvn" style="display: inline; color: black;">Quản lý nghỉ việc </a>
+                <a href="direct.php?route=quanlynvn" style="display: inline; color: black;">Quản lý nghỉ việc </a>
             </div>
 
             <div class="nav-cate nav-ele">

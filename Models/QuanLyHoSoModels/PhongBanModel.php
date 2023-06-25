@@ -28,11 +28,11 @@
                 $this->open_db();
                 if($id>0)
                 {
-                    $query=$this->condb->prepare("SELECT * FROM phong_ban WHERE maPb=?");
+                    $query=$this->condb->prepare("SELECT * FROM phongban WHERE maPb=?");
                     $query->bind_param("s",$id);
                 }
                 else
-                {$query=$this->condb->prepare("SELECT * FROM phong_ban");    }
+                {$query=$this->condb->prepare("SELECT * FROM phongban");    }
 
                 $query->execute();
                 $res=$query->get_result();

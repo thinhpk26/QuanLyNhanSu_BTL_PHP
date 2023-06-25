@@ -86,7 +86,7 @@
             </div>
             <div class="row">
                 <label>Vị trí ứng tuyển:</label>
-                <span><?=$row['viTriUngTuyen']?></span>
+                <span><?=$row['viTriUT']?></span>
             </div>
         <!-- Thêm các div khác tương ứng với dữ liệu từ bảng UngVien của bạn -->
         </div>

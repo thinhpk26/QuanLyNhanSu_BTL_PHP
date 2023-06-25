@@ -4,7 +4,7 @@
     $configg->opendb();
     $maNVV = $_GET['maNV']; 
     $sql = "SELECT * FROM nhanvien WHERE maNV = '$maNVV'";
-    $sql2 = "SELECT * FROM phong_ban";
+    $sql2 = "SELECT * FROM phongban";
     $sql3 = "SELECT * FROM chucvu";
     $sql4 = "SELECT * FROM hopdong WHERE maNV = '$maNVV'";
     $sql5 = "SELECT * FROM nghiviec WHERE maNV = '$maNVV'";
