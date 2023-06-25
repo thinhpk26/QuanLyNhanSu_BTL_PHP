@@ -121,7 +121,7 @@
         </div>
         <div class="m-4">
         <h5 class="text-center">Xác nhận gửi hồ sơ</h5>
-        <p class="mb-5 mt-5">Bạn chắc chắn muốn gửi hồ sơ này? (1 ngày chỉ được 1 lần gửi duy nhất)</p>
+        <p class="mb-5 mt-5">Bạn chắc chắn muốn gửi hồ sơ này?</p>
         <form action="/QuanLyNhanSu_BTL_PHP/Controllers/QuanLyNhanSu/TuyenDung/GuiHoSoController.php" id="extendInformation" method="post" class="m-4" onsubmit="addThongTinHoSo(event)">
             <input type="text" id="iDkeHoachTuyenDung" class="visually-hidden" name="iDKeHoachTuyenDung" value="<?=$iDKeHoachTuyenDung?>">
             <input name="action" value="addThongTinHoSo" class="visually-hidden">

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
-    include_once './HoSoUngTuyen.php';
-    include_once './TuyenDungModel.php';
+    require_once 'HoSoUngTuyen.php';
+    require_once 'TuyenDungModel.php';
     class HoSoUngTuyenModel extends TuyenDungModel {
         public static function withDifferentHost($host) {
             $instance = new self();
@@ -11,10 +11,10 @@
             return $instance;
         }
 
-        public function getAllHoSoUngTuyenWithChuaQuyetDinh() : array {
+        public function getAllHoSoUngTuyenWithChuaQuyetDinh($iDKeHoachTuyenDung) {
             try {
                 $query = "select hosoungtuyen.* from loaihoso join hosoungtuyen on loaihoso.iD = hosoungtuyen.iD
-                where loaihoso.loaiHoSo = 'Chưa quyết định'";
+                where loaihoso.loaiHoSo = 'Chưa quyết định' && hosoungtuyen.iDKeHoachTuyenDung = '$iDKeHoachTuyenDung'";
                 $this->open_db();
                 $hoSoUngTuyenList = array();
                 $result = $this->condb->query($query);
@@ -26,15 +26,14 @@
                 $this->close_db();
                 return $hoSoUngTuyenList;
             } catch (Exception $ex) {
-                $this->navigateWhenError($ex);
-                return [];
+                return $ex;
             }
         }
 
-        public function getAllHoSoUngTuyenWithChoPhongVan() : array {
+        public function getAllHoSoUngTuyenWithChoPhongVanByiDKeHoachtuyenDung($iDKeHoachTuyenDung) {
             try {
                 $query = "select hosoungtuyen.* from loaihoso join hosoungtuyen on loaihoso.iD = hosoungtuyen.iD
-                where loaihoso.loaiHoSo = 'Chờ phỏng vấn'";
+                where loaihoso.loaiHoSo = 'Chờ phỏng vấn' && hosoungtuyen.iDKeHoachTuyenDung = '$iDKeHoachTuyenDung'";
                 $this->open_db();
                 $hoSoUngTuyenList = array();
                 $result = $this->condb->query($query);
@@ -46,15 +45,14 @@
                 $this->close_db();
                 return $hoSoUngTuyenList;
             } catch (Exception $ex) {
-                $this->navigateWhenError($ex);
-                return [];
+                return $ex;
             }
         }
 
-        public function getAllHoSoUngTuyenWithLoaiBo(): array {
+        public function getAllHoSoUngTuyenWithLoaiBo($iDKeHoachTuyenDung) {
             try {
                 $query = "select hosoungtuyen.* from loaihoso join hosoungtuyen on loaihoso.iD = hosoungtuyen.iD
-                where loaihoso.loaiHoSo = 'Loại bỏ'";
+                where loaihoso.loaiHoSo = 'Loại bỏ' && hosoungtuyen.iDKeHoachTuyenDung = '$iDKeHoachTuyenDung'";
                 $this->open_db();
                 $hoSoUngTuyenList = array();
                 $result = $this->condb->query($query);
@@ -66,12 +64,11 @@
                 $this->close_db();
                 return $hoSoUngTuyenList;
             } catch (Exception $ex) {
-                $this->navigateWhenError($ex);
-                return [];
+                return $ex;
             }
         }
 
-        public function getAllHoSoUngTuyenWithChapNhanTuyenDung(): array {
+        public function getAllHoSoUngTuyenWithChapNhanTuyenDung() {
             try {
                 $query = "select hosoungtuyen.* from loaihoso join hosoungtuyen on loaihoso.iD = hosoungtuyen.iD
                 where loaihoso.loaiHoSo = 'Chấp nhận tuyển dụng'";
@@ -86,12 +83,25 @@
                 $this->close_db();
                 return $hoSoUngTuyenList;
             } catch (Exception $ex) {
-                $this->navigateWhenError($ex);
-                return [];
+                return $ex;
             }
         }
-
-        public function getAllHoSoUngTuyen() : array {
+        public function getHoSoUngTuyenByID($iD) {
+            try {
+                $query = "select * from hosoungtuyen where iD = '$iD'";
+                $this->open_db();
+                $hoSoUngTuyen = null;
+                $result = $this->condb->query($query);
+                if($result->num_rows > 0) {
+                    $hoSoUngTuyen = $result->fetch_object();
+                }
+                $this->close_db();
+                return $hoSoUngTuyen;
+            } catch (Exception $ex) {
+                return $ex;
+            }
+        }
+        public function getAllHoSoUngTuyen() {
             try {
                 $query = "select * from hosoungtuyen";
                 $this->open_db();
@@ -105,21 +115,18 @@
                 $this->close_db();
                 return $hoSoUngTuyenList;
             } catch (Exception $ex) {
-                $this->navigateWhenError($ex);
-                return [];
+                return $ex;
             }
         }
 
-        public function addHoSoUngTuyen(HoSoUngTuyen $hoSoUngTuyen) : bool {
+        public function addHoSoUngTuyen($hoSoUngTuyen) {
             try {
                 $query = "INSERT INTO HoSoUngTuyen VALUES (?,?,?,?,?,?,?,?,?)";
+                $this->checkHaveParams($hoSoUngTuyen, ['iD', 'iDKeHoachTuyenDung', 'iDKeHoachPhongVan', 'email', 'hoTen', 'soDT', 'diaChi', 'ngaySinh', 'ghiChu']);
                 $this->open_db();
                 $pttm = $this->condb->prepare($query);
                 $pttm->bind_param("sssssssss", $iD, $iDKeHoachTuyenDung, $iDKeHoachPhongVan, $hoTen, $email, $soDT, $diaChi, $ngaySinh, $ghiChu);
                 $iD = $hoSoUngTuyen->iD;
-                if($iD == "") {
-                    $this->createID();
-                }
                 $iDKeHoachTuyenDung = $hoSoUngTuyen->iDKeHoachTuyenDung;
                 $iDKeHoachPhongVan = $hoSoUngTuyen->iDKeHoachPhongVan;
                 $hoTen = $hoSoUngTuyen->hoTen;
@@ -127,16 +134,15 @@
                 $soDT = $hoSoUngTuyen->soDT;
                 $diaChi = $hoSoUngTuyen->diaChi;
                 $ngaySinh = $hoSoUngTuyen->ngaySinh;
-                $ghiChu = $hoSoUngTuyen->ghiChu;
+                $ghiChu = trim($hoSoUngTuyen->ghiChu);
                 $pttm->execute();
                 $this->close_db();
                 return true;
             } catch (Exception $ex) {
-                $this->navigateWhenError($ex);
-                return false;
+                return $ex;
             }
         }
-        public function deleteHoSoUngTuyen(string $iD) : bool {
+        public function deleteHoSoUngTuyen(string $iD) {
             try {
                 $query = "DELETE FROM HoSoUngTuyen WHERE iD = ?";
                 $this->open_db();
@@ -146,8 +152,7 @@
                 $this->close_db();
                 return true;
             } catch (Exception $ex) {
-                $this->navigateWhenError($ex);
-                return false;
+                return $ex;
             }
         }
     }

@@ -36,6 +36,9 @@ async function addThongTinHoSo(event) {
             alert(response.message);
         }
     })
+    .catch(err => {
+        console.log(err.message);
+    })
 
 }
 

@@ -13,13 +13,13 @@
         }
         public function showWebsiteTuyenDung(object $dataFromClient) {
             $iDKeHoachTuyenDung = $dataFromClient->iDKeHoachTuyenDung;
-            $variables = $this->getAllThongTinWebsiteToControllerByIDKeHoachTuyenDung($iDKeHoachTuyenDung);
-            if($variables instanceof Exception) {
+            $websiteDangTuyenList = $this->getAllThongTinWebsiteToControllerByIDKeHoachTuyenDung($iDKeHoachTuyenDung);
+            if($websiteDangTuyenList instanceof Exception) {
                 header('Location: /QuanLyNhanSu_BTL_PHP/Views/ErrorPage.php');
                 exit();
             }
-            $variables = ['websiteDangTuyenList' => $variables];
-            include_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/WebsiteDangTuyen/WebsiteDangTuyenView.php';
+            $variables = ['websiteDangTuyenList' => $websiteDangTuyenList, 'iDKeHoachTuyenDung' => $iDKeHoachTuyenDung];
+            require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/WebsiteDangTuyen/WebsiteDangTuyenView.php';
             exit;
         }
         private function getAllThongTinWebsiteToControllerByIDKeHoachTuyenDung(string $iDKeHoachTuyenDung) : array {

@@ -1,16 +1,18 @@
 <?php declare(strict_types = 1);
     session_start();
-    include_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/TaiKhoan.php';
-    include_once './DeNghiTuyenDungController.php';
+    require_once './DeNghiTuyenDungController.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/PhongBanModel.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/config.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/PhongBanEntity.php';
 
-    $inforUser = isset($_SESSION['inforUser']) ? $_SESSION['inforUser'] : new TaiKhoan();
-
-    $request = new Request($inforUser, $_SERVER['REQUEST_METHOD']);
-
-    $deNghiTuyenDungController = new DeNghiTuyenDungController($request, ['get']);
+    $deNghiTuyenDungController = new DeNghiTuyenDungController($_SESSION);
     
-    $deNghiTuyenDungController->handle();
-    
-    $deNghiTuyenDungController->hienThiDeNghiTuyenDungPage();
+    $deNghiTuyenDungController->handleAccessController();
 
+    $phongBanModel = new PhongBanModel(new config());
+
+    //$phongBan = $phongBanModel->getPhongBanByMaNV($_SESSION['inforuser']->maNV);
+
+    $phongBan = $phongBanModel->getPhongBanByMaNV("mnv01");
+    $deNghiTuyenDungController->hienThiDeNghiTuyenDungPage($phongBan);
 ?>

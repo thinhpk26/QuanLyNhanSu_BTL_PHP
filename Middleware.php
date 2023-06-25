@@ -1,80 +1,105 @@
 <?php declare(strict_types = 1);
 ?>
-<!-- Khoi tao san cho 2 doi tuong là checkNhanVien, checkTruongPhong, checkChuyenVienTuyenDung và checkQuanLyNhanSu -->
-<!-- Nếu kiểm tra thì truyền đối tượng đó vào trong tham số của function muốn check -->
-<!-- Chưa có model nên tạm thời chưa có dữ liệu -->
+
 <?php 
+    // Khoi tao san cho 2 doi tuong là checkNhanVien, checkTruongPhong, checkChuyenVienTuyenDung và checkQuanLyNhanSu
+    // Nếu kiểm tra thì truyền đối tượng đó vào trong tham số của function muốn check
+    // Chưa có model nên tạm thời chưa có dữ liệu
     // kiểm tra quyền truy cập
-    include_once __DIR__ . '/Models/QuanLyHoSoModels/TaiKhoan.php';
-    include_once __DIR__ . '/Request.php';
+    require_once __DIR__ . '/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
+    require_once __DIR__ . '/Models/QuanLyHoSoModels/TaiKhoanModel.php';
+    require_once __DIR__ . '/config.php';
+    require_once __DIR__ . '/Request.php';
     abstract class AuthMiddleware {
-        protected Request $request;
-        protected array $methods;
+        protected $Session;
+        protected TaiKhoanModel $taiKhoan;
+        public function __construct(&$Session) {
+            $this->Session = &$Session;
+            $this->taiKhoan = new TaiKhoanModel(new config());
+        }
+        
         protected abstract function checkRole() : bool;
-        public function handle()
-        {
-            if(!$this->checkRole() || !$this->checkMethod()) {
-                // header('Location: /QuanLyNhanSu_BTL_PHP/Views/ErrorPage.php');
-                echo "Khong duoc phep tiep can";
-                exit();
+
+        public function handleAccessController() {
+            if(!isset($this->Session['inforUser']) || !$this->checkRole()) {
+                header('location: /QuanLyNhanSu_BTL_PHP');
+                exit;
             }
         }
-        protected function checkMethod() : bool {
-            foreach($this->methods as $method) {
-                if(strcasecmp($this->request->method, $method) == 0) {
-                    return true;
-                }
+        protected function returnJson($resultForClient) {
+            $result = [];
+            if($resultForClient === true) {
+                $result = (object)['isSuccess' => true, 'message' => ''];
+            }else if($resultForClient instanceof Exception) {
+                $result = (object)['isSuccess' => false, 'message' => $resultForClient->getMessage()];
+            } else {
+                $result = (object)['isSuccess' => true, 'message' => '', 'data' => $resultForClient];
             }
-            return false;
+            header('Content-Type: application/json');
+            echo json_encode($result);
+            exit;
         }
     }
 
     class NhanVienAuthMiddleware extends AuthMiddleware{
-        public function __construct(Request $request, array $methods)
-        {
-            $this->request = $request;
-            $this->methods = $methods;
-        }
-        
         protected function checkRole() : bool {
+            $currAccount = $this->Session['account'];
+            $accountInDB = $this->taiKhoan->findAccountByUsernameAndPassword($currAccount->username, $currAccount->password);
+            if($accountInDB === null || $accountInDB->loaiTk !== "nhanVien") {
+                return false;
+            }
             return true;
         }
-        
     }
 
-
     class TruongPhongAuthMiddleware extends AuthMiddleware {
-        public function __construct(Request $request, array $methods)
-        {
-            $this->request = $request;
-            $this->methods = $methods;
-        }
         
         protected function checkRole() : bool {
+            $currAccount = $this->Session['account'];
+            $accountInDB = $this->taiKhoan->findAccountByUsernameAndPassword($currAccount->username, $currAccount->password);
+            if($accountInDB === null || $accountInDB->loaiTk !== "truongPhong") {
+                return false;
+            }
             return true;
         }
     }
 
     class QuanLyNhanSuAuthMiddleware extends AuthMiddleware {
-        public function __construct(Request $request, array $methods)
-        {
-            $this->request = $request;
-            $this->methods = $methods;
-        }
         
         protected function checkRole() : bool {
+            $currAccount = $this->Session['account'];
+            $accountInDB = $this->taiKhoan->findAccountByUsernameAndPassword($currAccount->username, $currAccount->password);
+            if($accountInDB === null || $accountInDB->loaiTk !== "quanLyNhanSu") {
+                return false;
+            }
             return true;
         }
     }
 
+    class KhongXacDinhAuthMiddleWare extends AuthMiddleware {
+        protected function checkRole() : bool {
+            return true;
+        }
+        public function handleAccessController() {
+        }
+    }
 
-    $taiKhoan = new TaiKhoan();
+    interface UUID {
+        public function setID(string $UUID);
+        public function getID();
+    }
 
-    // Request gồm những gì
-    $request = new Request($taiKhoan, "get");
-
-    // Đặt middleware trước controller nếu request không được chấp nhận sẽ tự động chuyển đến trang lỗi
-    $quanLyNhanSuMiddleware = new QuanLyNhanSuAuthMiddleware($request, ["get"]);
-    $quanLyNhanSuMiddleware->handle();
+    class UUIDVersion1 implements UUID {
+        private string $UUID;
+        public function __construct() {
+            $this->UUID = substr(uniqid(), 0, 13);
+        }
+        public function setID(string $UUID) {
+            $this->UUID = $UUID;
+        }
+        public function getID() {
+            return $this->UUID;
+        }
+    }
 
 ?>

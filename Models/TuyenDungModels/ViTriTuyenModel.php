@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
-    include_once './ViTriTuyen.php';
-    include_once './TuyenDungModel.php';
+    require_once 'ViTriTuyen.php';
+    require_once 'TuyenDungModel.php';
     class ViTriTuyenModel extends TuyenDungModel {
         public static function withDifferentHost($host) {
             $instance = new self();
@@ -33,6 +33,25 @@
         public function getAllViTriTuyenByiDKeHoachTuyenDung(string $iDKeHoachTuyenDung) : array {
             try {
                 $query = "SELECT * from ViTriTuyen where iDKeHoachTuyenDung = '$iDKeHoachTuyenDung'";
+                $this->open_db();
+                $result = $this->condb->query($query);
+                $viTriTuyenList = array();
+                if($result->num_rows > 0) {
+                    while($row = $result->fetch_object()) {
+                        $viTriTuyenList[] = $row;
+                    }
+                }
+                $this->close_db();
+                return $viTriTuyenList;
+            } catch(Exception $ex) {
+                $this->navigateWhenError($ex);
+                return [];
+            }
+        }
+
+        public function getAllViTriTuyenAndChucVuByiDKeHoachTuyenDung(string $iDKeHoachTuyenDung) : array {
+            try {
+                $query = "SELECT * from vitrituyen join chucvu on vitrituyen.iDViTri = chucvu.maChucVu where iDKeHoachTuyenDung = '$iDKeHoachTuyenDung'";
                 $this->open_db();
                 $result = $this->condb->query($query);
                 $viTriTuyenList = array();
