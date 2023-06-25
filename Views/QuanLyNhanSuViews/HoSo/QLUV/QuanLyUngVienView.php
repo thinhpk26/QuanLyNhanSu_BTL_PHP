@@ -369,12 +369,12 @@
 
             <div class="nav-cate2 nav-ele">
                 <i class="fa-solid fa-person"></i>
-                <a href="index.php?route=quanlynv" style="display: inline; color: black;">Quản lý nhân viên </a>
+                <a href="direct.php?route=quanlynv" style="display: inline; color: black;">Quản lý nhân viên </a>
             </div>
 
             <div class="nav-cate2 nav-ele">
                 <i class="fa-solid fa-ban"></i>
-                <a href="index.php?route=quanlynvn" style="display: inline; color: black;">Quản lý nghỉ việc </a>
+                <a href="direct.php?route=quanlynvn" style="display: inline; color: black;">Quản lý nghỉ việc </a>
             </div>
 
             <div class="nav-cate nav-ele">

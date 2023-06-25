@@ -360,12 +360,12 @@
             <!--Con của ông trên-->
             <div class="nav-cate2 nav-ele">
                 <i class="fa-solid fa-star"></i>
-                <a href="index.php?route=quanlyuv" style="display: inline; color: black;">Quản lý ứng viên</a>
+                <a href="direct.php?route=quanlyuv" style="display: inline; color: black;">Quản lý ứng viên</a>
             </div>
 
             <div class="nav-cate2 nav-ele">
                 <i class="fa-solid fa-person"></i>
-                <a href="index.php?route=quanlynv" style="display: inline; color: black;">Quản lý nhân viên </a>
+                <a href="direct.php?route=quanlynv" style="display: inline; color: black;">Quản lý nhân viên </a>
             </div>
 
             <div class="nav-cate2 nav-ele">
