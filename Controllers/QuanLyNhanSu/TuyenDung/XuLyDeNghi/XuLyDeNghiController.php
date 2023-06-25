@@ -5,8 +5,8 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/QuanLyNhanSu_BTL_PHP/Request.php';
     class XuLyDeNghiController extends QuanLyNhanSuAuthMiddleware {
         private $deNghiTuyenDungModel;
-        public function __construct(Request $request, array $methods) {
-            parent::__construct($request, $methods);
+        public function __construct(&$Session) {
+            parent::__construct($Session);
             $this->deNghiTuyenDungModel = new DeNghiTuyenDungsModel();
         }
         public function hienThiPhanHoiTuyenDungPage() {

@@ -6,8 +6,8 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/PhongBanEntity.php';
     class DeNghiTuyenDungController extends TruongPhongAuthMiddleware {
         private DeNghiTuyenDungsModel $deNghiTuyenDungModel;
-        public function __construct(Request $request, array $methods) {
-            parent::__construct($request, $methods);
+        public function __construct(&$Session) {
+            parent::__construct($Session);
             $this->initDAO();
         }
         private function initDAO() {
@@ -23,18 +23,18 @@
                 echo 'Xảy ra lỗi trong quá trình lấy dữ liệu';
                 exit;
             }
-            $variables = ['deNghiTuyenDungList' => $deNghiTuyenDungList];
+            $variables = ['deNghiTuyenDungList' => $deNghiTuyenDungList, 'phongBan' => $phongBan->maPb];
             require_once $_SERVER['DOCUMENT_ROOT']. '/QuanLyNhanSu_BTL_PHP/Views/QuanLyNhanSuViews/TuyenDung/DeNghiTuyenDung/DeNghiTuyenDungView.php';
         }
-        public function createYeuCauDeNghiTuyenDung(object $dataFromClient, UUID $uuid) {
+        public function createYeuCauDeNghiTuyenDung($dataFormClient) {
             $resultForClient = null;
             try {
-                if(!isset($dataFromClient->phongBan) || !isset($dataFromClient->deNghi)) 
+                if(!isset($dataFormClient['phongBan']) || !isset($dataFormClient['deNghi'])) 
                     throw new Exception ("Không có thuộc tính trên. Vui lòng reload lại page!");
-                
+                $uuid = new UUIDVersion1();
                 $iD = $uuid->getID();
-                $phongBan = $dataFromClient->phongBan;
-                $deNghi = $dataFromClient->deNghi;
+                $phongBan = $dataFormClient['phongBan'];
+                $deNghi = $dataFormClient['deNghi'];
                 $deNghiTuyenDung = new DeNghiTuyenDungs($iD, $phongBan, $deNghi, null);
                 $dataFromDB = $this->deNghiTuyenDungModel->addDeNghiTuyenDung($deNghiTuyenDung);
                 $resultForClient = $dataFromDB;

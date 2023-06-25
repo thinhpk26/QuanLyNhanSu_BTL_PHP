@@ -125,5 +125,22 @@
                 throw $e;
             }
         }
+
+        // Thịnh thêm phục vụ cho login
+        public function findAccountByUsernameAndPassword($username, $password) {
+            try {
+                $account = null;
+                $this->open_db();
+                $query = "SELECT * FROM TaiKhoan where username='$username' and password='$password'";
+                $result = $this->condb->query($query);
+                if($result->num_rows > 0) {
+                    $account = $result->fetch_object();
+                }
+                $this->close_db();
+                return $account;
+            }catch(Exception $ex) {
+                return $ex;
+            }
+        }
     }
 ?>

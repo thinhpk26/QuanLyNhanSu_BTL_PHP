@@ -178,5 +178,22 @@
                 throw $e;
             }
         }
+
+        // Thịnh thêm phương thức để setCookie
+        public function getNhanVienByIDTaiKhoan($maNV) {
+            try {
+                $nhanVien = null;
+                $this->open_db();
+                $query = "SELECT * FROM nhanvien where maNV = '$maNV'";
+                $result = $this->condb->query($query);
+                if($result->num_rows > 0) {
+                    $nhanVien = $result->fetch_object();
+                }
+                $this->close_db();
+                return $nhanVien;
+            }catch(Exception $e) {
+                return $e;
+            }
+        }
     }
 ?>

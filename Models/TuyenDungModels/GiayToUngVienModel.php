@@ -11,27 +11,25 @@
             return $instance;
         }
 
-        public function getGiayToUngVienbyID(string $iD) : array {
+        public function getGiayToUngVienbyID(string $iD) {
             try {
-                $query = "SELECT * FROM GiayToUngVienby WHERE iD = '$iD'";
+                $query = "SELECT * FROM GiayToUngVien WHERE iD = '$iD'";
                 $this->open_db();
-                $giayToUngVienList = array();
+                $giayToUngVien = null;
                 $result = $this->condb->query($query);
                 if($result->num_rows > 0) {
-                    while($row = $result->fetch_object()) {
-                        $giayToUngVienList[] = $row;
-                    }
+                    $giayToUngVien = $result->fetch_object();
                 }
                 $this->close_db();
-                return $giayToUngVienList;
+                return $giayToUngVien;
             } catch(Exception $e) {
-                $this->navigateWhenError($e);
-                return [];
+                return $e;
             }
         }
 
-        public function addGiayToUngVien(GiayToUngVien $giayToUngVien) : bool {
+        public function addGiayToUngVien($giayToUngVien) {
             try {
+                $this->checkHaveParams($giayToUngVien, ['iD', 'CV', 'soYeuLyLich', 'donXinViec', 'CCCD', 'giayKhaiSinh', 'soHoKhau', 'giayKhamSucKhoe', 'anh']);
                 $query = "INSERT INTO GiayToUngVien Values (?,?,?,?,?,?,?,?,?)";
                 $this->open_db();
                 $pttm = $this->condb->prepare($query);
@@ -49,11 +47,10 @@
                 $this->close_db();
                 return true;
             } catch (Exception $e) {
-                $this->navigateWhenError($e);
-                return false;
+                return $e;
             }
         }
-        public function deleteGiayToUngVienbyID(string $iD) :bool {
+        public function deleteGiayToUngVienbyID(string $iD) {
             try {
                 $query = "DELETE FROM GiayToUngVien WHERE iD = ?";
                 $this->open_db();
@@ -63,8 +60,7 @@
                 $this->close_db();
                 return true;
             } catch (Exception $e) {
-                $this->navigateWhenError($e);
-                return false;
+                return $e;
             }
         }
     }

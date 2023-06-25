@@ -7,53 +7,31 @@
     // Chưa có model nên tạm thời chưa có dữ liệu
     // kiểm tra quyền truy cập
     require_once __DIR__ . '/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
+    require_once __DIR__ . '/Models/QuanLyHoSoModels/TaiKhoanModel.php';
+    require_once __DIR__ . '/config.php';
     require_once __DIR__ . '/Request.php';
     abstract class AuthMiddleware {
-        protected Request $request;
-        protected array $methods;
+        protected $Session;
+        protected TaiKhoanModel $taiKhoan;
+        public function __construct(&$Session) {
+            $this->Session = &$Session;
+            $this->taiKhoan = new TaiKhoanModel(new config());
+        }
+        
         protected abstract function checkRole() : bool;
-        //kỹ thuật tạo file như là 1 action của controller
-        public function handle()
-        {
-            if(!$this->checkRole() || !$this->checkMethod()) {
-                // header('Location: /QuanLyNhanSu_BTL_PHP/Views/ErrorPage.php');
-                $result = (object)['isSuccess' => false, 'message' => "Không được phép tiếp cận"];
-                header('Content-Type: application/json');
-                echo json_encode($result);
-                exit();
+
+        public function handleAccessController() {
+            if(!isset($this->Session['inforUser']) || !$this->checkRole()) {
+                header('location: /QuanLyNhanSu_BTL_PHP/Views/DangNhapViews/index.html');
+                exit;
             }
-        }
-        // Kỹ thuật tạo 1 controller và action trong 1 file duy nhất và điều hướng
-        public function handleVersion2() { 
-            if(!$this->checkRole()) {
-                $result = (object)['isSuccess' => false, 'message' => "Bạn không có quyền truy cập!"];
-                header('Content-Type: application/json');
-                echo json_encode($result);
-                exit();
-            }
-        }
-        public function checkMeThodVersion2(array $methodList) {
-            foreach($methodList as $method) {
-                if(strcasecmp($this->request->method, $method) == 0) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        protected function checkMethod() : bool {
-            foreach($this->methods as $method) {
-                if(strcasecmp($this->request->method, $method) == 0) {
-                    return true;
-                }
-            }
-            return false;
         }
         protected function returnJson($resultForClient) {
             $result = [];
             if($resultForClient === true) {
                 $result = (object)['isSuccess' => true, 'message' => ''];
-            } else if($resultForClient instanceof Exception) {
-                $result = (object)['isSuccess' => false, 'message' => $resultForClient->getMessage()];
+            }else if($resultForClient instanceof Exception) {
+                $result = (object)['isSuccess' => false, 'message' => $resultForClient->getMessage() . $resultForClient->getTraceAsString()];
             } else {
                 $result = (object)['isSuccess' => true, 'message' => '', 'data' => $resultForClient];
             }
@@ -64,39 +42,45 @@
     }
 
     class NhanVienAuthMiddleware extends AuthMiddleware{
-        public function __construct(Request $request, array $methods)
-        {
-            $this->request = $request;
-            $this->methods = $methods;
-        }
-        
         protected function checkRole() : bool {
+            $currAccount = $this->Session['account'];
+            $accountInDB = $this->taiKhoan->findAccountByUsernameAndPassword($currAccount->username, $currAccount->password);
+            if($accountInDB === null || $accountInDB->loaiTk !== "nhanVien") {
+                return false;
+            }
             return true;
         }
-        
     }
 
     class TruongPhongAuthMiddleware extends AuthMiddleware {
-        public function __construct(Request $request, array $methods)
-        {
-            $this->request = $request;
-            $this->methods = $methods;
-        }
         
         protected function checkRole() : bool {
+            $currAccount = $this->Session['account'];
+            $accountInDB = $this->taiKhoan->findAccountByUsernameAndPassword($currAccount->username, $currAccount->password);
+            if($accountInDB === null || $accountInDB->loaiTk !== "truongPhong") {
+                return false;
+            }
             return true;
         }
     }
 
     class QuanLyNhanSuAuthMiddleware extends AuthMiddleware {
-        public function __construct(Request $request, array $methods)
-        {
-            $this->request = $request;
-            $this->methods = $methods;
-        }
         
         protected function checkRole() : bool {
+            $currAccount = $this->Session['account'];
+            $accountInDB = $this->taiKhoan->findAccountByUsernameAndPassword($currAccount->username, $currAccount->password);
+            if($accountInDB === null || $accountInDB->loaiTk !== "quanLyNhanSu") {
+                return false;
+            }
             return true;
+        }
+    }
+
+    class KhongXacDinhAuthMiddleWare extends AuthMiddleware {
+        protected function checkRole() : bool {
+            return true;
+        }
+        public function handleAccessController() {
         }
     }
 

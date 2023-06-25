@@ -1,12 +1,11 @@
 <?php declare(strict_types = 1);
     require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Middleware.php';
-    require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Request.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/WebsiteDangTuyenModel.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/TuyenDungModels/WebsiteDangTuyen.php';
     class WebsiteTuyenDungController extends QuanLyNhanSuAuthMiddleware {
         private WebsiteDangTuyenModel $websiteDangTuyenModel;
-        public function __construct(Request $request, array $method) {
-            parent::__construct($request, $method);
+        public function __construct(&$Session) {
+            parent::__construct($Session);
             $this->initDAO();
         }
         private function initDAO() {
@@ -105,18 +104,9 @@
     }
 
     session_start();
-    require_once $_SERVER['DOCUMENT_ROOT'].'/QuanLyNhanSu_BTL_PHP/Models/QuanLyHoSoModels/TaiKhoanEntity.php';
 
-    // Điều hướng đến login
-    if(!isset($_SESSION['inforUser'])) {
-        
-    }
-    $inforUser = isset($_SESSION['inforUser']) ? $_SESSION['inforUser'] : new TaiKhoanEntity();
-
-    $request = new Request($inforUser, $_SERVER['REQUEST_METHOD']);
-
-    $websiteTuyenDungController = new WebsiteTuyenDungController($request, ['post', 'get']);
-    $websiteTuyenDungController->handleVersion2();
+    $websiteTuyenDungController = new WebsiteTuyenDungController($_SESSION);
+    $websiteTuyenDungController->handleAccessController();
 
     if($_SERVER['REQUEST_METHOD'] === 'GET') {
         if(!isset($_GET['iDKeHoachTuyenDung'])) {

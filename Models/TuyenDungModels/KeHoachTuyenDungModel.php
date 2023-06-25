@@ -87,6 +87,7 @@
 
         public function addKeHoachTuyenDung(KeHoachTuyenDung $keHoachTuyenDung) {
             try {
+                $this->checkHaveParams($keHoachTuyenDung, ['iD', 'thoiGianTrienKhai', 'trangThaiGiaiDoan', 'ghiChu']);
                 $query = "INSERT INTO KeHoachTuyenDung VALUES (?,?,?,?)";
                 $this->open_db();
                 $pttm = $this->condb->prepare($query);
