@@ -205,7 +205,7 @@
     }
     
     .RContent form {
-        background-color: orange;
+        background-color: lightsalmon;
         padding: 20px;
         position: relative;
     }
@@ -388,13 +388,13 @@
                     $mp = $_POST['mp'];
                     
                     
-                    $sql_check = "SELECT * FROM DoanhSoPhong WHERE MaPhong = '$mp'";
+                    $sql_check = "SELECT * FROM DoanhSoPhong WHERE maPb = '$mp'";
                     $result_check = $this->condb->query($sql_check);
                     if ($result_check->num_rows > 0) {
                         echo "<span class='message'>Bạn đã nhập Doanh Số cho phòng này</span>";
                     }
                     else {
-                    $sql = "INSERT INTO DoanhSoPhong (DSYeuCau_Phong,DSHienTai_Phong, DonVi, MaPhong)
+                    $sql = "INSERT INTO DoanhSoPhong (DSYeuCau_Phong,DSHienTai_Phong, DonVi, maPb)
                             VALUES ('$money_yc','$money_ht','$dvi','$mp')";
 
                     $result = $this->condb->query($sql);
@@ -414,7 +414,7 @@
             $inforDb->host = 'localhost';
             $inforDb->pass = '';
             $inforDb->user = 'root';
-            $inforDb->db = 'quanlyluong';
+            $inforDb->db = 'quanlynhansu';
             $dscnModel = ADDDoanhSoPhongModel::withDifferentHost($inforDb);
             $dscnModel->insertDS();
         ?>
@@ -455,7 +455,7 @@
                     $mp_sua = $_POST['map_sua'];
                    
                     
-                    $sql_check_sua = "SELECT * FROM doanhsophong WHERE MaPhong = '$mp_sua'";
+                    $sql_check_sua = "SELECT * FROM doanhsophong WHERE maPb = '$mp_sua'";
 
                     $result_check_sua = $this->condb->query($sql_check_sua);
                     if ($result_check_sua->num_rows > 0) {
@@ -463,7 +463,7 @@
                         SET DSYeuCau_Phong = '$moneyyc_sua',
                             DSHienTai_Phong = '$moneyht_sua',
                             DonVi = '$dvi_sua'
-                        WHERE MaPhong = '$mp_sua'";
+                        WHERE maPb = '$mp_sua'";
                     $result = $this->condb->query($sql);
                     if ($this->condb->query($sql)) {
                         echo "<span class='message_sua'>Thông tin đã được sửa thành công</span>";
@@ -485,7 +485,7 @@
             $inforDb->host = 'localhost';
             $inforDb->pass = '';
             $inforDb->user = 'root';
-            $inforDb->db = 'quanlyluong';
+            $inforDb->db = 'quanlynhansu';
             $dscnModel = UDDSPhongModel::withDifferentHost($inforDb);
             $dscnModel->updateDS();
         ?>
@@ -516,12 +516,12 @@
                     $this->open_db();
                     $mp_xoa = $_POST['map_xoa'];
                     
-                    $sql_xoa= "SELECT * FROM doanhsophong WHERE MaPhong = '$mp_xoa'";
+                    $sql_xoa= "SELECT * FROM doanhsophong WHERE maPb = '$mp_xoa'";
 
                     $result_xoa= $this->condb->query($sql_xoa);
                     if ($result_xoa->num_rows > 0) {
                         $sql = "DELETE FROM doanhsophong
-                        WHERE MaPhong = '$mp_xoa'";
+                        WHERE maPb = '$mp_xoa'";
                 
 
                     $result = $this->condb->query($sql);
@@ -545,7 +545,7 @@
             $inforDb->host = 'localhost';
             $inforDb->pass = '';
             $inforDb->user = 'root';
-            $inforDb->db = 'quanlyluong';
+            $inforDb->db = 'quanlynhansu';
             $dscnModel = DELLDSModel::withDifferentHost($inforDb);
             $dscnModel->deleteDS();
         ?>

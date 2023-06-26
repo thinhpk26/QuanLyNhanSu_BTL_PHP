@@ -388,7 +388,7 @@ $inforDb = new stdClass();
 $inforDb->host = 'localhost';
 $inforDb->pass = '';
 $inforDb->user = 'root';
-$inforDb->db = 'quanlyluong';
+$inforDb->db = 'quanlynhansu';
 $dscnModel = PhucLoiModel::withDifferentHost($inforDb);
 $dscnModel->displayPhucLoi();
 ?>

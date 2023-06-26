@@ -371,7 +371,7 @@ class DoanhSoCaNhanModel extends QuanLyLuongModel
       
         $this->open_db();
 
-        $sql = "SELECT DSYeuCau, DSHienTai, DonVi FROM DoanhSoCaNhan";
+        $sql = "SELECT DSYeuCau, DSHienTai, DonVi FROM DoanhSoCaNhan WHERE maNV = 'mnv01'";
         $result = $this->condb->query($sql);
         if ($result->num_rows > 0) {
             echo "<table>";
@@ -406,7 +406,7 @@ $inforDb = new stdClass();
 $inforDb->host = 'localhost';
 $inforDb->pass = '';
 $inforDb->user = 'root';
-$inforDb->db = 'quanlyluong';
+$inforDb->db = 'quanlynhansu';
 $dscnModel = DoanhSoCaNhanModel::withDifferentHost($inforDb);
 $dscnModel->displayDoanhSo();
 ?>
@@ -466,7 +466,7 @@ $inforDb = new stdClass();
 $inforDb->host = 'localhost';
 $inforDb->pass = '';
 $inforDb->user = 'root';
-$inforDb->db = 'quanlyluong';
+$inforDb->db = 'quanlynhansu';
 $dscnModel = DoanhSoPhongModel::withDifferentHost($inforDb);
 $dscnModel->displayDoanhSo();
 ?>
@@ -491,7 +491,7 @@ class NgayCapNhatModel extends QuanLyLuongModel
       
         $this->open_db();
 
-        $sql = "SELECT NgayCapNhat FROM DoanhSoCaNhan";
+        $sql = "SELECT NgayCapNhat FROM DoanhSoCaNhan WHERE maNV ='mnv01'";
         $result = $this->condb->query($sql);
         if ($result->num_rows > 0) {
             echo "<table>";
@@ -520,7 +520,7 @@ $inforDb = new stdClass();
 $inforDb->host = 'localhost';
 $inforDb->pass = '';
 $inforDb->user = 'root';
-$inforDb->db = 'quanlyluong';
+$inforDb->db = 'quanlynhansu';
 $dscnModel = NgayCapNhatModel::withDifferentHost($inforDb);
 $dscnModel->displayDate();
 ?>

@@ -10,7 +10,7 @@
             $this->host = 'localhost';
             $this->pass = '12345678';
             $this->user = 'root';
-            $this->db = 'quanlyluong';
+            $this->db = 'quanlynhansu';
         }
 
         public function open_db() {

@@ -213,7 +213,7 @@
     }
     
     .RContent form {
-        background-color: orange;
+        background-color: lightsalmon;
         padding: 20px;
         position: relative;
     }
@@ -389,13 +389,13 @@
                     $mnv = $_POST['mnv'];
                     $date = $_POST['date'];
                     
-                    $sql_check = "SELECT * FROM Luong WHERE MaNV = '$mnv'";
+                    $sql_check = "SELECT * FROM Luong WHERE maNV = '$mnv'";
                     $result_check = $this->condb->query($sql_check);
                     if ($result_check->num_rows > 0) {
                         echo "<span class='message'>Bạn đã nhập lương cho nhân viên này</span>";
                     }
                     else {
-                    $sql = "INSERT INTO Luong (Luong, DonVi,MaNV,NgayCapNhat)
+                    $sql = "INSERT INTO Luong (Luong, DonVi,maNV,NgayCapNhat)
                             VALUES ('$money','$dvi','$mnv','$date')";
 
                     $result = $this->condb->query($sql);
@@ -415,7 +415,7 @@
             $inforDb->host = 'localhost';
             $inforDb->pass = '';
             $inforDb->user = 'root';
-            $inforDb->db = 'quanlyluong';
+            $inforDb->db = 'quanlynhansu';
             $dscnModel = ADDLUONGModel::withDifferentHost($inforDb);
             $dscnModel->insertLuonG();
         ?>
@@ -455,7 +455,7 @@
                     $mnv_sua = $_POST['manv_sua'];
                     $date_sua = $_POST['date_sua'];
                     
-                    $sql_check_sua = "SELECT * FROM Luong WHERE MaNV = '$mnv_sua'";
+                    $sql_check_sua = "SELECT * FROM Luong WHERE maNV = '$mnv_sua'";
 
                     $result_check_sua = $this->condb->query($sql_check_sua);
                     if ($result_check_sua->num_rows > 0) {
@@ -463,7 +463,7 @@
                         SET Luong = '$money_sua',
                             DonVi = '$dvi_sua',
                             NgayCapNhat = '$date_sua'
-                        WHERE MaNV = '$mnv_sua'";
+                        WHERE maNV = '$mnv_sua'";
                 
 
                     $result = $this->condb->query($sql);
@@ -487,7 +487,7 @@
             $inforDb->host = 'localhost';
             $inforDb->pass = '';
             $inforDb->user = 'root';
-            $inforDb->db = 'quanlyluong';
+            $inforDb->db = 'quanlynhansu';
             $dscnModel = UDLUONGModel::withDifferentHost($inforDb);
             $dscnModel->updateLuonG();
         ?>
@@ -518,12 +518,12 @@
                     $this->open_db();
                     $mnv_xoa = $_POST['manv_xoa'];
                     
-                    $sql_xoa= "SELECT * FROM Luong WHERE MaNV = '$mnv_xoa'";
+                    $sql_xoa= "SELECT * FROM Luong WHERE maNV = '$mnv_xoa'";
 
                     $result_xoa= $this->condb->query($sql_xoa);
                     if ($result_xoa->num_rows > 0) {
                         $sql = "DELETE FROM Luong 
-                        WHERE MaNV = '$mnv_xoa'";
+                        WHERE maNV = '$mnv_xoa'";
                 
 
                     $result = $this->condb->query($sql);
@@ -547,7 +547,7 @@
             $inforDb->host = 'localhost';
             $inforDb->pass = '';
             $inforDb->user = 'root';
-            $inforDb->db = 'quanlyluong';
+            $inforDb->db = 'quanlynhansu';
             $dscnModel = DELLUONGModel::withDifferentHost($inforDb);
             $dscnModel->deleteLuonG();
         ?>

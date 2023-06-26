@@ -372,7 +372,7 @@ class LuongModel extends QuanLyLuongModel
       
         $this->open_db();
 
-        $sql = "SELECT Luong, DonVi, NgayCapNhat FROM Luong";
+        $sql = "SELECT Luong, DonVi, NgayCapNhat FROM Luong WHERE maNV = 'mnv01'";
         $result = $this->condb->query($sql);
         if ($result->num_rows > 0) {
             echo "<table>";
@@ -405,7 +405,7 @@ $inforDb = new stdClass();
 $inforDb->host = 'localhost';
 $inforDb->pass = '';
 $inforDb->user = 'root';
-$inforDb->db = 'quanlyluong';
+$inforDb->db = 'quanlynhansu';
 $dscnModel = LuongModel::withDifferentHost($inforDb);
 $dscnModel->displayLuong();
 ?>
@@ -474,7 +474,7 @@ $inforDb = new stdClass();
 $inforDb->host = 'localhost';
 $inforDb->pass = '';
 $inforDb->user = 'root';
-$inforDb->db = 'quanlyluong';
+$inforDb->db = 'quanlynhansu';
 $dscnModel = LuongNVModel::withDifferentHost($inforDb);
 $dscnModel->displayLuongNV();
 
