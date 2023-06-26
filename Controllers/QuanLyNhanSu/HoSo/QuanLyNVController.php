@@ -393,7 +393,7 @@
 						$pid = $this -> objsm ->updateRecord($NhanVien);
 
 						if($pid != ''){			
-							$this->pageRedirect("directf.php?route=quanlynv"); 
+							$this->pageRedirect("direct.php?route=quanlynv"); 
 						}else{
 							echo "Somthing is wrong..., try again.";
 						}
